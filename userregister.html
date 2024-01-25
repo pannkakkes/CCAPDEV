@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Register User</title>
+    </head>
+
+    <body>
+        <form>
+            <div>
+                <span> Email address:<br/> </span>
+                <input type = "email" />
+                <br> </br>
+
+                <span> Password:<br/> </span>
+                <input type = "password" />
+                <br> </br>
+
+                <span> Description: <br/></span>
+                <textarea rows="4" cols="50"></textarea>
+                <br> </br>
+
+                <span> Birthdate: <br/> </span>
+                <input type = "date">
+                <br> </br>
+                
+                <span> Profile Picture: <br/> </span>
+                <div class="first">
+                    <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"></p>
+                    <p><img id="output" width="200" /></p>
+                  </div>    
+            </div>
+        </form>
+    </body>
+
+</html>

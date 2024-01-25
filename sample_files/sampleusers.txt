@@ -1,0 +1,32 @@
+Email Address
+Password
+Description
+Birthdate
+Profile Picture
+
+freddyfazbear@dlsu.edu.ph (Visitor/Student)
+fazbear00
+I am five bears.
+01/01/1987
+
+bonnythebonnybon@dlsu.edu.ph (Visitor/Student)
+bonny3
+I like baking cupcakes.
+02/21/1983
+
+
+foxythepirate@dlsu.edu.ph (Visitor/Student)
+foxie12
+I hunt for treasure!
+06/04/2000
+
+
+williamaftersun@dlsu.edu.ph (Lab technician)
+willom2
+I'm the bad guy.
+07/29/1954
+
+springtrap@dlsu.edu.ph (Lab technician)
+Summer!
+I trap you.
+07/29/1987
