@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lab Reservation - View Slots</title>   
+    </head>
+
+    <body>
+        <form>
+            <h1>View Slots Availability</h1>
+
+            <label for="Lab">Lab Number:</label>
+            <input type="text" id="lab_number" name="lab_number" value="">
+            <br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="">
+            <br>
+
+            <label for="Time Slot">Time Slot:</label>
+            <select id="time_slot" name="time_slot">
+                <option value="10:00 - 11:30">10:00 - 11:30</option>
+                <option value="12:00 - 13:30">12:00 - 13:30</option>
+                <option value="14:00 - 15:30">14:00 - 15:30</option>
+                <!-- Add more time slots as needed -->
+            </select>
+            <br>
+            
+            <input type="submit" value="Save Changes">
+        </form>
+    </body>
+</html>
