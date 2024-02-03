@@ -1,20 +1,24 @@
 <html>
     <head>
-        <title>Login User</title>
+        <title>Login User - Lab Reservation System</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
-        <form>
-            <div>
-                <span> Email address:<br/> </span>
-                <input type = "email" />
-                <br> </br>  
-                
-                <span> Password:<br/> </span>
-                <input type = "password" />
-                <br> </br>
-            </div>      
-        </form>
-        <a href = "dashboard.html"><button type = "button"> Login</button> </a>
+        <div class="container">
+            <form action="dashboard.html">
+                <div>
+                    <h1>Login</h1><br>
+                    <span> Email address:<br/> </span>
+                    <input type = "email" class="form-input"/>
+                    <br> </br>  
+                    
+                    <span> Password:<br/> </span>
+                    <input type = "password" class="form-input"/>
+                    <br> </br>
+                </div>
+                <input type = "submit" class="submit-button" value="Login">
+            </form>
+    </div>
     </body>
 </html>

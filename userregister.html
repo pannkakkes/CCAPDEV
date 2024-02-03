@@ -1,35 +1,37 @@
 <html>
     <head>
-        <title>Register User</title>
+        <title>Register User - Lab Reservation System</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     
     <body>
-        <form>
-            <div>
+        <form action="dashboard.html">
+            <div class="container">
+                <h1>Register User</h1>
                 <span> Email address:<br/> </span>
-                <input type = "email" />
+                <input type = "email" class="form-input"/>
                 <br> </br>
 
                 <span> Password:<br/> </span>
-                <input type = "password" />
+                <input type = "password" class="form-input"/>
                 <br> </br>
 
                 <span> Description: <br/></span>
-                <textarea rows="4" cols="50"></textarea>
+                <textarea rows="4" cols="50" class="form-input"></textarea>
                 <br> </br>
 
                 <span> Birthdate: <br/> </span>
-                <input type = "date">
+                <input type = "date" class="form-input">
                 <br> </br>
                 
                 <span> Profile Picture: <br/> </span>
                 <div class="first">
-                    <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"></p>
+                    <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="form-input"></p>
                     <p><img id="output" width="200" /></p>
                   </div>    
+                  <input type = "submit" class="submit-button" value="Register"></button>
             </div>
         </form>
-        <a href = "dashboard.html"> <button type = "button"> Register</button> </a>
     </body>
 
 </html>

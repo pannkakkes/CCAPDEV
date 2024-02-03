@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Press+Start+2P&display=swap');
+
+body {
+    font-family: "Nunito", sans-serif;
+    font-weight: 500;
+    background-color: #fffcef;
+    text-align: center;
+    line-height: 1.6;
+}
+
+h1 {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.container {
+    width: 500px;
+    margin: 20px auto;
+    background-color: #f1cf54;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#indexcont {
+    margin-top: 100px;
+}
+
+.normal-link {
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #e54c44;
+    color: #fffcef;
+    font-size: 12px;
+    margin: 10px;
+    border: 1px solid #e54c44;
+    border-radius: 5px;
+    appearance: none;
+    font-family: "Press Start 2P", system-ui;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #e54c44;
+    color: #fffcef;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: "Press Start 2P", system-ui;
+}
+
+.search-button {
+    padding: 8px 17px;
+    border-radius: 8px;
+    border: none;
+    background-color: #e54c44;
+    color: #fffcef;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: "Press Start 2P", system-ui;
+}
+
+.form-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #fffcef;
+    appearance: none;
+}
+
+nav {
+    background-color: #e54c44;
+    overflow: hidden;
+    height: 50px;
+    width: 550px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: #fffcef;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 10px;
+    position: relative;
+    top: 25%;
+    font-family: "Press Start 2P", system-ui;
+}
+
+table {
+    position: relative;
+    left: 15%;
+}

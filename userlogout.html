@@ -1,24 +1,26 @@
 <html>
     <head>
-        <title>Logout User</title>
+        <title>Logout User - Lab Reservation System</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     
     <nav>
         <a href="dashboard.html">Home</a>
         <a href="userviewprofile.html">User Profile</a>
-        <a href="reserveviewslots.html">Reserve</button>
+        <a href="reservemenu.html">Reserve</a>
         <a href="search.html">Search</a>
         <a href="userlogout.html">Logout</a>
     </nav>
 
     <body>
-        <form>
-            <div>
-            </div>      
-        </form>
-        <h1> Goodbye! Insert Username here</h1>
-        <!--Show current user name and ask if they're sure to log out-->
-        <a href = "index.html"> <button type = "button"> Logout</button> </a>
+        <div class="container">
+            <form action="index.html">
+                <h1> Goodbye, insert username here!</h1>
+                <p>Are you sure you want to log out?</p>
+                <!--Show current user name and ask if they're sure to log out-->
+                <input type = "submit" class="submit-button" value="Logout">
+            </form>
+        </div>
     </body>
 </html>
