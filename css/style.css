@@ -24,6 +24,19 @@ h1 {
     border-radius: 8px;
 }
 
+.subcontainer{
+    width: 450px;
+    margin: 20px auto;
+    background-color: #d8c677;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.table-container{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
 #indexcont {
     margin-top: 100px;
 }
@@ -95,6 +108,10 @@ nav a {
     position: relative;
     top: 25%;
     font-family: "Press Start 2P", system-ui;
+}
+
+th{
+    padding: 10px;
 }
 
 table {
