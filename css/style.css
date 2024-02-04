@@ -71,6 +71,12 @@ h1 {
     appearance: none;
 }
 
+select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #fffcef;
+}
+
 nav {
     background-color: #e54c44;
     overflow: hidden;
