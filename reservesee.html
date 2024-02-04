@@ -1,34 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation Details</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <h1>Reservation Details</h1>
+    <nav>
+        <a href="dashboard.html">Home</a>
+        <a href="userviewprofile.html">User Profile</a>
+        <a href="reservemenu.html">Reserve</a>
+        <a href="search.html">Search</a>
+        <a href="userlogout.html">Logout</a>
+    </nav>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Reservation ID</th>
-                <th>Seat Number</th>
-                <th>Laboratory Number</th>
-                <th>Date and Time of Request</th>
-                <th>Date and Time of Reservation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>12345</td>
-                <td>1</td>
-                <td>1</td>
-                <td>2024-01-24 10:30 AM</td>
-                <td>2024-01-25 2:00 PM - 3:30 PM</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container" style="width: 1000px; position: relative;">
+        <h1>Reservation Details</h1>
+    </div>
 
+    <div class="table-container" style="left: 0; right: 0">
+        <table style="left: 0">
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Seat Number</th>
+                    <th>Laboratory Number</th>
+                    <th>Date and Time of Request</th>
+                    <th>Date and Time of Reservation</th>
+                    <th>Person Appointed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12345</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2024-01-24 10:30 AM</td>
+                    <td>2024-01-25 2:00 PM - 3:30 PM</td>
+                    <td>Rock D. Stone<td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
