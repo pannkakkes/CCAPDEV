@@ -16,6 +16,11 @@ h1 {
     line-height: 1.2;
 }
 
+.center{
+    position: static;
+    margin: auto;
+}
+
 .container {
     width: 500px;
     margin: 20px auto;
