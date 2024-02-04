@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Profile</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
-        <h1>Edit Profile</h1>
+        <nav>
+			<a href="dashboard.html">Home</a>
+			<a href="userviewprofile.html">User Profile</a>
+			<a href="reservemenu.html">Reserve</a>
+			<a href="search.html">Search</a>
+			<a href="userlogout.html">Logout</a>
+		</nav>
 
-        <form>
+        <div class="container">
+            <h1>Edit Profile</h1>
+
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="put name of student">
+            <input class="inputtext" type="text" id="name" name="name" value="put name of student">
             <br>
 
             <label for="course">Course Program:</label>
@@ -24,7 +31,9 @@
             <textarea id="description" name="description" rows="4" cols="50">Put Previous Description here</textarea>
             <br>
 
-            <input type="submit" value="Save Changes">
-        </form>
+            
+            <input class="normal-link" type="submit" value="Save Changes">
+
+        </div>
     </body>
 </html>
