@@ -1,34 +1,77 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>View Slots - Lab Reservation System</title>   
-        <link rel="stylesheet" href="css/style.css">
-    </head>
 
-    <body>
+<head>
+    <title>Lab Reservation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav>
+		<a href="dashboard.html">Home</a>
+		<a href="userviewprofile.html">User Profile</a>
+		<a href="reservemenu.html">Reserve</a>
+		<a href="search.html">Search</a>
+		<a href="userlogout.html">Logout</a>
+	</nav>
+
+    <div class = container>
+        <h1>View Slot Availability</h1>
+
         <form>
-            <h1>View Slots Availability</h1>
-
-            <label for="Lab">Lab Number:</label>
-            <input type="text" id="lab_number" name="lab_number" value="">
+            <a>Choose Computer Lab:</a>
+            <select id="lab" name="lab">
+                <option value="1">Lab 1</option>
+                <option value="1">Lab 2</option>
+            </select>
             <br>
 
-            <label for="date">Date:</label>
+            <a>Select Date:</a>
             <input type="date" id="date" name="date" value="">
             <br>
 
-            <label for="Time Slot">Time Slot:</label>
+            <a>Select Time Slot:</a>
             <select id="time_slot" name="time_slot">
-                <option value="10:00 - 11:30">10:00 - 11:30</option>
-                <option value="12:00 - 13:30">12:00 - 13:30</option>
-                <option value="14:00 - 15:30">14:00 - 15:30</option>
-                <!-- Add more time slots as needed -->
+                <option value="choose-slot">Choose Slot</option>
+                <option value="slot1">Slot 1 (9:00 - 9:30)</option>
+                <option value="slot2">Slot 2 (9:30 - 10:00)</option>
+                <option value="slot3">Slot 3 (10:00 - 10:30)</option>
+                <option value="slot4">Slot 4 (10:30 - 11:00)</option>
+                <option value="slot5">Slot 5 (11:00 - 11:30)</option>
+                <option value="slot6">Slot 6 (11:30 - 12:00)</option>
+                <option value="slot7">Slot 7 (12:00 - 12:30)</option>
+                <option value="slot8">Slot 8 (12:30 - 1:00)</option>
+                <option value="slot9">Slot 9 (1:00 - 1:30)</option>
+                <option value="slot10">Slot 10 (1:30 - 2:00)</option>
+                <option value="slot11">Slot 11 (2:00 - 2:30)</option>
+                <option value="slot12">Slot 12 (2:30 - 3:00)</option>
+                <option value="slot13">Slot 13 (3:00 - 3:30)</option>
+                <option value="slot14">Slot 14 (3:30 - 4:00)</option>
             </select>
             <br>
-            
-            <input type="submit" value="Save Changes">
+
+            <input class="normal-link" type="submit" value="Check Availability">
         </form>
-    </body>
+
+        <h2>Current Available Seats</h2>
+        <table class="center" border="1">
+            <thead>
+                <tr>
+                    <th>Lab Room No.</th>
+                    <th>Seat Number</th>
+                    <th>Reserved By</th>
+                    <th>View Profile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>A1</td>
+                    <td>John Doe</td>
+                    <td><a href="profile.html">View Profile</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</body>
 </html>
