@@ -116,6 +116,10 @@ nav a {
     font-family: "Press Start 2P", system-ui;
 }
 
+#home-icon {
+    width: 20px;
+}
+
 th{
     padding: 10px;
 }
