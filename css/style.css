@@ -121,6 +121,10 @@ th{
 }
 
 table {
-    position: relative;
-    left: 15%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td {
+    font-size: 15px;
 }

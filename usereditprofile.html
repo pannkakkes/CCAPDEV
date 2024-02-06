@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edit Profile</title>
+        <title>Edit Profile - Lab Reservation System</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -15,25 +15,31 @@
 		</nav>
 
         <div class="container">
-            <h1>Edit Profile</h1>
+            <h1>Edit Profile</h1><br>
+            <form action="userviewprofile.html">
 
-            <label for="name">Name:</label>
-            <input class="inputtext" type="text" id="name" name="name" value="put name of student">
-            <br>
+                <label for="name">Name:</label>
+                <input class="form-input" type="text" id="name" name="name" value="Freddy Fazbear">
+                <br><br>
 
-            <label for="course">Course Program:</label>
-            <input type="text" id="course" name="course" value="Put actual course of student">
-            <br>
+                <label for="description">Description:</label>
+                <br>
+                <textarea class="form-input" id="description" name="description" rows="4" cols="50">I am five bears.</textarea>
+                <br><br>
 
+                <label for="birthdate">Birthdate:</label>
+                <input class="form-input" type="date" value="1987-01-01">
+                <br><br>
 
-            <label for="description">Description:</label>
-            <br>
-            <textarea id="description" name="description" rows="4" cols="50">Put Previous Description here</textarea>
-            <br>
-
-            
-            <input class="normal-link" type="submit" value="Save Changes">
-
+                <label for="profilepicture">Profile Picture:</label><br>
+                <img src="sample_files/sampleusersprofilepictures/freddyfazbear.png" alt="Profile Image" width="150">
+                <div class="first">
+                    <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="form-input"></p>
+                    <p><img id="output" width="200" /></p>
+                </div>
+                
+                <input type = "submit" class="submit-button" value="Save Changes"><br>
+            </form>
         </div>
     </body>
 </html>
