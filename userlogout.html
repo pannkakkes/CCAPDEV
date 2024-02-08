@@ -2,6 +2,8 @@
     <head>
         <title>Logout User - Lab Reservation System</title>
         <link rel="stylesheet" href="css/style.css">
+        <script src = "js/CurrentUser.js"></script>
+        <script src="js/Logout.js" defer></script> 
     </head>
 
     
@@ -15,11 +17,11 @@
 
     <body>
         <div class="container">
-            <form action="index.html">
-                <h1> Goodbye, Freddy Fazbear!</h1>
+            <form action="logoutForm">
+                <h1 id = "logoutMessage"> Goodbye, [UserName]!</h1>
                 <p>Are you sure you want to log out?</p>
                 <!--Show current user name and ask if they're sure to log out-->
-                <input type = "submit" class="submit-button" value="Logout">
+                <input type = "submit" class = "submit-button" id="submit-button" value="Logout">
             </form>
         </div>
     </body>

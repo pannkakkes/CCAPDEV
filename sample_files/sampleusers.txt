@@ -3,6 +3,7 @@ Password
 Description
 Birthdate
 Profile Picture
+V or T (Visitor or Lab Technician)
 
 freddyfazbear@dlsu.edu.ph (Visitor/Student)
 fazbear00
@@ -18,8 +19,7 @@ I like baking cupcakes.
 foxythepirate@dlsu.edu.ph (Visitor/Student)
 foxie12
 I hunt for treasure!
-06/04/2000
-
+06/04/1985
 
 williamaftersun@dlsu.edu.ph (Lab technician)
 willom2
@@ -29,4 +29,4 @@ I'm the bad guy.
 springtrap@dlsu.edu.ph (Lab technician)
 Summer!
 I trap you.
-07/29/1987
+07/29/1954

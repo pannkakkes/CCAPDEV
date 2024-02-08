@@ -2,27 +2,31 @@
     <head>
         <title>Login User - Lab Reservation System</title>
         <link rel="stylesheet" href="css/style.css">
+        <script src = "js/User.js"></script>
     </head>
 
     <body>
         <div class="container">
-            <form action="dashboard.html">
+            <form id="loginForm">
                 <div>
                     <h1>Login</h1><br>
                     <span> Email address:<br/> </span>
-                    <input type = "email" class="form-input"/>
+                    <input type="email" class="form-input" id="email"/>
                     <br> </br>  
                     
                     <span> Password:<br/> </span>
-                    <input type = "password" class="form-input"/>
+                    <input type="password" class="form-input" id="password"/>
                     <br> </br>
-
-                    <input type = "checkbox" class = "check-box" value= "Keep me logged in"> 
+    
+                    <input type="checkbox" class="check-box" id="keepLoggedIn"> 
                     <span> Keep me logged in</span>
                     <br> </br>
+                    <div id="error" style="color: red;"></div> <!-- Error message display -->
                 </div>
-                <input type = "submit" class="submit-button" value="Login">
+                <input type="submit" class="submit-button" id="submitButton" value="Login">
             </form>
-    </div>
+        </div>
+        <script src = "js/Login.js"></script>
+        <script src = "js/CurrentUser.js"></script>
     </body>
 </html>
