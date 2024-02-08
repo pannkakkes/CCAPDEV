@@ -2,6 +2,9 @@
     <head>
         <title>Delete User - Lab Reservation System</title>
         <link rel = "stylesheet" href = "css/style.css">
+        <script src = "js/User.js"></script>
+        <script src = "js/CurrentUser.js"></script>
+        <script src = "js/Delete.js"></script>
     </head>
 
     <nav>
@@ -14,22 +17,22 @@
 
     <body>
         <form>
-
-            <div class = "container">
-                <img src="sample_files/sampleusersprofilepictures/freddyfazbear.png" alt="Profile Image" width="150">
+            <div class="container">
+                <!-- Use JavaScript to dynamically generate the image source -->
+                <img id="profileImage" alt="Profile Image" width="150">
                 <br><br>
-                <!--Displays user information -->
-                <span> Email address: freddyfazbear@dlsu.edu.ph</span>
+                <!-- Display user information -->
+                <span id="email"></span>
                 <br>
-                <span> Name: Freddy Fazbear</span>
+                <span id="name"></span>
                 <br>
-                <span> Description: I am five bears.</span>
+                <span id="description"></span>
                 <br>
-                <span> Birthdate: 01/01/1987 </span>
+                <span id="birthdate"></span>
                 <br>
                 <br>
-                <!--Alerts user first if they're sure and will allow afterwards-->
-                 <a href = "index.html"><button type="button" class="submit-button"> Delete User</button></a>
+                <!-- Alert user first if they're sure and will allow afterwards -->
+                <button id="deleteUserButton" type="button" class="submit-button">Delete User</button>
             </div>
         </form>
     </body>

@@ -5,31 +5,31 @@
     </head>
     
     <body>
-        <form action="dashboard.html">
+        <form id="register_form">
             <div class="container">
                 <h1>Register User</h1>
                 <span> Email address:<br/> </span>
-                <input type = "email" class="form-input"/>
+                <input type = "email" class="form-input" id = "email"/>
                 <br> </br>
 
                 <span> Name:<br/> </span>
-                <input type = "text" class="form-input"/>
+                <input type = "text" class="form-input" id = "username"/>
                 <br> </br>
 
                 <span> Password:<br/> </span>
-                <input type = "password" class="form-input"/>
+                <input type = "password" class="form-input" id = "password"/>
                 <br> </br>
 
                 <span> Confirm Password:<br/> </span>
-                <input type = "password" class="form-input"/>
+                <input type = "password" class="form-input" id = "confirmPassword"/>
                 <br> </br>
 
                 <span> Description: <br/></span>
-                <textarea rows="4" cols="50" class="form-input"></textarea>
+                <textarea rows="4" cols="50" class="form-input" id = "description"></textarea>
                 <br> </br>
 
                 <span> Birthdate: <br/> </span>
-                <input type = "date" class="form-input">
+                <input type = "date" class="form-input" id = "birthdate">
                 <br> </br>
                 
                 <span> Profile Picture: <br/> </span>
@@ -38,11 +38,12 @@
                     <p><img id="output" width="200" /></p>
                 </div>    
 
-                <input type = "submit" class="submit-button" value="Register as Lab Technician"></button>
+                <input type = "submit" class="submit-button" id="submitT" value="Register as Lab Technician"></button>
                 <br> </br>
-                <input type = "submit" class="submit-button" value="Register as Student"></button>
+                <input type = "submit" class="submit-button" id="submitV" value="Register as Student"></button>
             </div>
         </form>
+        <script src = "js/Register.js"></script>
     </body>
 
 </html>
