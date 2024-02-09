@@ -2,34 +2,110 @@
 <html>
 <head>
     <title>Lab Reservation System - Reserve</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .group-button{
+            text-align: center;
+        }
+        .search-button{
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            padding: 15px 0px;
+            width: 65px;
+            background-color: #f1cf54;
+        }
+        .search-button.red{
+            background-color: #e54c44; 
+        }
+        .subcontainer{
+            display: none; 
+            border-top-right-radius: 0px;
+            border-top-left-radius: 0px;
+            margin-top: -0.3px;
+            text-align: center;
+            width: 440px;
+            background-color: #e54c44;
+        }
+        .sub-subcontainer{
+            background-color: #fffcef;
+            width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .lab-title{
+            font-size: 20px;
+            text-align: left;
+        }
+        .reserve-button {
+            margin-top: 0px;
+            border: 0px;
+            width: 400px;
+            background-color: #e54c44;
+            text-align: center;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lab Reservation - Reserve Slot</h1>
-    <form>
-        <label>Choose Date:</label>
-        <input type="date">
-        <br>
-        <label>Select Slot:</label> 
-        <select>
-            <option value="slot1">Slot 1 (9:00 - 9:30)</option>
-            <option value="slot2">Slot 2 (9:30 - 10:00)</option>
-            <option value="slot3">Slot 3 (10:00 - 10:30)</option>
-            <option value="slot4">Slot 4 (10:30 - 11:00)</option>
-            <option value="slot5">Slot 5 (11:00 - 11:30)</option>
-            <option value="slot6">Slot 6 (11:30 - 12:00)</option>
-            <option value="slot7">Slot 7 (12:00 - 12:30)</option>
-            <option value="slot8">Slot 8 (12:30 - 1:00)</option>
-            <option value="slot9">Slot 9 (1:00 - 1:30)</option>
-            <option value="slot10">Slot 10 (1:30 - 2:00)</option>
-            <option value="slot11">Slot 11 (2:00 - 2:30)</option>
-            <option value="slot12">Slot 12 (2:30 - 3:00)</option>
-            <option value="slot13">Slot 13 (3:00 - 3:30)</option>
-            <option value="slot14">Slot 14 (3:30 - 4:00)</option>
-        </select>
-        <br>
-        <label>Reserve Anonymously:</label>
-        <input type="checkbox">
-    </form>
-    <button type="button">Reserve</button> 
+    <nav>
+        <a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a>
+        <a href="userviewprofile.html">User Profile</a>
+        <a href="reservemenu.html">Reserve</a>
+        <a href="search.html">Search</a>
+        <a href="userlogout.html">Logout</a>
+    </nav>
+    <div class="container">
+        <h1>Set Reservation</h1>
+        <div class="group-button">
+            <div class="btn-group">
+                <button class="search-button" id="Sunday">SUN</button>
+                <button class="search-button" id="Monday">MON</button>
+                <button class="search-button" id="Tuesday">TUE</button>
+                <button class="search-button" id="Wednesday">WED</button>
+                <button class="search-button" id="Thursday">THU</button>
+                <button class="search-button" id="Friday">FRI</button>
+                <button class="search-button" id="Saturday">SAT</button>
+            </div>
+        </div>
+        <div class="subcontainer" id="subContainer">
+            <div class="sub-subcontainer" id="Lab1">
+                <h1 class="lab-title">Lab 1</h1>
+                <div class="lab-info">
+                    <p style="text-align: left; margin-top: -10px;">Freddy's Frightful Manor 201</p>
+                </div>
+                <button class="reserve-button">Reserve</button>
+            </div>
+            <div class="sub-subcontainer" id="Lab2">
+                <h1 class="lab-title">Lab 2</h1>
+                <div class="lab-info">
+                    <p style="text-align: left; margin-top: -10px;">Chica's Chilling Chamber 406</p>
+                </div>
+                <button class="reserve-button">Reserve</button>
+            </div>
+            <div class="sub-subcontainer" id="Lab3">
+                <h1 class="lab-title">Lab 3</h1>
+                <div class="lab-info">
+                    <p style="text-align: left; margin-top: -10px;">Puppet's Perilous Palace 1704</p>
+                </div>
+                <button class="reserve-button">Reserve</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.search-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.search-button').forEach(btn => {
+                    btn.classList.remove('red');
+                });
+                button.classList.add('red');
+
+                document.getElementById('subContainer').style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>
