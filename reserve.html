@@ -15,10 +15,10 @@
             background-color: #f1cf54;
         }
         .search-button.red{
-            background-color: #e54c44; 
+            background-color: #e54c44; /* Updated red color */
         }
         .subcontainer{
-            display: none; 
+            display: none; /* Hide the subcontainer by default */
             border-top-right-radius: 0px;
             border-top-left-radius: 0px;
             margin-top: -0.3px;
@@ -39,6 +39,7 @@
         }
         .reserve-button {
             margin-top: 0px;
+            margin-bottom: 20px;
             border: 0px;
             width: 400px;
             background-color: #e54c44;
@@ -47,6 +48,10 @@
             padding: 15px;
             border-radius: 5px;
             cursor: pointer;
+        }
+        p{
+            text-align: left; 
+            margin-top: -10px;
         }
     </style>
 </head>
@@ -75,35 +80,60 @@
             <div class="sub-subcontainer" id="Lab1">
                 <h1 class="lab-title">Lab 1</h1>
                 <div class="lab-info">
-                    <p style="text-align: left; margin-top: -10px;">Freddy's Frightful Manor 201</p>
+                    <p class="building">Freddy's Frightful Manor</p>
+                    <p class="room">201</p>
                 </div>
-                <button class="reserve-button">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Lab 1', 'Frightful Manor 201', 'student')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Lab 1', 'Frightful Manor 201', 'admin')">Reserve for Student</button>
             </div>
             <div class="sub-subcontainer" id="Lab2">
                 <h1 class="lab-title">Lab 2</h1>
                 <div class="lab-info">
-                    <p style="text-align: left; margin-top: -10px;">Chica's Chilling Chamber 406</p>
+                    <p class="building">Chilling Chamber</p>
+                    <p class="room">406</p>
                 </div>
-                <button class="reserve-button">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Lab 2', 'Chica Chilling Chamber 406', 'student')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Lab 1', 'Chica Chilling Chamber 406', 'admin')">Reserve for Student</button>
             </div>
             <div class="sub-subcontainer" id="Lab3">
                 <h1 class="lab-title">Lab 3</h1>
                 <div class="lab-info">
-                    <p style="text-align: left; margin-top: -10px;">Puppet's Perilous Palace 1704</p>
+                    <p class="building">Puppet's Perilous Palace</p>
+                    <p class="room">1704</p>
                 </div>
-                <button class="reserve-button">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Lab 3', 'Puppet Perilous Palace 1704', 'student')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Lab 1', 'Puppet Perilous Palace 1704', 'admin')">Reserve for Student</button>
             </div>
         </div>
     </div>
     <script>
+        function reserveLab(labName, location, user) {
+            localStorage.setItem('selectedLab', labName);
+            localStorage.setItem('selectedRoom', location);
+            if (user == 'admin'){
+                window.location.href = 'reserveforstudent.html';
+            }
+            else{
+                window.location.href = 'reserveconfirm.html';
+            }
+        }
+    
+        function setDay(dayName){
+            localStorage.setItem('selectedDay', dayName);
+        }
+    
         document.querySelectorAll('.search-button').forEach(button => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.search-button').forEach(btn => {
                     btn.classList.remove('red');
                 });
                 button.classList.add('red');
-
+    
+                // Show the subcontainer when a button is clicked
                 document.getElementById('subContainer').style.display = 'block';
+                
+                // Call setDay function with the day name
+                setDay(button.textContent);
             });
         });
     </script>
