@@ -1,53 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Reservation - Fazbear Entertainment Labs</title>
+    <title>Lab Reservation System - Edit Reservation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .subcontainer {
+            border-top-right-radius: 0px;
+            border-top-left-radius: 0px;
+            margin-top: -0.3px;
+            text-align: center;
+            width: 440px;
+            background-color: #e54c44;
+        }
+        .schedule-list {
+            background-color: #fffcef;
+            width: 440px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            border: none;
+            overflow: hidden; /* Clear floats */
+        }
+        .schedule {
+            width: 50%; /* Set width to 50% for equal spacing */
+            float: left; /* Float left */
+            text-align: left; /* Align text to the left */
+            margin: 0; /* Remove default margins */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+        .schedule.right {
+            float: right; /* Float right */
+            text-align: right; /* Align text to the right */
+        }
+        h2 {
+            font-family: "Press Start 2P", system-ui;
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #fffcef;
+        }
+    </style>
 </head>
 <body>
     <h1>Lab Reservation - Edit Reservation</h1>
-    <form>
-    	<h2>Previous reservation date:</h2>
-        <label>Choose Date:</label>
-        <input type="date">
-        <br>
-        <label>Select Slot to Remove:</label> 
-        <select>
-            <option value="slot1">Slot 1 (9:00 - 9:30)</option>
-            <option value="slot2">Slot 2 (9:30 - 10:00)</option>
-            <option value="slot3">Slot 3 (10:00 - 10:30)</option>
-            <option value="slot4">Slot 4 (10:30 - 11:00)</option>
-            <option value="slot5">Slot 5 (11:00 - 11:30)</option>
-            <option value="slot6">Slot 6 (11:30 - 12:00)</option>
-            <option value="slot7">Slot 7 (12:00 - 12:30)</option>
-            <option value="slot8">Slot 8 (12:30 - 1:00)</option>
-            <option value="slot9">Slot 9 (1:00 - 1:30)</option>
-            <option value="slot10">Slot 10 (1:30 - 2:00)</option>
-            <option value="slot11">Slot 11 (2:00 - 2:30)</option>
-            <option value="slot12">Slot 12 (2:30 - 3:00)</option>
-            <option value="slot13">Slot 13 (3:00 - 3:30)</option>
-            <option value="slot14">Slot 14 (3:30 - 4:00)</option>
-        </select>
-        <h2>New reservation date:</h2>
-        <label>Choose Date:</label>
-        <input type="date">
-        <br>
-        <label>Select Slot to Remove:</label> 
-        <select>
-            <option value="slot1">Slot 1 (9:00 - 9:30)</option>
-            <option value="slot2">Slot 2 (9:30 - 10:00)</option>
-            <option value="slot3">Slot 3 (10:00 - 10:30)</option>
-            <option value="slot4">Slot 4 (10:30 - 11:00)</option>
-            <option value="slot5">Slot 5 (11:00 - 11:30)</option>
-            <option value="slot6">Slot 6 (11:30 - 12:00)</option>
-            <option value="slot7">Slot 7 (12:00 - 12:30)</option>
-            <option value="slot8">Slot 8 (12:30 - 1:00)</option>
-            <option value="slot9">Slot 9 (1:00 - 1:30)</option>
-            <option value="slot10">Slot 10 (1:30 - 2:00)</option>
-            <option value="slot11">Slot 11 (2:00 - 2:30)</option>
-            <option value="slot12">Slot 12 (2:30 - 3:00)</option>
-            <option value="slot13">Slot 13 (3:00 - 3:30)</option>
-            <option value="slot14">Slot 14 (3:30 - 4:00)</option>
-        </select>
-    </form>
+    <nav>
+        <a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a>
+        <a href="userviewprofile.html">User Profile</a>
+        <a href="reservemenu.html">Reserve</a>
+        <a href="search.html">Search</a>
+        <a href="userlogout.html">Logout</a>
+    </nav>
+    <div class="container">
+        <h1>Edit Reservation</h1>
+        <div class="subcontainer">
+            <h2>Select Reservation to Edit</h2>
+            <button class="schedule-list" onclick = "changeSched()">
+                <p class="schedule">Monday<br>12:00-12:30</p>             
+                <p class="schedule right">Anonymous<br>Lab 1</p>           
+            </button>
+            <button class="schedule-list" onclick = "changeSched()">
+                <p class="schedule">Sunday<br>09:00-09:30</p>             
+                <p class="schedule right">Freddy Fazbear<br>Lab 3</p>           
+            </button>
+            <button class="schedule-list" onclick = "changeSched()">
+                <p class="schedule">Friday<br>14:30-15:00</p>             
+                <p class="schedule right">Chica<br>Lab 2</p>           
+            </button>
+            <button class="schedule-list" onclick = "changeSched()">
+                <p class="schedule">Wednesday<br>12:00-14:30</p>             
+                <p class="schedule right">Anonymous<br>Lab 3</p>           
+            </button>
+        </div>
+    </div>
+    <script>
+        function changeSched() {
+            window.location.href = 'reservesaveedit.html';
+        }
+    </script>
 </body>
 </html>
