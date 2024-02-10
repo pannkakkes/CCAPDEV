@@ -131,9 +131,10 @@ table {
 
 td {
     font-size: 15px;
+    text-align: center;
 }
 
-.user-link {
+.details-link, .user-link {
     color: #e54c44;
     text-decoration: none;
     font-weight: 700;
