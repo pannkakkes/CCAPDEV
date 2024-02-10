@@ -97,6 +97,9 @@ select {
 }
 
 nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #e54c44;
     overflow: hidden;
     height: 50px;
@@ -106,7 +109,7 @@ nav {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-nav a {
+nav a, nav span {
     color: #fffcef;
     padding: 15px;
     text-decoration: none;
@@ -138,4 +141,30 @@ td {
     color: #e54c44;
     text-decoration: none;
     font-weight: 700;
+}
+
+nav div {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1cf54;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: left;
+}
+
+.dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.homebutton {
+    position: relative;
+    bottom: 3px;
 }
