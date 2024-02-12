@@ -1,37 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Confirm Reservation for Student - Fazbear Entertainment Labs</title>
+    <title>Lab Reservation System - Confirm Reservation for Student</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .group-button {
+            text-align: center;
+        }
+
+        .search-button {
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            padding: 15px 0px;
+            width: 65px;
+            background-color: #f1cf54;
+        }
+
+        .search-button.red {
+            background-color: #e54c44; /* Updated red color */
+        }
+
+        .subcontainer-yellow {
+            background-color: #f1cf54; /* Yellow color for subcontainer */
+            text-align: center;
+        }
+
+        .subcontainer-red {
+            background-color: #e54c44; /* Red color for subcontainer */
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .sub-subcontainer {
+            background-color: #fffcef;
+            width: 400px;
+            margin-top: 40px; /* Adjusted top margin */
+            margin-bottom: 40px; /* Adjusted bottom margin */
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .lab-title {
+            font-size: 20px;
+            text-align: left;
+        }
+
+        .reserve-button {
+            margin-top: 10px;
+            border: 0px;
+            width: 400px;
+            background-color: #fffcef;
+            text-align: center;
+            color: black;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .lab-info {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <nav>
-        <div class="homebutton"><a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a></div>
-        <div class="dropdown">
-            <a href="userviewprofile.html">User Profile</a>
-            <div class="dropdown-content">
-                <a href="userviewprofile.html">View Profile</a>
-                <a href="usereditprofile.html">Edit Profile</a>
-                <a href="userdelete.html">Delete Profile</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="reservemenu.html">Reserve</a>
-            <div class="dropdown-content">
-                <a href="reserve.html">Reserve</a>
-                <a href="reserveremove.html">Remove Reservation</a>
-                <a href="reserveedit.html">Edit Reservation</a>
-                <a href="reservesee.html">See Reservations</a>
-                <a href="reserveviewslots.html">View Available Slots</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#">Search</a>
-            <div class="dropdown-content">
-                <a href="searchusers.html">Search Users</a>
-                <a href="searchslots.html">Search Slots</a>
-            </div>
-        </div>
-        <div><a href="userlogout.html">Logout</a></div>
+        <a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a>
+        <a href="userviewprofile.html">User Profile</a>
+        <a href="reservemenu.html">Reserve</a>
+        <a href="search.html">Search</a>
+        <a href="userlogout.html">Logout</a>
     </nav>
     <div class="container">
         <h1>Confirm Reservation for admin</h1>
