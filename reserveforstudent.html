@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lab Reservation System - Confirm Reservation for Student</title>
+    <title>Confirm Reservation for Student - Fazbear Entertainment Labs</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         .group-button {
@@ -67,14 +67,35 @@
 </head>
 <body>
     <nav>
-        <a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a>
-        <a href="userviewprofile.html">User Profile</a>
-        <a href="reservemenu.html">Reserve</a>
-        <a href="search.html">Search</a>
-        <a href="userlogout.html">Logout</a>
+        <div class="homebutton"><a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a></div>
+        <div class="dropdown">
+            <a href="userviewprofile.html">User Profile</a>
+            <div class="dropdown-content">
+                <a href="userviewprofile.html">View Profile</a>
+                <a href="usereditprofile.html">Edit Profile</a>
+                <a href="userdelete.html">Delete Profile</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="reserve.html">Reserve</a>
+            <div class="dropdown-content">
+                <a href="reserve.html">Reserve</a>
+                <a href="reserveedit.html">Edit Reservation</a>
+                <a href="reservesee.html">See Reservations</a>
+                <a href="reserveviewslots.html">View Available Slots</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Search</a>
+            <div class="dropdown-content">
+                <a href="searchusers.html">Search Users</a>
+                <a href="searchslots.html">Search Slots</a>
+            </div>
+        </div>
+        <div><a href="userlogout.html">Logout</a></div>
     </nav>
     <div class="container">
-        <h1>Confirm Reservation for admin</h1>
+        <h1>Confirm Reservation for Admin</h1>
         <div class="subcontainer-red">
             <h1 class="lab-title" id="labTitle" style="color: white;"></h1>
             <div class="lab-info" style="color: white;">
