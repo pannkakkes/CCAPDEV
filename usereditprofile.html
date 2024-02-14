@@ -3,62 +3,45 @@
     <head>
         <title>Edit Profile - Fazbear Entertainment Labs</title>
         <link rel="stylesheet" href="css/style.css">
-		<link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
+        <script src="js/User.js"></script>
+        <script src="js/CurrentUser.js"></script>
+        <script src="js/EditProfile.js"></script>
     </head>
 
     <body>
         <nav>
-			<div class="homebutton"><a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a></div>
-			<div class="dropdown">
-				<a href="userviewprofile.html">User Profile</a>
-				<div class="dropdown-content">
-					<a href="userviewprofile.html">View Profile</a>
-					<a href="usereditprofile.html">Edit Profile</a>
-					<a href="userdelete.html">Delete Profile</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<a href="reservemenu.html">Reserve</a>
-				<div class="dropdown-content">
-					<a href="reserve.html">Reserve</a>
-					<a href="reserveremove.html">Remove Reservation</a>
-					<a href="reserveedit.html">Edit Reservation</a>
-					<a href="reservesee.html">See Reservations</a>
-					<a href="reserveviewslots.html">View Available Slots</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<a href="#">Search</a>
-				<div class="dropdown-content">
-					<a href="searchusers.html">Search Users</a>
-					<a href="searchslots.html">Search Slots</a>
-				</div>
-			</div>
-			<div><a href="userlogout.html">Logout</a></div>
-		</nav>
+            <a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a>
+            <a href="userviewprofile.html">User Profile</a>
+            <a href="reservemenu.html">Reserve</a>
+            <a href="search.html">Search</a>
+            <a href="userlogout.html">Logout</a>
+        </nav>
 
         <div class="container">
             <h1>Edit Profile</h1><br>
             <form action="userviewprofile.html">
 
-                <h2>FreddyFazbear</h2>
-                <label for="description">Description:</label>
-                <br>
-                <textarea class="form-input" id="description" name="description" rows="4" cols="50">I am five bears.</textarea>
+                <label for="name">Name:</label>
+                <input class="form-input" type="text" id="name" name="name" value="">
                 <br><br>
 
-                <label for="birthdate">Birthdate:</label>
-                <input class="form-input" type="date" value="1987-01-01">
+                <label for="description">Description:</label>
+                <br>
+                <textarea class="form-input" id="description" name="edit-description" rows="4" cols="50"></textarea>
+                <br><br>
+
+                <label for="birthdate">Birthdate: (mm/dd/yyyy)</label>
+                <input class="form-input" id="birthdate" type="text" value="1987-01-01">
                 <br><br>
 
                 <label for="profilepicture">Profile Picture:</label><br>
-                <img src="sample_files/sampleusersprofilepictures/freddyfazbear.png" alt="Profile Image" width="150">
+                <img src="sample_files/sampleusersprofilepictures/freddyfazbear.png" id="profile-image" alt="Profile Image" width="150">
                 <div class="first">
                     <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="form-input"></p>
                     <p><img id="output" width="200" /></p>
                 </div>
-                
-                <input type = "submit" class="submit-button" value="Save Changes"><br>
+
+                <input id="save-changes" type="submit" class="submit-button" value="Save Changes"><br>
             </form>
         </div>
     </body>
