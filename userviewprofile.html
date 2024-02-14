@@ -2,47 +2,28 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
     <title>View Profile - Fazbear Entertainment Labs</title>
+    <script src = "js/User.js"></script>
+    <script src="js/CurrentUser.js"></script>
+    <script src="js/ViewProfile.js"></script>
 </head>
 <body>
     <nav>
-        <div class="homebutton"><a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a></div>
-        <div class="dropdown">
-            <a href="userviewprofile.html">User Profile</a>
-            <div class="dropdown-content">
-                <a href="userviewprofile.html">View Profile</a>
-                <a href="usereditprofile.html">Edit Profile</a>
-                <a href="userdelete.html">Delete Profile</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="reservemenu.html">Reserve</a>
-            <div class="dropdown-content">
-                <a href="reserve.html">Reserve</a>
-                <a href="reserveremove.html">Remove Reservation</a>
-                <a href="reserveedit.html">Edit Reservation</a>
-                <a href="reservesee.html">See Reservations</a>
-                <a href="reserveviewslots.html">View Available Slots</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#">Search</a>
-            <div class="dropdown-content">
-                <a href="searchusers.html">Search Users</a>
-                <a href="searchslots.html">Search Slots</a>
-            </div>
-        </div>
-        <div><a href="userlogout.html">Logout</a></div>
+        <a href="dashboard.html"><img id="home-icon" src="icons/home.png"> Home</a>
+        <a href="userviewprofile.html">User Profile</a>
+        <a href="reservemenu.html">Reserve</a>
+        <a href="search.html">Search</a>
+        <a href="userlogout.html">Logout</a>
     </nav>
+
     <div class="container">
         <h1>Profile</h1>
 
         <div>
-            <img src="sample_files/sampleusersprofilepictures/freddyfazbear.png" alt="Profile Image" width="150">
-            <h2>FreddyFazbear</h2>
-            <p>I am five bears.</p>
-            <p>Birthdate: 01/01/1987</p>
+            <img id="profile-picture" src="" alt="Profile Image" width="150">
+            <h2 id="profile-name"></h2>
+            <p id="profile-description"></p>
+            <p id="profile-birthdate"></p>
         </div>
 
         <div>
