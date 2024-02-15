@@ -5,7 +5,7 @@ function Reserve(student, seatNum, labTitle, requestTime, reserveTime, faculty, 
     this.requestTime = requestTime;
     this.reserveTime = reserveTime;
     this.faculty = faculty;
-    this.anonymous = anonymous
+    this.anonymous = anonymous;
 }
 
 var reservations = [
@@ -22,6 +22,14 @@ function getReservations(student) {
         if (reservations[i].student === student) {
             studentReservations.push(reservations[i]);
         }
+    }
+    return studentReservations;
+}
+
+function getAllReservations() {
+    var studentReservations = [];
+    for (var i = 0; i < reservations.length; i++) {
+        studentReservations.push(reservations[i]);
     }
     return studentReservations;
 }

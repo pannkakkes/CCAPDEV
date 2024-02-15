@@ -102,8 +102,13 @@
         });
 
         function name(user) {
-            var freddyReservations = getReservations(user.username);
-            generateButtons(freddyReservations);
+            if (user.status == 'T'){
+                var reservations = getAllReservations();
+            }
+            else{
+                var reservations = getReservations(user.username);
+            }
+            generateButtons(reservations);
         }
 
         function generateButtons(reservations) {
@@ -131,9 +136,16 @@
                 
                 if (reservation.anonymous) {
                     var anonimity = document.createElement('p');
-                    anonimity.textContent = reservation.anonymous;
+                    anonimity.textContent = 'Anonymous';
                     anonimity.classList.add('float-left');
+                    content.appendChild(anonimity); // Append to content
+                } else {
+                    var nameElement = document.createElement('p'); // Renamed variable to avoid conflict
+                    nameElement.textContent = reservation.student;
+                    nameElement.classList.add('float-left');
+                    content.appendChild(nameElement); // Append to content
                 }
+
                 
                 var reserveTime = document.createElement('p');
                 reserveTime.textContent = 'Reserve Time: ' + reservation.reserveTime;

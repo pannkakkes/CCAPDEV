@@ -64,6 +64,7 @@
             text-align: left;
         }
     </style>
+    <script src="js/CurrentUser.js"></script>
 </head>
 <body>
     <nav>
@@ -99,7 +100,6 @@
         <div class="subcontainer-red">
             <h1 class="lab-title" id="labTitle" style="color: white;"></h1>
             <div class="lab-info" style="color: white;">
-                <p id="roomNumber"></p>
                 <p id="selectedDay"></p>
                 Select time:
                 <select>
@@ -132,8 +132,8 @@
                     <option value="slot9">Seat 9</option>
                     <option value="slot10">Seat 10</option>
                 </select>
-                <p>Reservation by: <input type="text" placeholder="Name"></p>
-                <p>Student ID: <input type="text" placeholder="ID"></p>
+                <p id="techReservationBy"></p>
+                <p>Reserve for: <input type="text" placeholder="Name"></p>
                 <label>
                     <input type="checkbox"> Reserve Anonymously
                 </label>
@@ -143,10 +143,21 @@
     </div>
 
     <script>
-        // Retrieve data from local storage and display it
         document.getElementById('labTitle').textContent = localStorage.getItem('selectedLab');
-        document.getElementById('roomNumber').textContent = "Location: " + localStorage.getItem('selectedRoom');
         document.getElementById('selectedDay').textContent = "Day: " + localStorage.getItem('selectedDay');
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentUser = getCurrentUser();
+
+            if (currentUser) {
+                name(currentUser);
+            }
+        });
+
+        function name(user){
+            var reservationByElement = document.getElementById("techReservationBy");
+            reservationByElement.textContent = 'Technician Reservation by: ' + user.username;
+        }
     </script>
 </body>
 </html>
