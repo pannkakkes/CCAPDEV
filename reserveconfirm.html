@@ -66,7 +66,6 @@
     </style>
     <script src = "js/User.js"></script>
     <script src="js/CurrentUser.js"></script>
-    <script src="js/CurrentReservation.js"></script>
 </head>
 <body>
     <nav>
@@ -135,7 +134,7 @@
                     <option value="slot9">Seat 9</option>
                     <option value="slot10">Seat 10</option>
                 </select>
-                <p>Reservation by: Freddy Fazbear</p>
+                <p id="reservationBy"></p>
                 <label>
                     <input type="checkbox"> Reserve Anonymously
                 </label>
@@ -146,8 +145,20 @@
 
     <script>
         document.getElementById('labTitle').textContent = localStorage.getItem('selectedLab');
-        document.getElementById('roomNumber').textContent = "Location: " + localStorage.getItem('selectedRoom');
         document.getElementById('selectedDay').textContent = "Day: " + localStorage.getItem('selectedDay');
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentUser = getCurrentUser();
+
+            if (currentUser) {
+                name(currentUser);
+            }
+        });
+
+        function name(user){
+            var reservationByElement = document.getElementById("reservationBy");
+            reservationByElement.textContent = 'Reservation by: ' + user.username;
+        }
     </script>
 </body>
 </html>

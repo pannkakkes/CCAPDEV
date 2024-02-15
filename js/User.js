@@ -24,9 +24,3 @@ function getUser(emailaddress){
     }
     return null;
 }
-
-
-
-
-
-
