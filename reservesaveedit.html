@@ -102,9 +102,9 @@
             <div class="lab-info" style="color: white;">
                 Select New Room
                 <select>
-                    <option value="slot1">Lab 1</option>
-                    <option value="slot2">Lab 2</option>
-                    <option value="slot3">Lab 3</option>
+                    <option value="slot1">Freddy Frightful Manor</option>
+                    <option value="slot2">Chica Chilling Chamber</option>
+                    <option value="slot3">Puppet Perilous Palace</option>
                 </select>
                 <br>
                 <br>
@@ -138,6 +138,19 @@
                     <option value="slot14">Slot 14 (3:30 - 4:00)</option>
                 </select>
                 <br>
+                Select new seat number:
+                <select>
+                    <option value="slot1">Seat 1</option>
+                    <option value="slot2">Seat 2</option>
+                    <option value="slot3">Seat 3</option>
+                    <option value="slot4">Seat 4</option>
+                    <option value="slot5">Seat 5</option>
+                    <option value="slot6">Seat 6</option>
+                    <option value="slot7">Seat 7</option>
+                    <option value="slot8">Seat 8</option>
+                    <option value="slot9">Seat 9</option>
+                    <option value="slot10">Seat 10</option>
+                </select>
                 <br>
                 <label>
                     <input type="checkbox"> Reserve Anonymously
@@ -152,7 +165,6 @@
     <script>
         // Retrieve data from local storage and display it
         document.getElementById('labTitle').textContent = localStorage.getItem('selectedLab');
-        document.getElementById('roomNumber').textContent = "Location: "+ localStorage.getItem('selectedRoom');
         document.getElementById('selectedDay').textContent = "Day: " + localStorage.getItem('selectedDay');
     </script>
 </body>
