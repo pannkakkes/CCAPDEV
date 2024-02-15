@@ -7,6 +7,7 @@
     <script src = "js/User.js"></script>
     <script src="js/CurrentUser.js"></script>
     <script src="js/ViewProfile.js"></script>
+    <script src = "js/ReverseSee.js"></script>
 </head>
 <body>
     <nav>
@@ -61,40 +62,20 @@
                         <th>Date and Time of Reservation</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Seat 1</td>
-                        <td>Lab 1 - Freddy's Frightful Manor 201</td>
-                        <td>1/1/2024 10:00 AM</td>
-                        <td>1/1/2024 2:30 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Seat 9</td>
-                        <td>Lab 2 - Chica's Chilling Chamber 406</td>
-                        <td>1/1/2024 10:01 AM</td>
-                        <td>1/9/2024 2:30 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Seat 8</td>
-                        <td>Lab 3 - Puppet's Perilous Palace 1704</td>
-                        <td>1/1/2024 10:02 AM</td>
-                        <td>1/8/2024 2:30 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Seat 7</td>
-                        <td>Lab 3 - Puppet's Perilous Palace 1704</td>
-                        <td>1/1/2024 10:03 AM</td>
-                        <td>1/7/2024 2:30 PM</td>
-                    </tr>
+                <tbody id="reservationTableBody">
+                    
                 </tbody>
             </table>
-
+            
             <div class="subcontainer">
 
             <a href="userdelete.html" class="normal-link">Delete Profile</a>
             <a href="usereditprofile.html" class="normal-link">Edit Profile</a>
 
             </div>
+
+            <br>
+            <p class="reservation-none" id="reservation-none"> No Reservation Found </p>
         </div>
     </div>
 </body>
