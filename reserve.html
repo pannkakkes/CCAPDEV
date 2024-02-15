@@ -56,6 +56,7 @@
     </style>
     <script src = "js/User.js"></script>
     <script src="js/CurrentUser.js"></script>
+    <script src="js/CurrentReservation.js"></script>
 </head>
 <body>
     <nav>
@@ -101,36 +102,33 @@
         </div>
         <div class="subcontainer" id="subContainer">
             <div class="sub-subcontainer" id="Lab1">
-                <h1 class="lab-title">Lab 1</h1>
+                <h1 class="lab-title">Freddy's Frightful Manor</h1>
                 <div class="lab-info">
-                    <p class="building">Freddy's Frightful Manor</p>
                 </div>
-                <button class="reserve-button" onclick="reserveLab('Lab 1', 'Frightful Manor')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Freddy Frightful Manor')">Reserve</button>
             </div>
             <div class="sub-subcontainer" id="Lab2">
-                <h1 class="lab-title">Lab 2</h1>
+                <h1 class="lab-title">Chica's Chilling Chamber</h1>
                 <div class="lab-info">
-                    <p class="building">Chica's Chilling Chamber</p>
                 </div>
-                <button class="reserve-button" onclick="reserveLab('Lab 2', 'Chica Chilling Chamber')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Chica Chilling Chamber')">Reserve</button>
             </div>
             <div class="sub-subcontainer" id="Lab3">
-                <h1 class="lab-title">Lab 3</h1>
+                <h1 class="lab-title">Puppet's Perilous Palace</h1>
                 <div class="lab-info">
-                    <p class="building">Puppet's Perilous Palace</p>
                 </div>
-                <button class="reserve-button" onclick="reserveLab('Lab 3', 'Puppet Perilous Palace')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Puppet Perilous Palace')">Reserve</button>
             </div>
         </div>
     </div>
     <script>
 
-        function reserveLab(labName, location) {
+        function reserveLab(labName) {
             var currentUser = getCurrentUser(); 
             var userStatus = currentUser.status; 
 
             localStorage.setItem('selectedLab', labName);
-            localStorage.setItem('selectedRoom', location);
+            //setCurrentReservation(labName, 'Monday');
             
             if (userStatus === 'T') { 
                 window.location.href = 'reserveforstudent.html';
@@ -141,6 +139,7 @@
 
         function setDay(dayName){
             localStorage.setItem('selectedDay', dayName);
+            //setCurrentReservation(getCurrentReservation().labTitle, dayName); 
         }
     
         document.querySelectorAll('.search-button').forEach(button => {
