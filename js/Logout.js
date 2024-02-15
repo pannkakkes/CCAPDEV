@@ -6,6 +6,6 @@ if (currentUser) {
 
 document.getElementById("submit-button").addEventListener("click", function(event) {
     event.preventDefault();
-    sessionStorage.removeItem("currentUser"); 
+    document.cookie = 'currentUser=; expires=Mon, 01 Jan 2024 00:00:00 UTC; path=/;';
     window.location.href = "./index.html"; 
 });
