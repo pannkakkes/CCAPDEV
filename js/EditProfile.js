@@ -10,8 +10,8 @@ function updateProfile(user){
     var profilePictureElement = document.getElementById("profile-image");
     profilePictureElement.src = "sample_files/sampleusersprofilepictures/" + user.profilePicture;
 
-    var profileNameElement = document.getElementById("name");
-    profileNameElement.value = user.username;
+    var profileNameElement = document.getElementById("profile-name");
+    profileNameElement.textContent = user.username;
 
     var profileDescriptionElement = document.getElementById("description");
     profileDescriptionElement.value = user.description;
@@ -26,7 +26,6 @@ function updateProfile(user){
 }
 
 function saveChanges(user){
-    var newName = document.getElementById("name").value;
     var newDescription = document.getElementById("description").value;
     var newBirthdate = document.getElementById("birthdate").value;
 
