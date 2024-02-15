@@ -3,6 +3,9 @@
     <title>Reservation Details - Fazbear Entertainment Labs</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
+    <script src = "js/User.js"></script>
+    <script src="js/CurrentUser.js"></script>
+    <script src = "js/ReverseSee.js"></script>
 </head>
 <body>
 
@@ -35,9 +38,9 @@
         <div><a href="userlogout.html">Logout</a></div>
     </nav>
 
-    <div class="container" style="width: 700px; position: relative;">
+    <div class="container" style="width: 700px; position: relative; height: 500px">
         <h1>Reservation Details</h1>
-    </div>
+    
 
     <div class="table-container" style="left: 0; right: 0">
         <table style="left: 0">
@@ -49,33 +52,11 @@
                     <th>Date and Time of Reservation</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Seat 1</td>
-                    <td>Freddy's Frightful Manor 201</td>
-                    <td>1/1/2024 10:00 AM</td>
-                    <td>1/1/2024 2:30 PM</td>
-                </tr>
-                <tr>
-                    <td>Seat 9</td>
-                    <td>Chica's Chilling Chamber 406</td>
-                    <td>1/1/2024 10:01 AM</td>
-                    <td>1/9/2024 2:30 PM</td>
-                </tr>
-                <tr>
-                    <td>Seat 8</td>
-                    <td>Puppet's Perilous Palace 1704</td>
-                    <td>1/1/2024 10:02 AM</td>
-                    <td>1/8/2024 2:30 PM</td>
-                </tr>
-                <tr>
-                    <td>Seat 7</td>
-                    <td>Puppet's Perilous Palace 1704</td>
-                    <td>1/1/2024 10:03 AM</td>
-                    <td>1/7/2024 2:30 PM</td>
-                </tr>
+            <tbody id="reservationTableBody">
+
             </tbody>
         </table>
     </div>
+</div>
 </body>
 </html>
