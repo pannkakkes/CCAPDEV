@@ -65,7 +65,13 @@
         .lab-info {
             text-align: left;
         }
+
+        #cancel-button {
+            display: none;
+        }
     </style>
+    <script src = "js/User.js"></script>
+    <script src="js/CurrentUser.js"></script>
 </head>
 <body>
     <nav>
@@ -157,15 +163,18 @@
                 </label>
                 <br>
                 <a href="dashboard.html"><button class="reserve-button"><h1 style="font-size: 12px; padding: -20px;">Save Changes</h1></button></a>
-                <a href="dashboard.html"><button class="reserve-button"><h1 style="font-size: 12px; padding: -20px;">Cancel Reservation</h1></button></a>
+                <div id="cancel-button"><a href="dashboard.html"><button class="reserve-button"><h1 style="font-size: 12px; padding: -20px;">Cancel Reservation</h1></button></a></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Retrieve data from local storage and display it
-        document.getElementById('labTitle').textContent = localStorage.getItem('selectedLab');
-        document.getElementById('selectedDay').textContent = "Day: " + localStorage.getItem('selectedDay');
+        var currentUser = getCurrentUser(); 
+        var userStatus = currentUser.status;
+        
+        if (userStatus === 'T') { 
+            document.getElementById("cancel-button").style.display = "block";
+        }
     </script>
 </body>
 </html>
