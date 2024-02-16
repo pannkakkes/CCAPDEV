@@ -3,6 +3,7 @@
         <title>Search for Slots - Fazbear Entertainment Labs</title>
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
+		<script src="js/SearchSlots.js"></script>
     </head>
 
     <body>
@@ -37,10 +38,10 @@
         <div class="container">
 			<h1>Search for Slots</h1><br>
 			<div>
-				<form>
-					<input type="date" class="form-input">
+				<form onsubmit="return validate()">
+					<input type="date" class="form-input" id="selected_date">
 					<select id="time_slot" name="time_slot">
-						<option value="choose-slot">Choose Slot</option>
+						<option value="choose-slot">Choose Time</option>
 						<option value="slot1">Slot 1 (9:00 - 9:30)</option>
 						<option value="slot2">Slot 2 (9:30 - 10:00)</option>
 						<option value="slot3">Slot 3 (10:00 - 10:30)</option>
@@ -56,7 +57,7 @@
 						<option value="slot13">Slot 13 (3:00 - 3:30)</option>
 						<option value="slot14">Slot 14 (3:30 - 4:00)</option>
 					</select>
-					<select>
+					<select id="selected_lab">
 						<option value="choose-lab">Choose Lab</option>
 						<option value="lab1">Freddy's Frightful Manor</option>
 						<option value="lab2">Chica's Chilling Chamber</option>
