@@ -9,7 +9,8 @@ function Reserve(student, seatNum, labTitle, requestTime, reserveTime, faculty, 
 }
 
 var reservations = [
-    new Reserve("FreddyFazbear", "Seat 1" ,"Freddy's Frightful Manor", "1/1/2024 10:01", "1/1/2024 14:30", null, false),
+    new Reserve("FreddyFazbear", "Seat 1" ,"Freddy's Frightful Manor", "1/1/2024 10:00", "1/1/2024 14:30", null, false),
+    new Reserve("FreddyFazbear", "Seat 9" ,"Chica's Chilling Chamber", "1/1/2024 10:01", "1/9/2024 14:30", null, false),
     new Reserve("FreddyFazbear", "Seat 8", "Puppet's Perilous Palace", "1/1/2024 10:02", "1/8/2024 14:30", null, false),
     new Reserve("FreddyFazbear", "Seat 7", "Puppet's Perilous Palace", "1/1/2024 10:03", "1/7/2024 14:30", null, false),
     new Reserve("BonnieBunny", "Seat 2", "Freddy's Frightful Manor", "1/1/2024 10:00", "1/1/2024 14:30", null, false),
