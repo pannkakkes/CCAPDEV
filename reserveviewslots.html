@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
     <script src="js/RegisterView.js"></script>
+    <script src="js/ViewSlots.js"></script>
 </head>
 
 <body>
@@ -40,8 +41,8 @@
     <div class = container>
         <h1>View Slot Availability</h1>
 
-        <h2>Seat Availability - Freddy's Frightful Manor</h2>
-        <p>1/1/2024 2:30 PM</p>
+        <h2 id="heading-lab">Freddy's Frightful Manor</h2>
+        <p id="date-and-time">1/1/2024 2:30 PM - 3:00 PM</p>
         <table class="center" border="1">
             <thead>
                 <tr>
@@ -55,73 +56,73 @@
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>1</td>
-                    <td><a href="freddyfazbear.html" class="user-link">FreddyFazbear</a></td>
-                    <td>Unavailable</td>
+                    <td class="reserved-by"><a href="freddyfazbear.html" class="user-link">FreddyFazbear</a></td>
+                    <td class="availability">Unavailable</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>2</td>
-                    <td><a href="bonniebunny.html" class="user-link">BonnieBunny</a></td>
-                    <td>Unavailable</td>
+                    <td class="reserved-by"><a href="bonniebunny.html" class="user-link">BonnieBunny</a></td>
+                    <td class="availability">Unavailable</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>3</td>
-                    <td><p>Anonymous</p></td>
-                    <td>Unavailable</td>
+                    <td class="reserved-by"><p>Anonymous</p></td>
+                    <td class="availability">Unavailable</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>4</td>
-                    <td></td>
-                    <td>Available</td>
+                    <td class="reserved-by"></td>
+                    <td class="availability">Available</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>5</td>
-                    <td></td>
-                    <td>Available</td>
+                    <td class="reserved-by"></td>
+                    <td class="availability">Available</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>6</td>
-                    <td></td>
-                    <td>Available</td>
+                    <td class="reserved-by"></td>
+                    <td class="availability">Available</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>7</td>
-                    <td></td>
-                    <td>Available</td>
+                    <td class="reserved-by"></td>
+                    <td class="availability">Available</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>8</td>
-                    <td></td>
-                    <td>Available</td>
+                    <td class="reserved-by"></td>
+                    <td class="availability">Available</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>9</td>
-                    <td></td>
-                    <td>Available</td>
+                    <td class="reserved-by"></td>
+                    <td class="availability">Available</td>
                 </tr>
                 <tr>
                     <td>Freddy's Frightful Manor</td>
                     <td>10</td>
-                    <td></td>
-                    <td>Available</td>
+                    <td class="reserved-by"></td>
+                    <td class="availability">Available</td>
                 </tr>
                 
             </tbody>
         </table><br>
 
-        <form action="reserveviewslots.html">
+        <form onsubmit="return validate(event)" method="post">
             <a>Choose Computer Lab:</a>
             <select id="lab" name="lab">
-                <option value="1">Freddy's Frightful Manor</option>
-                <option value="0">Chica's Chilling Chamber</option>
-                <option value="0">Puppet's Perilous Palace</option>
+                <option value="lab1">Freddy's Frightful Manor</option>
+                <option value="lab2">Chica's Chilling Chamber</option>
+                <option value="lab3">Puppet's Perilous Palace</option>
             </select>
             <br>
 
@@ -132,20 +133,20 @@
             <a>Select Time Slot:</a>
             <select id="time_slot" name="time_slot">
                 <option value="choose-slot">Choose Slot</option>
-                <option value="slot1">Slot 1 (9:00 - 9:30)</option>
-                <option value="slot2">Slot 2 (9:30 - 10:00)</option>
-                <option value="slot3">Slot 3 (10:00 - 10:30)</option>
-                <option value="slot4">Slot 4 (10:30 - 11:00)</option>
-                <option value="slot5">Slot 5 (11:00 - 11:30)</option>
-                <option value="slot6">Slot 6 (11:30 - 12:00)</option>
-                <option value="slot7">Slot 7 (12:00 - 12:30)</option>
-                <option value="slot8">Slot 8 (12:30 - 1:00)</option>
-                <option value="slot9">Slot 9 (1:00 - 1:30)</option>
-                <option value="slot10">Slot 10 (1:30 - 2:00)</option>
-                <option value="slot11">Slot 11 (2:00 - 2:30)</option>
-                <option value="slot12">Slot 12 (2:30 - 3:00)</option>
-                <option value="slot13">Slot 13 (3:00 - 3:30)</option>
-                <option value="slot14">Slot 14 (3:30 - 4:00)</option>
+                <option value="9:00 PM - 9:30 PM">Slot 1 (9:00 - 9:30)</option>
+                <option value="9:30 PM - 10:00 PM">Slot 2 (9:30 - 10:00)</option>
+                <option value="10:00 PM - 10:30 PM">Slot 3 (10:00 - 10:30)</option>
+                <option value="10:30 PM - 11:00 PM">Slot 4 (10:30 - 11:00)</option>
+                <option value="11:00 PM - 11:30 PM">Slot 5 (11:00 - 11:30)</option>
+                <option value="11:30 PM - 12:00 PM">Slot 6 (11:30 - 12:00)</option>
+                <option value="12:00 PM - 12:30 PM">Slot 7 (12:00 - 12:30)</option>
+                <option value="12:30 PM - 1:00 PM">Slot 8 (12:30 - 1:00)</option>
+                <option value="1:00 PM - 1:30 PM">Slot 9 (1:00 - 1:30)</option>
+                <option value="1:30 PM - 2:00 PM">Slot 10 (1:30 - 2:00)</option>
+                <option value="2:00 PM - 2:30 PM">Slot 11 (2:00 - 2:30)</option>
+                <option value="2:30 PM - 3:00 PM">Slot 12 (2:30 - 3:00)</option>
+                <option value="3:00 PM - 3:30 PM">Slot 13 (3:00 - 3:30)</option>
+                <option value="3:30 PM - 4:00 PM">Slot 14 (3:30 - 4:00)</option>
             </select>
             <br><br>
 
