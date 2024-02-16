@@ -3,6 +3,7 @@
 <head>
     <title>Lab Reservation System - Reserve</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
     <style>
         .group-button{
             text-align: center;
@@ -105,19 +106,19 @@
                 <h1 class="lab-title">Freddy's Frightful Manor</h1>
                 <div class="lab-info">
                 </div>
-                <button class="reserve-button" onclick="reserveLab('Freddy Frightful Manor')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Freddy\'s Frightful Manor')">Reserve</button>
             </div>
             <div class="sub-subcontainer" id="Lab2">
                 <h1 class="lab-title">Chica's Chilling Chamber</h1>
                 <div class="lab-info">
                 </div>
-                <button class="reserve-button" onclick="reserveLab('Chica Chilling Chamber')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Chica\'s Chilling Chamber')">Reserve</button>
             </div>
             <div class="sub-subcontainer" id="Lab3">
                 <h1 class="lab-title">Puppet's Perilous Palace</h1>
                 <div class="lab-info">
                 </div>
-                <button class="reserve-button" onclick="reserveLab('Puppet Perilous Palace')">Reserve</button>
+                <button class="reserve-button" onclick="reserveLab('Puppet\'s Perilous Palace')">Reserve</button>
             </div>
         </div>
     </div>
@@ -127,7 +128,7 @@
             var currentUser = getCurrentUser(); 
             var userStatus = currentUser.status; 
 
-            localStorage.setItem('selectedLab', labName);
+            setLab(labName);
             //setCurrentReservation(labName, 'Monday');
             
             if (userStatus === 'T') { 
@@ -137,11 +138,6 @@
             }
         }
 
-        function setDay(dayName){
-            localStorage.setItem('selectedDay', dayName);
-            //setCurrentReservation(getCurrentReservation().labTitle, dayName); 
-        }
-    
         document.querySelectorAll('.search-button').forEach(button => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.search-button').forEach(btn => {

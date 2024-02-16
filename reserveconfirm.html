@@ -3,6 +3,7 @@
 <head>
     <title>Lab Reservation System - Confirm Reservation</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
     <style>
         .group-button {
             text-align: center;
@@ -66,6 +67,7 @@
     </style>
     <script src = "js/User.js"></script>
     <script src="js/CurrentUser.js"></script>
+    <script src="js/CurrentReservation.js"></script>
 </head>
 <body>
     <nav>
@@ -138,14 +140,15 @@
                 <label>
                     <input type="checkbox"> Reserve Anonymously
                 </label>
-                <a href="dashboard.html"><button class="reserve-button"><h1 style="font-size: 15px; padding: -20px;">Reserve</h1></button></a>
+                <a href="dashboard.html" id="final-reserve"><button class="reserve-button"><h1 style="font-size: 15px; padding: -20px;">Reserve</h1></button></a>
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('labTitle').textContent = localStorage.getItem('selectedLab');
-        document.getElementById('selectedDay').textContent = "Day: " + localStorage.getItem('selectedDay');
+        
+        document.getElementById('labTitle').textContent = getLab();
+        document.getElementById('selectedDay').textContent = "Day: " + getDay();
 
         document.addEventListener("DOMContentLoaded", function () {
             var currentUser = getCurrentUser();
@@ -159,6 +162,10 @@
             var reservationByElement = document.getElementById("reservationBy");
             reservationByElement.textContent = 'Reservation by: ' + user.username;
         }
+
+        document.getElementById("final-reserve").addEventListener("click", function(event) {
+            alert("Reservation successful!");
+        });
     </script>
 </body>
 </html>
