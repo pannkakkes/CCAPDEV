@@ -1,16 +1,12 @@
-// function setCurrentUser(user) {
-//     sessionStorage.setItem('currentUser', JSON.stringify(user));
-// }
-
-// function getCurrentUser() {
-//     var userString = sessionStorage.getItem('currentUser');
-//     return userString ? JSON.parse(userString) : null;
-// }
-
 function setCurrentUser(user, isRemembered) {
-    // Set cookie with expiry time in days (e.g., 1 day)
     var expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + 1); // Expires in 1 day
+
+    if (isRemembered) {
+        expiryDate.setDate(expiryDate.getDate() + 22);
+    } else {
+        expiryDate.setDate(expiryDate.getDate() + 1);
+    }
+
     document.cookie = `currentUser=${JSON.stringify(user)}; expires=${expiryDate.toUTCString()}; path=/`;
 }
 
