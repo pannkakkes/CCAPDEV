@@ -4,6 +4,11 @@
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
 		<script src="js/SearchSlots.js"></script>
+		<style>
+			#search-results {
+				display: none;
+			}
+		</style>
     </head>
 
     <body>
@@ -38,7 +43,7 @@
         <div class="container">
 			<h1>Search for Slots</h1><br>
 			<div>
-				<form onsubmit="return validate()">
+				<form onsubmit="return validate(event)" method="post">
 					<input type="date" class="form-input" id="selected_date">
 					<select id="time_slot" name="time_slot">
 						<option value="choose-slot">Choose Time</option>
@@ -65,6 +70,7 @@
 					</select><br><br>
 					<button class="search-button">Search for Slots</button>
 				</form>
+				<p id="search-results">All seats are available!</p>
 		</div>
     </body>
 </html>
