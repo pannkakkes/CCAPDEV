@@ -23,6 +23,18 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '\\' + 'index.html');
 });
 
+app.get('/userlogin', function (req, res) {
+    res.sendFile(__dirname + '\\' + 'userlogin.html');
+});
+
+app.get('/userregister', function (req, res) {
+    res.sendFile(__dirname + '\\' + 'userregister.html');
+});
+
+app.get('/details', function (req, res) {
+    res.sendFile(__dirname + '\\' + 'details.html');
+});
+
 var server = app.listen(3000, function () {
     console.log('Node server is running...');
 });
