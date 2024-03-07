@@ -12,6 +12,8 @@ const path = require('path')
 
 const bodyParser = require('body-parser');
 
+var currentEmail;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -81,6 +83,8 @@ app.post('/login', async function (req, res) {
         // At this point, login is successful
         // You can generate a session token or set a cookie to maintain the user's session
         // For simplicity, let's just send a success message
+        currentEmail = email;
+        console.log(email);
         res.send("Login successful!");
     } catch (error) {
         console.error(error);
@@ -129,7 +133,17 @@ app.get('/searchslots', function (req, res) {
     res.sendFile(__dirname + '\\' + 'searchslots.html');
 });
 
-app.get('/viewprofile', function (req, res) {
+app.get('/viewprofile', async function (req, res) {
+    try {
+        const userData = await User.findOne({email: currentEmail});
+        const reservationsData = await Reservation.find({ username: userData.username });
+
+        console.log(userData);
+        console.log(reservationsData.length);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
     res.sendFile(__dirname + '\\' + 'userviewprofile.html');
 });
 
