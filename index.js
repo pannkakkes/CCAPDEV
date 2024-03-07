@@ -89,6 +89,10 @@ app.post('/register', function (req, res) {
         });
 });
 
+app.get('/dashboard', function (req, res) {
+    res.sendFile(__dirname + '\\' + 'dashboard.html');
+});
+
 app.get('/details', function (req, res) {
     res.sendFile(__dirname + '\\' + 'details.html');
 });
