@@ -97,6 +97,14 @@ app.get('/details', function (req, res) {
     res.sendFile(__dirname + '\\' + 'details.html');
 });
 
+app.get('/searchusers', function (req, res) {
+    res.sendFile(__dirname + '\\' + 'searchusers.html');
+});
+
+app.get('/searchslots', function (req, res) {
+    res.sendFile(__dirname + '\\' + 'searchslots.html');
+});
+
 var server = app.listen(3000, function () {
     console.log('Node server is running...');
 });
