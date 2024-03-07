@@ -129,6 +129,14 @@ app.get('/searchslots', function (req, res) {
     res.sendFile(__dirname + '\\' + 'searchslots.html');
 });
 
+app.get('/viewprofile', function (req, res) {
+    res.sendFile(path.join(__dirname, 'userviewprofile.html'));
+});
+
+app.get('/editprofile', function (req, res) {
+    res.sendFile(path.join(__dirname, 'usereditprofile.html'));
+});
+
 var server = app.listen(3000, function () {
     console.log('Node server is running...');
 });
