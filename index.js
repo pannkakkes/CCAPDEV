@@ -11,6 +11,7 @@ const Reservation = require("./database/models/Reservation")
 const path = require('path')
 
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -27,15 +28,15 @@ var db = mongoose.connection;
 db.once('open', function() {
     User.create([
         { username: 'FreddyFazbear', email: 'freddyfazbear@dlsu.edu.ph', password: 'fazbear00', description: 'I am five bears.',
-        birthdate: '01/01/1987', role: 'V' },
+        birthdate: '01/01/1987', profilepicture: 'images/freddyfazbear.png',role: 'V' },
         { username: 'BonnieBunny', email: 'bonnythebonnybon@dlsu.edu.ph', password: 'bonny3', description: 'I like baking cupcakes.',
-        birthdate: '02/21/1983', role: 'V' },
+        birthdate: '02/21/1983', profilepicture: 'images/bonniebunny.png', role: 'V' },
         { username: 'FoxyThePirate', email: 'foxythepirate@dlsu.edu.ph', password: 'foxie12', description: 'I hunt for treasure!',
-        birthdate: '06/04/1985', role: 'V' },
+        birthdate: '06/04/1985', profilepicture: 'images/foxythepirate.png', role: 'V' },
         { username: 'WilliamAfton', email: 'williamaftersun@dlsu.edu.ph', password: 'willom2', description: "I'm the bad guy.",
-        birthdate: '07/29/1954', role: 'T' },
+        birthdate: '07/29/1954', profilepicture: 'images/williamafton.png', role: 'T' },
         { username: 'SpringTrap', email: 'springtrap@dlsu.edu.ph', password: 'Summer!', description: "I trap you.",
-        birthdate: '07/29/1954', role: 'T' },
+        birthdate: '07/29/1954', profilepicture: 'images/freddyfazbear.png', role: 'T' },
     ]);
 
     Reservation.create([
@@ -67,27 +68,22 @@ app.get('/userregister', function (req, res) {
 });
 
 app.post('/register', function (req, res) {
-    const { email, username, password, description, birthdate, profilePicture, status } = req.body;
-
-    const newUser = new User({
-        email,
-        username,
-        password,
-        description,
-        birthdate,
-        profilePicture,
-        role: status 
-    });
-
-    newUser.save()
-        .then(user => {
-            res.json(user);
-        })
-        .catch(error => {
-            console.error('Error creating user:', error);
-            res.status(500).json({ error: 'An error occurred while creating user' });
-        });
+    const { image } = req.files; // Access the uploaded image file
+    const { email, username, password, description, birthdate } = req.body;
+    console.log(req.body);
+    image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
+        if (error) {
+            console.log("Error!")
+        } else {
+            User.create({
+                ...req.body,
+                profilepicture: '/images/' + image.name
+            });
+            res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
+        }
+    })
 });
+
 
 app.get('/details', function (req, res) {
     res.sendFile(__dirname + '\\' + 'details.html');

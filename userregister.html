@@ -6,46 +6,47 @@
     </head>
     
     <body>
-        <form id="register_form">
+        <form id="register_form" action="/register" method="post" enctype="multipart/form-data">
             <div class="container">
                 <h1>Register User</h1>
                 <span> Email address:<br/> </span>
-                <input type = "email" class="form-input" id = "email"/>
+                <input type="email" class="form-input" id="email" name="email" /> <!-- Added name attribute -->
                 <br> </br>
-
+        
                 <span> Username:<br/> </span>
-                <input type = "text" class="form-input" id = "username"/>
+                <input type="text" class="form-input" id="username" name="username" /> <!-- Added name attribute -->
                 <br> </br>
-
+        
                 <span> Password:<br/> </span>
-                <input type = "password" class="form-input" id = "password"/>
+                <input type="password" class="form-input" id="password" name="password" /> <!-- Added name attribute -->
                 <br> </br>
-
+        
                 <span> Confirm Password:<br/> </span>
-                <input type = "password" class="form-input" id = "confirmPassword"/>
+                <input type="password" class="form-input" id="confirmPassword" name="confirmPassword" /> <!-- Added name attribute -->
                 <br> </br>
-
+        
                 <span> Description: <br/></span>
-                <textarea rows="4" cols="50" class="form-input" id = "description"></textarea>
+                <textarea rows="4" cols="50" class="form-input" id="description" name="description"></textarea> <!-- Added name attribute -->
                 <br> </br>
-
+        
                 <span> Birthdate: <br/> </span>
-                <input type = "date" class="form-input" id = "birthdate">
+                <input type="date" class="form-input" id="birthdate" name="birthdate" /> <!-- Added name attribute -->
                 <br> </br>
                 
                 <span> Profile Picture: <br/> </span>
                 <div class="first">
-                    <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="form-input"></p>
+                    <p><input type="file" name="image" id="pfp" class="form-input" /></p>
                     <p><img id="output" width="200" /></p>
                 </div>    
-
-                <input type = "submit" class="submit-button" id="submitT" value="Register as Lab Technician"></button>
+        
+                <input type="submit" class="submit-button" id="submitT" value="Register as Lab Technician" />
                 <br> </br>
-                <input type = "submit" class="submit-button" id="submitV" value="Register as Student"></button>
+                <input type="submit" class="submit-button" id="submitV" value="Register as Student" />
             </div>
-        </form>
+        </form>        
         <a href="/" class="normal-link">Back</a>
         <br><br>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src = "js/Register.js"></script>
     </body>
 
