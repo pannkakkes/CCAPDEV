@@ -89,6 +89,16 @@ app.post('/register', function (req, res) {
         });
 });
 
+app.post('/searchU', async (req, res) => {
+    var regex = new RegExp(["^", req.body.username, "$"].join(""), "i");
+    const existUsername = await User.find({ username: regex});
+    console.log(existUsername);
+
+    if (existUsername  && existUsername.length > 0) {
+        console.log('username taken');
+    }
+})
+
 app.get('/dashboard', function (req, res) {
     res.sendFile(__dirname + '\\' + 'dashboard.html');
 });
