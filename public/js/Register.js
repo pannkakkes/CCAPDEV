@@ -35,17 +35,31 @@ document.getElementById("submitT").addEventListener("click", function(event) {
         alert("Please enter a valid email ending with @dlsu.edu.ph");
         isValid = false;
     }
-    
-    /*
-    var newUser = new Account(username, email, password, description, birthdate, profilePicture, status);
 
-    users.push(newUser);
-    */
+    if (isValid) {
+        var formData = new FormData();
+        formData.append("email", email);
+        formData.append("username", username);
+        formData.append("password", password);
+        formData.append("confirmPassword", confirmPassword);
+        formData.append("description", description);
+        formData.append("birthdate", birthdate);
+        formData.append("profilePicture", profilePicture);
+        formData.append("status", status);
 
-    if (isValid){
-    alert("Account created successfully! Welcome, " + username + "!");
-    
-    window.location.href = "index.html";
+        // Make AJAX POST request
+        fetch('/register', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Account created successfully! Welcome, " + data.username + "!");
+            window.location.href = "index.html";
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 });
 
@@ -78,15 +92,29 @@ document.getElementById("submitV").addEventListener("click", function(event) {
         isValid = false;
     }
     
-    /*
-    var newUser = new Account(username, email, password, description, birthdate, profilePicture, status);
+    if (isValid) {
+        var formData = new FormData();
+        formData.append("email", email);
+        formData.append("username", username);
+        formData.append("password", password);
+        formData.append("confirmPassword", confirmPassword);
+        formData.append("description", description);
+        formData.append("birthdate", birthdate);
+        formData.append("profilePicture", profilePicture);
+        formData.append("status", status);
 
-    users.push(newUser);
-    */
-
-    if (isValid){
-    alert("Account created successfully! Welcome, " + username + "!");
-    
-    window.location.href = "index.html";
+        // Make AJAX POST request
+        fetch('/register', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Account created successfully! Welcome, " + data.username + "!");
+            window.location.href = "index.html";
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 });

@@ -10,6 +10,10 @@ const User = require("./database/models/User")
 const Reservation = require("./database/models/Reservation")
 const path = require('path')
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.json())
 app.use(express.urlencoded( {extended: true}))
 app.use(express.static('public'))
@@ -59,7 +63,30 @@ app.get('/userlogin', function (req, res) {
 });
 
 app.get('/userregister', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'userregister.html');
+    res.sendFile(path.join(__dirname, 'userregister.html'));
+});
+
+app.post('/register', function (req, res) {
+    const { email, username, password, description, birthdate, profilePicture, status } = req.body;
+
+    const newUser = new User({
+        email,
+        username,
+        password,
+        description,
+        birthdate,
+        profilePicture,
+        role: status 
+    });
+
+    newUser.save()
+        .then(user => {
+            res.json(user);
+        })
+        .catch(error => {
+            console.error('Error creating user:', error);
+            res.status(500).json({ error: 'An error occurred while creating user' });
+        });
 });
 
 app.get('/details', function (req, res) {
