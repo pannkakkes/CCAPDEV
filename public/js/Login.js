@@ -1,16 +1,28 @@
-document.getElementById("submitButton").addEventListener("click", function(event) {
-    event.preventDefault(); 
+document.getElementById("submitButton").addEventListener("click", async function(event) {
+    event.preventDefault();
 
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
-    var keepLoggedIn = document.getElementById("keepLoggedIn").checked;
 
-    var user = getUser(email); 
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
 
-    if (user !== null && user.password === password) { 
-        setCurrentUser(user, keepLoggedIn); 
-        window.location.href = "/dashboard"; 
-    } else {
-        alert("Invalid email or password.");
+        const data = await response.text();
+        
+        if (response.ok) {
+            alert(data); // Display success message
+            window.location.href = "/dashboard"; // Redirect to dashboard
+        } else {
+            alert(data); // Display error message
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert("An error occurred. Please try again later.");
     }
 });

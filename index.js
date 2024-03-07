@@ -59,10 +59,38 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '\\' + 'index.html');
 });
 
+//User Login
 app.get('/userlogin', function (req, res) {
     res.sendFile(__dirname + '\\' + 'userlogin.html');
 });
 
+app.post('/login', async function (req, res) {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email }); // Find user by email
+
+        if (!user) {
+            return res.status(400).send("Invalid email or password."); // User not found
+        }
+
+        if (user.password !== password) {
+            return res.status(400).send("Invalid email or password."); // Incorrect password
+        }
+
+        // At this point, login is successful
+        // You can generate a session token or set a cookie to maintain the user's session
+        // For simplicity, let's just send a success message
+        res.send("Login successful!");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+});
+
+
+
+//User Registration
 app.get('/userregister', function (req, res) {
     res.sendFile(path.join(__dirname, 'userregister.html'));
 });
@@ -82,6 +110,11 @@ app.post('/register', function (req, res) {
             res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
         }
     })
+});
+//
+
+app.get('/dashboard', function (req, res) {
+    res.sendFile(__dirname + '\\' + 'dashboard.html');
 });
 
 app.get('/details', function (req, res) {
