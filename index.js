@@ -14,7 +14,6 @@ const path = require('path')
 
 const bodyParser = require('body-parser');
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -66,12 +65,12 @@ db.once('open', function() {
 
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'index.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 //User Login
 app.get('/userlogin', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'userlogin.html');
+    res.sendFile(path.join(__dirname, 'userlogin.html'));
 });
 
 app.post('/login', async function (req, res) {
@@ -83,9 +82,12 @@ app.post('/login', async function (req, res) {
         if (!user || user.password !== password) {
             return res.status(400).send("Invalid email or password.");
         }
-
+        
+        // At this point, login is successful
+        // You can generate a session token or set a cookie to maintain the user's session
+        // For simplicity, let's just send a success message
         req.session.currentUser = user;
-        console.log(req.session.currentUser);
+
         res.redirect('/dashboard');
     } catch (error) {
         console.error(error);
@@ -119,7 +121,7 @@ app.post('/register', function (req, res) {
 //
 
 app.get('/dashboard', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'dashboard.html');
+    res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 
 //User Profile Options
@@ -154,15 +156,33 @@ app.post('/delete', async function (req, res) {
 
 //
 app.get('/details', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'details.html');
+    res.sendFile(path.join(__dirname, 'details.html'));
 });
 
 app.get('/searchusers', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'searchusers.html');
+    res.sendFile(path.join(__dirname, 'searchusers.html'));
 });
 
 app.get('/searchslots', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'searchslots.html');
+    res.sendFile(path.join(__dirname, 'searchslots.html'));
+});
+
+app.get('/viewprofile', async function (req, res) {
+    try {
+        const userData = await User.findOne({email: currentEmail});
+        const reservationsData = await Reservation.find({ username: userData.username });
+
+        console.log(userData);
+        console.log(reservationsData.length);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+    res.sendFile(path.join(__dirname, 'userviewprofile.html'));
+});
+
+app.get('/editprofile', function (req, res) {
+    res.sendFile(path.join(__dirname, 'usereditprofile.html'));
 });
 
 
