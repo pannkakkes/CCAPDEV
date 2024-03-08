@@ -58,12 +58,12 @@ db.once('open', function() {
 })
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'index.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 //User Login
 app.get('/userlogin', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'userlogin.html');
+    res.sendFile(path.join(__dirname, 'userlogin.html'));
 });
 
 app.post('/login', async function (req, res) {
@@ -118,19 +118,19 @@ app.post('/register', function (req, res) {
 //
 
 app.get('/dashboard', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'dashboard.html');
+    res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 
 app.get('/details', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'details.html');
+    res.sendFile(path.join(__dirname, 'details.html'));
 });
 
 app.get('/searchusers', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'searchusers.html');
+    res.sendFile(path.join(__dirname, 'searchusers.html'));
 });
 
 app.get('/searchslots', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'searchslots.html');
+    res.sendFile(path.join(__dirname, 'searchslots.html'));
 });
 
 app.get('/viewprofile', async function (req, res) {
@@ -144,11 +144,11 @@ app.get('/viewprofile', async function (req, res) {
         console.error(error);
         res.status(500).send("Server error");
     }
-    res.sendFile(__dirname + '\\' + 'userviewprofile.html');
+    res.sendFile(path.join(__dirname, 'userviewprofile.html'));
 });
 
 app.get('/editprofile', function (req, res) {
-    res.sendFile(__dirname + '\\' + 'usereditprofile.html');
+    res.sendFile(path.join(__dirname, 'usereditprofile.html'));
 });
 
 var server = app.listen(3000, function () {
