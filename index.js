@@ -3,14 +3,17 @@ mongoose.connect('mongodb://localhost/labDB')
 
 const express = require('express')
 const app = new express()
+const session = require('express-session');
 
 const fileUpload = require('express-fileupload')
 
 const User = require("./database/models/User")
 const Reservation = require("./database/models/Reservation")
+
 const path = require('path')
 
 const bodyParser = require('body-parser');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +22,12 @@ app.use(express.json())
 app.use(express.urlencoded( {extended: true}))
 app.use(express.static('public'))
 app.use(fileUpload())
+
+app.use(session({
+    secret: 'sheaacrettt',
+    resave: false,
+    saveUninitialized: true
+  }));
 
 var hbs = require('hbs')
 app.set('view engine','hbs');
@@ -53,7 +62,8 @@ db.once('open', function() {
         { reserveId: 1006, username: 'FoxyThePirate', seat: 'Seat 3', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
         dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: true}
     ])
-})
+});
+
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '\\' + 'index.html');
@@ -68,20 +78,15 @@ app.post('/login', async function (req, res) {
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email }); // Find user by email
+        const user = await User.findOne({ email });
 
-        if (!user) {
-            return res.status(400).send("Invalid email or password."); // User not found
+        if (!user || user.password !== password) {
+            return res.status(400).send("Invalid email or password.");
         }
 
-        if (user.password !== password) {
-            return res.status(400).send("Invalid email or password."); // Incorrect password
-        }
-
-        // At this point, login is successful
-        // You can generate a session token or set a cookie to maintain the user's session
-        // For simplicity, let's just send a success message
-        res.send("Login successful!");
+        req.session.currentUser = user;
+        console.log(req.session.currentUser);
+        res.redirect('/dashboard');
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
@@ -117,6 +122,37 @@ app.get('/dashboard', function (req, res) {
     res.sendFile(__dirname + '\\' + 'dashboard.html');
 });
 
+//User Profile Options
+app.get('/userviewprofile', function (req, res){
+    res.sendFile(__dirname + '\\' + 'userviewprofile.html');
+});
+
+app.get('/usereditprofile', function (req, res){
+    res.sendFile(__dirname + '\\' + 'usereditprofile.html');
+});
+
+app .get('/userdelete', function (req, res){
+    // Retrieve current user from session
+    const currentUser = req.session.currentUser;
+    console.log(currentUser._id)
+    // Render user delete template (userdelete.hbs) with current user's information
+    res.render('userdelete', { currentUser});
+});   
+
+app.post('/delete', async function (req, res) {
+    const idTobeDeleted = req.body.theone;
+
+    try {
+        await User.deleteOne({ _id: idTobeDeleted });
+        res.status(200).send('User deleted successfully');
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).send('Error deleting user');
+    }
+});
+
+
+//
 app.get('/details', function (req, res) {
     res.sendFile(__dirname + '\\' + 'details.html');
 });
@@ -129,6 +165,13 @@ app.get('/searchslots', function (req, res) {
     res.sendFile(__dirname + '\\' + 'searchslots.html');
 });
 
+
+//User Logout
+
+app.get('/userlogout', function (req, res) {
+    const currentUser = req.session.currentUser;
+    res.sendFile(__dirname + '\\' + 'userlogout.html');
+});
 var server = app.listen(3000, function () {
     console.log('Node server is running...');
 });

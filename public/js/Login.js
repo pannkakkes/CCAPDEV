@@ -16,7 +16,6 @@ document.getElementById("submitButton").addEventListener("click", async function
         const data = await response.text();
         
         if (response.ok) {
-            alert(data); // Display success message
             window.location.href = "/dashboard"; // Redirect to dashboard
         } else {
             alert(data); // Display error message

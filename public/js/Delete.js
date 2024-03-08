@@ -1,18 +1,30 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var currentUser = getCurrentUser();
+    document.addEventListener('DOMContentLoaded', function() {
+        var theone = document.getElementById('ID').textContent.split(":")[1].trim();
 
-    if (currentUser) {
-        document.getElementById('email').innerText = 'Email address: ' + currentUser.emailaddress;
-        document.getElementById('name').innerText = 'Name: ' + currentUser.username;
-        document.getElementById('description').innerText = 'Description: ' + currentUser.description;
-        document.getElementById('birthdate').innerText = 'Birthdate: ' + currentUser.birthDate;
-        document.getElementById('profileImage').src = 'sample_files/sampleusersprofilepictures/' + currentUser.profilePicture;
-    }
-
-    document.getElementById('deleteUserButton').addEventListener('click', function() {
-        if (confirm('Are you sure you want to delete this user?')) {
-            alert('User deleted successfully!');
-            window.location.href = 'index.html'; 
-        }
+        document.getElementById('deleteUserButton').addEventListener('click', async function() {
+            if (confirm('Are you sure you want to delete this user?')) {
+                try {
+                    const response = await fetch('/delete', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({theone: theone}),
+                    });
+            
+                    const data = await response.text();
+                    
+                    if (response.ok) {
+                        window.location.href = "/"; // Redirect to home page
+                    } else {
+                        alert(data); // Display error message
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert("An error occurred. Please try again later.");
+                }
+            }
+        });
     });
-});
+
+
