@@ -125,13 +125,6 @@ app.get('/dashboard', function (req, res) {
 });
 
 //User Profile Options
-app.get('/userviewprofile', function (req, res){
-    res.sendFile(__dirname + '\\' + 'userviewprofile.html');
-});
-
-app.get('/usereditprofile', function (req, res){
-    res.sendFile(__dirname + '\\' + 'usereditprofile.html');
-});
 
 app .get('/userdelete', function (req, res){
     // Retrieve current user from session
