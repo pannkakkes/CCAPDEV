@@ -87,7 +87,7 @@ app.post('/login', async function (req, res) {
         // You can generate a session token or set a cookie to maintain the user's session
         // For simplicity, let's just send a success message
         req.session.currentUser = user;
-
+        console.log(user);
         res.redirect('/dashboard');
     } catch (error) {
         console.error(error);
@@ -130,6 +130,7 @@ app .get('/userdelete', function (req, res){
     // Retrieve current user from session
     const currentUser = req.session.currentUser;
     console.log(currentUser._id)
+    //console.log(currentUser);
     // Render user delete template (userdelete.hbs) with current user's information
     res.render('userdelete', { currentUser});
 });   
@@ -162,16 +163,18 @@ app.get('/searchslots', function (req, res) {
 
 app.get('/viewprofile', async function (req, res) {
     try {
-        const userData = await User.findOne({email: currentEmail});
-        const reservationsData = await Reservation.find({ username: userData.username });
+        const currentUser = req.session.currentUser;
+        const reservationsData = await Reservation.find({ username: currentUser.username });
 
-        console.log(userData);
-        console.log(reservationsData.length);
+        res.render('userviewprofile',{currentUser, reservationsData});
+
+        //console.log(user);
+        console.log(reservationsData);
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
     }
-    res.sendFile(path.join(__dirname, 'userviewprofile.html'));
+    //res.sendFile(path.join(__dirname, 'userviewprofile.html'));
 });
 
 app.get('/editprofile', function (req, res) {
