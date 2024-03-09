@@ -169,7 +169,7 @@ app.get('/viewprofile', async function (req, res) {
         res.render('userviewprofile',{currentUser, reservationsData});
 
         //console.log(user);
-        console.log(reservationsData);
+        //console.log(reservationsData);
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
@@ -178,7 +178,21 @@ app.get('/viewprofile', async function (req, res) {
 });
 
 app.get('/editprofile', function (req, res) {
-    res.sendFile(path.join(__dirname, 'usereditprofile.html'));
+    try {
+        const currentUser = req.session.currentUser;
+        const birthdate = currentUser.birthdate; 
+        const [month, day, year] = birthdate.split('/');
+
+        console.log('Month:', month);
+        console.log('Day:', day);
+        console.log('Year:', year);
+
+        res.render('usereditprofile', { currentUser, formattedBirthdate: `${year}-${month}-${day}` });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+    //res.sendFile(path.join(__dirname, 'usereditprofile.html'));
 });
 
 
