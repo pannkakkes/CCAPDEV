@@ -43,26 +43,27 @@
             <h1>Edit Profile</h1><br>
 
             <h2 id="profile-name">{{currentUser.username}}</h2>
-            <form action="userviewprofile.html">
+            <form action="/edit" method ="post">
 
                 <label for="description">Description:</label>
                 <br>
-                <textarea class="form-input" id="description" name="edit-description" rows="4" cols="50">{{currentUser.description}}</textarea>
+                <textarea class="form-input" id="description" name="description" rows="4" cols="50">{{currentUser.description}}</textarea>
                 <br><br>
 
                 <label for="birthdate">Birthdate:</label>
-                <input class="form-input" id="birthdate" type="date" value= {{formattedBirthdate}}>
+                <input class="form-input" id="birthdate" type="date" value= {{formattedBirthdate}} name="birthdate">
                 <br><br>
 
                 
                 <label for="profilepicture">Profile Picture:</label><br>
                 <img src="{{ currentUser.profilepicture }}" id="profile-image" alt="Profile Image" width="150">
+
                 <div class="first">
-                    <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="form-input"></p>
+                    <p><input type="file" name="image" id="pfp" class="form-input"/></p>
                     <p><img id="output" width="200" /></p>
                 </div>
 
-                <input id="save-changes" type="submit" class="submit-button" value="Save Changes"><br>
+                <input id="save-changes" type="submit" class="submit-button" value="Edit Changes"><br>
             </form>
         </div>
     </body>

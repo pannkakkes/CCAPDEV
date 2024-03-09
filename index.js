@@ -28,7 +28,8 @@ app.use(session({
     saveUninitialized: true
   }));
 
-var hbs = require('hbs')
+var hbs = require('hbs');
+const { brotliDecompress } = require('zlib');
 app.set('view engine','hbs');
 
 var db = mongoose.connection;
@@ -40,11 +41,11 @@ db.once('open', function() {
         { username: 'BonnieBunny', email: 'bonnythebonnybon@dlsu.edu.ph', password: 'bonny3', description: 'I like baking cupcakes.',
         birthdate: '02/21/1983', profilepicture: 'images/bonniebunny.png', role: 'V' },
         { username: 'FoxyThePirate', email: 'foxythepirate@dlsu.edu.ph', password: 'foxie12', description: 'I hunt for treasure!',
-        birthdate: '06/04/1985', profilepicture: 'images/foxythepirate.png', role: 'V' },
+        birthdate: '06/04/1985', profilepicture: 'images/foxythepirate.jpeg', role: 'V' },
         { username: 'WilliamAfton', email: 'williamaftersun@dlsu.edu.ph', password: 'willom2', description: "I'm the bad guy.",
-        birthdate: '07/29/1954', profilepicture: 'images/williamafton.png', role: 'T' },
+        birthdate: '07/29/1954', profilepicture: 'images/williamafton.jpg', role: 'T' },
         { username: 'SpringTrap', email: 'springtrap@dlsu.edu.ph', password: 'Summer!', description: "I trap you.",
-        birthdate: '07/29/1954', profilepicture: 'images/freddyfazbear.png', role: 'T' },
+        birthdate: '07/29/1954', profilepicture: 'images/springtrap.jpg', role: 'T' },
     ]);
 
     Reservation.create([
@@ -166,6 +167,8 @@ app.get('/viewprofile', async function (req, res) {
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
+        console.log(currentUser.profilepicture);
+
         res.render('userviewprofile',{currentUser, reservationsData});
 
         //console.log(user);
@@ -183,10 +186,6 @@ app.get('/editprofile', function (req, res) {
         const birthdate = currentUser.birthdate; 
         const [month, day, year] = birthdate.split('/');
 
-        console.log('Month:', month);
-        console.log('Day:', day);
-        console.log('Year:', year);
-
         res.render('usereditprofile', { currentUser, formattedBirthdate: `${year}-${month}-${day}` });
     } catch (error) {
         console.error(error);
@@ -195,6 +194,45 @@ app.get('/editprofile', function (req, res) {
     //res.sendFile(path.join(__dirname, 'usereditprofile.html'));
 });
 
+app.post('/edit', async (req, res) => {
+    const img = req.files;
+    const currentUser = req.session.currentUser;
+    const ID = currentUser.username;
+
+    const date = req.body.birthdate.toString();
+    const [year, month, day] = date.split('-');
+    const formattedBirthdate = `${month}/${day}/${year}`;
+
+    const desc = req.body.description;
+    const image = req.body.image.toString();
+
+    //console.log(ID + formattedBirthdate + desc + image);
+
+    try {
+        const userToUpdate = await User.findOne({username: ID});
+
+        if (!userToUpdate){
+            return res.status(404).send('User not found');
+        }
+
+        console.log(img);
+
+        //img.mv(path.resolve(__dirname, 'public/images', image.name))
+        
+        userToUpdate.birthdate = formattedBirthdate;
+        userToUpdate.description = desc;
+        userToUpdate.profilepicture = "image/"+ image;
+
+        //console.log(formattedBirthdate + desc + "image/"+ image);
+
+        await userToUpdate.save();
+        //images.mv(path.resolve(__dirname, 'public/images', image));
+
+    } catch (err){
+        console.error('Error updating user:', err);
+        res.status(500).send('Error updating user');
+    }
+})
 
 //User Logout
 
