@@ -238,8 +238,15 @@ app.post('/edit', async (req, res) => {
 
 app.get('/userlogout', function (req, res) {
     const currentUser = req.session.currentUser;
-    res.sendFile(__dirname + '\\' + 'userlogout.html');
+    res.render('userlogout', { currentUser });
 });
+
+app.get('/logout', function (req, res) {
+    req.session.currentUser = null; // Reset currentUser in session
+    res.sendStatus(200); // Send a success response
+});
+
+
 var server = app.listen(3000, function () {
     console.log('Node server is running...');
 });
