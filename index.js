@@ -234,6 +234,23 @@ app.post('/edit', async (req, res) => {
     }
 })
 
+//Reservation
+app.get('/reservesee', async function (req, res){
+    try {
+        const currentUser = req.session.currentUser;
+        const reservationsData = await Reservation.find({ username: currentUser.username });
+
+        console.log(currentUser);
+
+        res.render('reservesee',{reservationsData});
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+    //res.sendFile(path.join(__dirname, 'userviewprofile.html'));
+});
+
 //User Logout
 
 app.get('/userlogout', function (req, res) {

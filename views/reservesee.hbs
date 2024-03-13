@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <title>Reservation Details - Fazbear Entertainment Labs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
+    <script src = "js/User.js"></script>
+    <script src="js/CurrentUser.js"></script>
+    <script src = "js/ReverseSee.js"></script>
+</head>
+<body>
+
+    <nav>
+        <div class="homebutton"><a href="/dashboard"><img id="home-icon" src="icons/home.png"> Home</a></div>
+        <div class="dropdown">
+            <a href="/viewprofile">User Profile</a>
+            <div class="dropdown-content">
+                <a href="/viewprofile">View Profile</a>
+                <a href="/editprofile">Edit Profile</a>
+                <a href="userdelete.html">Delete Profile</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="reserve.html">Reserve</a>
+            <div class="dropdown-content">
+                <a href="reserve.html">Reserve</a>
+                <a href="reserveedit.html">Edit Reservation</a>
+                <a href="/reservesee">See Reservations</a>
+                <a href="reserveviewslots.html">View Available Slots</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Search</a>
+            <div class="dropdown-content">
+                <a href="/searchusers">Search Users</a>
+                <a href="/searchslots">Search Slots</a>
+            </div>
+        </div>
+        <div><a href="userlogout.html">Logout</a></div>
+    </nav>
+
+    <div class="container" style="width: 700px; position: relative; height: 500px">
+        <h1>Reservation Details</h1>
+    
+
+    <div class="table-container" style="left: 0; right: 0">
+        <table style="left: 0">
+            <thead>
+                <tr>
+                    <th>Seat</th>
+                    <th>Laboratory Name</th>
+                    <th>Date and Time of Request</th>
+                    <th>Date and Time of Reservation</th>
+                </tr>
+            </thead>
+            <tbody id="reservationTableBody">
+            {{#if reservationsData.length}}
+                {{#each reservationsData}}
+                <tr>
+                    <td>{{ this.seat }}</td> <td>{{ this.laboratory }}</td>
+                    <td>{{ this.dateTimeRequest }}</td>
+                    <td>{{ this.dateTimeReservation }}</td>
+                </tr>
+                {{/each}}
+            {{else}}
+                <p class="reservation-none" id="reservation-none">No reservations found.</p>
+            {{/if}}
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+</div>
+</body>
+</html>
