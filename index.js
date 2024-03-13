@@ -96,8 +96,6 @@ app.post('/login', async function (req, res) {
     }
 });
 
-
-
 //User Registration
 app.get('/userregister', function (req, res) {
     res.sendFile(path.join(__dirname, 'userregister.html'));
@@ -249,6 +247,20 @@ app.get('/reservesee', async function (req, res){
         res.status(500).send("Server error");
     }
     //res.sendFile(path.join(__dirname, 'userviewprofile.html'));
+});
+
+//Make a reservation
+app.get('/reserve.html', function (req, res) {
+    res.sendFile(path.join(__dirname, 'reserve.html'));
+});
+app.post('/reserveRedirect', function (req, res) {
+    const { userStatus, labName } = req.body;
+
+    if (userStatus === 'T') { 
+        res.redirect('/reserveforstudent.html');
+    } else {
+        res.redirect('/reserveconfirm.html');
+    }
 });
 
 //User Logout
