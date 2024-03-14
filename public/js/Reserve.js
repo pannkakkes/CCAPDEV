@@ -1,8 +1,10 @@
 function reserveLab(labName) {
+
     var currentUser = getCurrentUser(); 
     var userStatus = currentUser.status;
-
-    console.log(userStatus);
+    
+    console.log(currentUser.status);
+    
     setLab(labName);
 
     console.log("yaaaaas");

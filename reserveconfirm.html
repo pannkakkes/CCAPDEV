@@ -100,7 +100,7 @@
     </nav>
     <div class="container">
         <h1>Confirm Reservation</h1>
-        <div class="subcontainer-red">
+        <form class="subcontainer-red">
             <h1 class="lab-title" id="labTitle" style="color: white;"></h1>
             <div class="lab-info" style="color: white;">
                 <p id="roomNumber"></p>
@@ -142,30 +142,8 @@
                 </label>
                 <a href="dashboard.html" id="final-reserve"><button class="reserve-button"><h1 style="font-size: 15px; padding: -20px;">Reserve</h1></button></a>
             </div>
-        </div>
+        </form>
     </div>
-
-    <script>
-        
-        document.getElementById('labTitle').textContent = getLab();
-        document.getElementById('selectedDay').textContent = "Day: " + getDay();
-
-        document.addEventListener("DOMContentLoaded", function () {
-            var currentUser = getCurrentUser();
-
-            if (currentUser) {
-                name(currentUser);
-            }
-        });
-
-        function name(user){
-            var reservationByElement = document.getElementById("reservationBy");
-            reservationByElement.textContent = 'Reservation by: ' + user.username;
-        }
-
-        document.getElementById("final-reserve").addEventListener("click", function(event) {
-            alert("Reservation successful!");
-        });
-    </script>
+    <script src="js/ReserveConfirm.js"></script>
 </body>
 </html>
