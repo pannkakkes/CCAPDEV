@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="sample_files/sampleusersprofilepictures/freddyfazbear.png">
+    <title>View Profile - Fazbear Entertainment Labs</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src = "js/User.js"></script>
+    <script src="js/CurrentUser.js"></script>
+    <script src="js/ViewProfile.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="homebutton"><a href="/dashboard"><img id="home-icon" src="icons/home.png"> Home</a></div>
+        <div class="dropdown">
+            <a href="/viewprofile">User Profile</a>
+            <div class="dropdown-content">
+                <a href="/viewprofile">View Profile</a>
+                <a href="/editprofile">Edit Profile</a>
+                <a href="userdelete.html">Delete Profile</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="reserve.html">Reserve</a>
+            <div class="dropdown-content">
+                <a href="reserve.html">Reserve</a>
+                <a href="reserveedit.html">Edit Reservation</a>
+                <a href="reservesee.html">See Reservations</a>
+                <a href="reserveviewslots.html">View Available Slots</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Search</a>
+            <div class="dropdown-content">
+                <a href="/searchusers">Search Users</a>
+                <a href="/searchslots">Search Slots</a>
+            </div>
+        </div>
+        <div><a href="userlogout.html">Logout</a></div>
+    </nav>
+
+    <div class="container">
+        <h1>Profile</h1>
+
+        <div>
+            <div id="profile-picture-container">
+                <img id="profile-picture" src={{ existUsername.profilepicture }} alt="Profile Image" width="150">
+            </div>
+            <h2 id="profile-name"> {{ existUsername.username }} </h2>
+            <p id="profile-description"> {{ existUsername.description }} </p>
+            <p id="profile-birthdate">{{ existUsername.birthdate }}</p>
+
+        </div>
+
+        <div>
+            <h2>Reserved Seats</h2>
+          {{#if reservationsData.length}}
+          <table>
+        <thead>
+          <tr>
+            <th>Seat</th>
+            <th>Laboratory Number</th>
+            <th>Date and Time of Request</th>
+            <th>Date and Time of Reservation</th>
+          </tr>
+        </thead>
+        <tbody id="reservationTableBody">
+            {{#each reservationsData}}
+              <tr>
+                <td>{{ this.seat }}</td> <td>{{ this.laboratory }}</td>
+                <td>{{ this.dateTimeRequest }}</td>
+                <td>{{ this.dateTimeReservation }}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+      </table>
+          {{else}}
+            <p class="reservation-none" id="reservation-none">No reservations found.</p>
+          {{/if}}
+        
+
+            <br>
+        </div>
+    </div>
+</body>
+</html>
