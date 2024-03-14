@@ -220,7 +220,7 @@ app.get('/reservesee', async function (req, res){
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
-        console.log(currentUser);
+        //console.log(currentUser);
 
         res.render('reservesee',{reservationsData});
 
@@ -230,6 +230,36 @@ app.get('/reservesee', async function (req, res){
     }
     //res.sendFile(path.join(__dirname, 'userviewprofile.html'));
 });
+
+//View Slots
+app.get('/reserveviewslots', async function(req, res){
+    try {
+        const currentUser = req.session.currentUser;
+        const reservationsData = await Reservation.find({ username: currentUser.username });
+
+        //console.log(currentUser);
+        const today = formatDate(today);
+        console.log(today);
+
+        res.render('reserveviewslots', {reservationsData});
+        
+    } catch (error){
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+})
+
+function formatDate(date, format = "MM/DD/YYYY") {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0'); 
+    const day = String(d.getDate()).padStart(2, '0'); 
+  
+    // Replace placeholders in format string
+    return format.replace(/MM/, month)
+               .replace(/DD/, day)
+               .replace(/YYYY/, year);
+  }
 
 //Make a reservation
 app.get('/reserve.html', function (req, res) {
