@@ -420,6 +420,15 @@ app.get('/reserveedit.html', function (req, res) {
         res.status(500).send("Server error");
     }
 });
+app.get('/reservesaveedit.html', function (req, res) {
+    try {
+        const currentUser = req.session.currentUser;
+        res.render('reservesaveedit', { currentUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+});
 
 //User Logout
 
