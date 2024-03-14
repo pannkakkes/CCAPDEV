@@ -1,14 +1,20 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/labDB')
+
+const express = require('express')
+const app = new express()
+
 var db = mongoose.connection;
-db.collection('reservations').drop();
-db.collection('users').drop();
+
+var server = app.listen(3000, function () {
+    console.log('Node server is running..');
+});
 
 const User = require("./database/models/User")
 const Reservation = require("./database/models/Reservation")
 
-db.once('open', function() {
-    User.create([
+console.log("Inserting sample users...")
+User.create([
         { username: 'FreddyFazbear', email: 'freddyfazbear@dlsu.edu.ph', password: 'fazbear00', description: 'I am five bears.',
         birthdate: '01/01/1987', profilepicture: 'images/freddyfazbear.png',role: 'V' },
         { username: 'BonnieBunny', email: 'bonnythebonnybon@dlsu.edu.ph', password: 'bonny3', description: 'I like baking cupcakes.',
@@ -19,9 +25,10 @@ db.once('open', function() {
         birthdate: '07/29/1954', profilepicture: 'images/williamafton.jpg', role: 'T' },
         { username: 'SpringTrap', email: 'springtrap@dlsu.edu.ph', password: 'Summer!', description: "I trap you.",
         birthdate: '07/29/1954', profilepicture: 'images/springtrap.jpg', role: 'T' },
-    ]);
+]);
 
-    Reservation.create([
+console.log("Inserting sample reservations...")
+Reservation.create([
         { reserveId: 1001, username: 'FreddyFazbear', seat: 'Seat 1', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
         dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: false},
         { reserveId: 1002, username: 'FreddyFazbear', seat: 'Seat 9', laboratory: 'Chica\'s Chilling Chamber', dateTimeRequest: '1/1/2024 10:01 AM',
@@ -34,7 +41,4 @@ db.once('open', function() {
         dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: false},
         { reserveId: 1006, username: 'FoxyThePirate', seat: 'Seat 3', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
         dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: true}
-    ])
-});
-
-process.exit(0);
+]);
