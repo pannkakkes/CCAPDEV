@@ -156,6 +156,19 @@ app.get('/searchusers', function (req, res) {
     res.sendFile(path.join(__dirname, 'searchusers.html'));
 });
 
+app.get('/searchU', async (req, res) => {
+    var regex = new RegExp(["^", req.query.username, "$"].join(""), "i");
+    const existUsername = await User.findOne({ username: regex});
+
+    if (existUsername) {
+        const reservationsData = await Reservation.findOne({ username: regex });
+        res.sendFile(path.join(__dirname, existUsername.username.toLowerCase() + ".html"));
+    }
+    else {
+        res.send('user not found');
+    }
+})
+
 app.get('/searchslots', function (req, res) {
     res.sendFile(path.join(__dirname, 'searchslots.html'));
 });
