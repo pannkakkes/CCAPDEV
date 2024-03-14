@@ -8,33 +8,33 @@
 </head>
 
 <nav>
-    <div class="homebutton"><a href="/dashboard"><img id="home-icon" src="icons/home.png"> Home</a></div>
-    <div class="dropdown">
-        <a href="userviewprofile.html">User Profile</a>
-        <div class="dropdown-content">
-            <a href="userviewprofile.html">View Profile</a>
-            <a href="usereditprofile.html">Edit Profile</a>
-            <a href="userdelete.html">Delete Profile</a>
-        </div>
-    </div>
-    <div class="dropdown">
-        <a href="reserve.html">Reserve</a>
-        <div class="dropdown-content">
-            <a href="reserve.html">Reserve</a>
-            <a href="reserveedit.html">Edit Reservation</a>
-            <a href="reservesee.html">See Reservations</a>
-            <a href="/reserveviewslots">View Available Slots</a>
-        </div>
-    </div>
-    <div class="dropdown">
-        <a href="#">Search</a>
-        <div class="dropdown-content">
-            <a href="searchusers.html">Search Users</a>
-            <a href="searchslots.html">Search Slots</a>
-        </div>
-    </div>
-    <div><a href="userlogout.html">Logout</a></div>
-</nav>
+			<div class="homebutton"><a href="/dashboard"><img id="home-icon" src="icons/home.png"> Home</a></div>
+			<div class="dropdown">
+				<a href="/viewprofile">User Profile</a>
+				<div class="dropdown-content">
+					<a href="/viewprofile">View Profile</a>
+					<a href="/editprofile">Edit Profile</a>
+					<a href="/userdelete">Delete Profile</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="/reserve">Reserve</a>
+				<div class="dropdown-content">
+					<a href="/reserve">Reserve</a>
+					<a href="reserveedit.html">Edit Reservation</a>
+					<a href="/reservesee">See Reservations</a>
+					<a href="/reserveviewslots">View Available Slots</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="#">Search</a>
+				<div class="dropdown-content">
+					<a href="/searchusers">Search Users</a>
+					<a href="/searchslots">Search Slots</a>
+				</div>
+			</div>
+			<div><a href="/userlogout">Logout</a></div>
+		</nav>
 
 <body>
     <form>
@@ -46,7 +46,7 @@
             <br>
             <span>Email: {{ currentUser.email }}</span>
             <br>
-            <span>Name: {{ currentUser.name }}</span>
+            <span>Name: {{ currentUser.username }}</span>
             <br>
             <span>Description: {{ currentUser.description }}</span>
             <br>
