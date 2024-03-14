@@ -139,7 +139,7 @@ app.get('/users', async (req, res) => {
 })
 
 app.get('/searchslots', function (req, res) {
-    res.render("searchslots", {});
+    res.render("searchslots", null);
 });
 
 app.get('/slots', async (req, res) => {
@@ -330,7 +330,7 @@ function formatDate(date, format = "MM/DD/YYYY") {
   }
 
 //Make a reservation
-app.get('/reserve.html', function (req, res) {
+app.get('/reserve', function (req, res) {
     res.sendFile(path.join(__dirname, 'reserve.html'));
 });
 app.post('/reserveRedirect', function (req, res) {
