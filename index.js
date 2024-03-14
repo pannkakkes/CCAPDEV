@@ -34,37 +34,6 @@ app.set('view engine','hbs');
 
 var db = mongoose.connection;
 
-db.once('open', function() {
-    User.create([
-        { username: 'FreddyFazbear', email: 'freddyfazbear@dlsu.edu.ph', password: 'fazbear00', description: 'I am five bears.',
-        birthdate: '01/01/1987', profilepicture: 'images/freddyfazbear.png',role: 'V' },
-        { username: 'BonnieBunny', email: 'bonnythebonnybon@dlsu.edu.ph', password: 'bonny3', description: 'I like baking cupcakes.',
-        birthdate: '02/21/1983', profilepicture: 'images/bonniebunny.png', role: 'V' },
-        { username: 'FoxyThePirate', email: 'foxythepirate@dlsu.edu.ph', password: 'foxie12', description: 'I hunt for treasure!',
-        birthdate: '06/04/1985', profilepicture: 'images/foxythepirate.jpeg', role: 'V' },
-        { username: 'WilliamAfton', email: 'williamaftersun@dlsu.edu.ph', password: 'willom2', description: "I'm the bad guy.",
-        birthdate: '07/29/1954', profilepicture: 'images/williamafton.jpg', role: 'T' },
-        { username: 'SpringTrap', email: 'springtrap@dlsu.edu.ph', password: 'Summer!', description: "I trap you.",
-        birthdate: '07/29/1954', profilepicture: 'images/springtrap.jpg', role: 'T' },
-    ]);
-
-    Reservation.create([
-        { reserveId: 1001, username: 'FreddyFazbear', seat: 'Seat 1', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
-        dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: false},
-        { reserveId: 1002, username: 'FreddyFazbear', seat: 'Seat 9', laboratory: 'Chica\'s Chilling Chamber', dateTimeRequest: '1/1/2024 10:01 AM',
-        dateTimeReservation: '1/9/2024 2:30 PM', isAnonymous: false},
-        { reserveId: 1003, username: 'FreddyFazbear', seat: 'Seat 8', laboratory: 'Puppet\'s Perilous Palace', dateTimeRequest: '1/1/2024 10:02 AM',
-        dateTimeReservation: '1/8/2024 2:30 PM', isAnonymous: false},
-        { reserveId: 1004, username: 'FreddyFazbear', seat: 'Seat 7', laboratory: 'Puppet\'s Perilous Palace', dateTimeRequest: '1/1/2024 10:03 AM',
-        dateTimeReservation: '1/7/2024 2:30 PM', isAnonymous: false},
-        { reserveId: 1005, username: 'BonnieBunny', seat: 'Seat 2', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
-        dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: false},
-        { reserveId: 1006, username: 'FoxyThePirate', seat: 'Seat 3', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
-        dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: true}
-    ])
-});
-
-
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -156,6 +125,19 @@ app.get('/searchusers', function (req, res) {
     res.sendFile(path.join(__dirname, 'searchusers.html'));
 });
 
+app.get('/users', async (req, res) => {
+    var regex = new RegExp(["^", req.query.username, "$"].join(""), "i");
+    const existUsername = await User.findOne({ username: regex});
+
+    if (existUsername) {
+        const reservationsData = await Reservation.find({ username: existUsername.username });
+        res.render("publicprofile", {existUsername, reservationsData});
+    }
+    else {
+        res.send("<script>alert('No users found.'); window.location.href = '/searchusers'; </script>");
+    }
+})
+
 app.get('/searchslots', function (req, res) {
     res.sendFile(path.join(__dirname, 'searchslots.html'));
 });
@@ -238,7 +220,7 @@ app.get('/reservesee', async function (req, res){
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
-        console.log(currentUser);
+        //console.log(currentUser);
 
         res.render('reservesee',{reservationsData});
 
@@ -248,6 +230,36 @@ app.get('/reservesee', async function (req, res){
     }
     //res.sendFile(path.join(__dirname, 'userviewprofile.html'));
 });
+
+//View Slots
+app.get('/reserveviewslots', async function(req, res){
+    try {
+        const currentUser = req.session.currentUser;
+        const reservationsData = await Reservation.find({ username: currentUser.username });
+
+        //console.log(currentUser);
+        const today = formatDate(today);
+        console.log(today);
+
+        res.render('reserveviewslots', {reservationsData});
+        
+    } catch (error){
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+})
+
+function formatDate(date, format = "MM/DD/YYYY") {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0'); 
+    const day = String(d.getDate()).padStart(2, '0'); 
+  
+    // Replace placeholders in format string
+    return format.replace(/MM/, month)
+               .replace(/DD/, day)
+               .replace(/YYYY/, year);
+  }
 
 //Make a reservation
 app.get('/reserve.html', function (req, res) {
