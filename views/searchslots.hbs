@@ -4,11 +4,6 @@
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="icon" type="image/x-icon" href="favicon/freddyfazbear.png">
 		<script src="js/SearchSlots.js"></script>
-		<style>
-			#search-results {
-				display: none;
-			}
-		</style>
     </head>
 
     <body>
@@ -43,8 +38,8 @@
         <div class="container">
 			<h1>Search for Slots</h1><br>
 			<div>
-				<form onsubmit="return validate(event)" method="post">
-					<input type="date" class="form-input" id="selected_date">
+				<form action="/slots" method="get">
+					<input type="date" class="form-input" id="selected_date" name="selected_date">
 					<select id="time_slot" name="time_slot">
 						<option value="choose-slot">Choose Time</option>
 						<option value="slot1">Slot 1 (9:00 - 9:30)</option>
@@ -62,7 +57,7 @@
 						<option value="slot13">Slot 13 (3:00 - 3:30)</option>
 						<option value="slot14">Slot 14 (3:30 - 4:00)</option>
 					</select>
-					<select id="selected_lab">
+					<select id="selected_lab" name="lab">
 						<option value="choose-lab">Choose Lab</option>
 						<option value="lab1">Freddy's Frightful Manor</option>
 						<option value="lab2">Chica's Chilling Chamber</option>
@@ -70,7 +65,16 @@
 					</select><br><br>
 					<button class="search-button">Search for Slots</button>
 				</form>
-				<p id="search-results">All seats are available!</p>
+				<p id="search-results">
+					{{#if searchResults.length}}
+					The following seats are taken:<br>
+					{{#each searchResults}}
+					{{this.seat}}<br>
+					{{/each}}
+					{{else}}
+					All seats are available!
+					{{/if}}
+				</p>
 		</div>
     </body>
 </html>
