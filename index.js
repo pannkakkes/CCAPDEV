@@ -317,13 +317,9 @@ app.get('/reserveviewslots', async function(req, res){
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({});
 
-<<<<<<< Updated upstream
-        //console.log(currentUser);
-        const today = formatDate(today);
-=======
         const today = formatDate();
         const initialDtr = '1/1/2024 2:30 PM';
->>>>>>> Stashed changes
+        //const initialDtr = formatDate() + ' 9:00AM';
 
         const initialLab = 'Freddy\'s Frightful Manor';
         const initialDt = today + ' 9:00 AM - 9:30 AM';
@@ -340,13 +336,12 @@ app.get('/reserveviewslots', async function(req, res){
         for (const reservation of reservationsData) {
             const currentSeatNumber = parseInt(reservation.seat.split(' ')[1]);
             
-            // Fill in placeholders for missing seat numbers
             while (expectedSeatNumber < currentSeatNumber) {
                 sortedAndFilledReservationsData.push({
-                    laboratory: '', // Add the appropriate laboratory name
+                    laboratory: '', 
                     seat: 'Seat ' + expectedSeatNumber,
-                    isAnonymous: false, // Add the appropriate value
-                    dateTimeReservation: '' // Add the appropriate date/time
+                    isAnonymous: false, 
+                    dateTimeReservation: '' 
                 });
                 expectedSeatNumber++;
             }
@@ -355,18 +350,16 @@ app.get('/reserveviewslots', async function(req, res){
             expectedSeatNumber++;
         }
 
-        // If there are any remaining seat numbers after the last reservation, fill them in with placeholders
         while (expectedSeatNumber <= 10) {
             sortedAndFilledReservationsData.push({
-                laboratory: '', // Add the appropriate laboratory name
+                laboratory: '', 
                 seat: 'Seat ' + expectedSeatNumber,
-                isAnonymous: false, // Add the appropriate value
-                dateTimeReservation: '' // Add the appropriate date/time
+                isAnonymous: false, 
+                dateTimeReservation: '' 
             });
             expectedSeatNumber++;
         }
-        fillBlanks(sortedAndFilledReservationsData, initialLab);
-        //console.log(sortedAndFilledReservationsData);
+        fillBlanksDate(sortedAndFilledReservationsData, initialLab, initialDtr);
 
         res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt});
     } catch (error){
@@ -387,12 +380,13 @@ function formatDate( format = "MM/DD/YYYY") {
                .replace(/YYYY/, year);
 }
 
-function fillBlanks(reservation, initialLab){
+function fillBlanksDate(reservation, initialLab, initialDtr){
     for (const reserve of reservation) {
         const currentSeatNumber = parseInt(reserve.seat.split(' ')[1]);
         console.log('Reserve Laboratory:',reserve.laboratory);
         console.log('InitialLab:',initialLab);
-        if (reserve.laboratory === initialLab){
+
+        if (reserve.dateTimeReservation === initialDtr && reserve.laboratory === initialLab){
 
         }
         else{
