@@ -165,7 +165,7 @@ app.get('/searchU', async (req, res) => {
         res.sendFile(path.join(__dirname, existUsername.username.toLowerCase() + ".html"));
     }
     else {
-        res.send('user not found');
+        res.status(240).send();
     }
 })
 
