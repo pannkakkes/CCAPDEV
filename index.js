@@ -57,7 +57,6 @@ app.post('/login', async function (req, res) {
         // You can generate a session token or set a cookie to maintain the user's session
         // For simplicity, let's just send a success message
         req.session.currentUser = user;
-        console.log(user);
         res.redirect('/dashboard');
     } catch (error) {
         console.error(error);
@@ -73,7 +72,6 @@ app.get('/userregister', function (req, res) {
 app.post('/register', function (req, res) {
     const { image } = req.files; // Access the uploaded image file
     const { email, username, password, description, birthdate } = req.body;
-    console.log(req.body);
     image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
         if (error) {
             console.log("Error!")
@@ -97,7 +95,6 @@ app.get('/dashboard', function (req, res) {
 app .get('/userdelete', function (req, res){
     // Retrieve current user from session
     const currentUser = req.session.currentUser;
-    console.log(currentUser._id)
     //console.log(currentUser);
     // Render user delete template (userdelete.hbs) with current user's information
     res.render('userdelete', { currentUser});
@@ -215,8 +212,6 @@ app.get('/viewprofile', async function (req, res) {
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
-        console.log(currentUser.profilepicture);
-
         res.render('userviewprofile',{currentUser, reservationsData});
 
         //console.log(user);
@@ -263,8 +258,6 @@ app.post('/edit', async (req, res) => {
             return res.status(404).send('User not found');
         }
 
-        console.log(img);
-
         //img.mv(path.resolve(__dirname, 'public/images', image.name))
         
         userToUpdate.birthdate = formattedBirthdate;
@@ -307,7 +300,6 @@ app.get('/reserveviewslots', async function(req, res){
 
         //console.log(currentUser);
         const today = formatDate(today);
-        console.log(today);
 
         res.render('reserveviewslots', {reservationsData});
         
