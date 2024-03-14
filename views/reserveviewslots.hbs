@@ -4,8 +4,9 @@
     <title>View Slot Availability - Fazbear Entertainment Labs</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="favicon/freddyfazbear.png">
-    <script src="js/RegisterView.js"></script>
-    <script src="js/ViewSlots.js"></script>
+    <script>
+        
+    </script>
 </head>
 
 <body>
@@ -41,8 +42,8 @@
     <div class = container>
         <h1>View Slot Availability</h1>
 
-        <h2 id="heading-lab">Freddy's Frightful Manor</h2>
-        <p id="date-and-time">1/1/2024 2:30 PM - 3:00 PM</p>
+        <h2 id="heading-lab"></h2>
+        <p id="date-and-time">{{initialDt}}</p>
         <table class="center" border="1">
             <thead>
                 <tr>
@@ -50,70 +51,31 @@
                     <th>Seat Number</th>
                     <th>Reserved By</th>
                     <th>Availability</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>1</td>
-                    <td class="reserved-by"><a href="freddyfazbear.html" class="user-link">FreddyFazbear</a></td>
-                    <td class="availability">Unavailable</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>2</td>
-                    <td class="reserved-by"><a href="bonniebunny.html" class="user-link">BonnieBunny</a></td>
-                    <td class="availability">Unavailable</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>3</td>
-                    <td class="reserved-by"><p>Anonymous</p></td>
-                    <td class="availability">Unavailable</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>4</td>
-                    <td class="reserved-by"></td>
-                    <td class="availability">Available</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>5</td>
-                    <td class="reserved-by"></td>
-                    <td class="availability">Available</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>6</td>
-                    <td class="reserved-by"></td>
-                    <td class="availability">Available</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>7</td>
-                    <td class="reserved-by"></td>
-                    <td class="availability">Available</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>8</td>
-                    <td class="reserved-by"></td>
-                    <td class="availability">Available</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>9</td>
-                    <td class="reserved-by"></td>
-                    <td class="availability">Available</td>
-                </tr>
-                <tr>
-                    <td>Freddy's Frightful Manor</td>
-                    <td>10</td>
-                    <td class="reserved-by"></td>
-                    <td class="availability">Available</td>
-                </tr>
-                
+                {{#each sortedAndFilledReservationsData}}
+                    {{#if (compareStrings '' this.dateTimeReservation)}}
+                    <tr>
+                        <td>{{../initialLab}}</td>
+                        <td>{{this.seat}}</td>
+                        <td class="reserved-by"><a></a></td>
+                        <td class="availability">Available</td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td>{{this.laboratory}}</td>
+                        <td>{{this.seat}}</td>
+                            {{#if this.isAnonymous}}
+                            <td class="reserved-by"><a>Anonymous</a></td>
+                            {{else}}
+                            <td class="reserved-by"><a href="freddyfazbear.html" class="user-link">FreddyFazbear</a></td>
+                            {{/if}}
+                            <td class="availability">Unavailable</td>
+                    </tr>
+                    {{/if}}
+                {{/each}}
             </tbody>
         </table><br>
 
@@ -131,7 +93,7 @@
             <br>
 
             <a>Select Time Slot:</a>
-            <select id="time_slot" name="time_slot">
+            <select id="time_slot" name="time_slot" value="9:00 PM - 9:30 PM">
                 <option value="choose-slot">Choose Slot</option>
                 <option value="9:00 PM - 9:30 PM">Slot 1 (9:00 - 9:30)</option>
                 <option value="9:30 PM - 10:00 PM">Slot 2 (9:30 - 10:00)</option>

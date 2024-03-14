@@ -32,6 +32,25 @@ var hbs = require('hbs');
 const { brotliDecompress } = require('zlib');
 app.set('view engine','hbs');
 
+hbs.registerHelper('compareStrings', function(string1, string2, options) {
+    return string1 === string2;
+});
+
+hbs.registerHelper('and', function () {
+    return Array.prototype.slice.call(arguments, 0, -1).every(Boolean);
+});
+
+hbs.registerHelper('break', function() {
+    this.breakLoop = true;
+});
+
+hbs.registerHelper('times', function(n, block) {
+    var accum = '';
+    for(var i = 0; i < n; ++i)
+        accum += block.fn(i);
+    return accum;
+});
+
 var db = mongoose.connection;
 
 app.get('/', function (req, res) {
@@ -296,21 +315,68 @@ app.get('/reservesee', async function (req, res){
 app.get('/reserveviewslots', async function(req, res){
     try {
         const currentUser = req.session.currentUser;
-        const reservationsData = await Reservation.find({ username: currentUser.username });
+        const reservationsData = await Reservation.find({});
 
+<<<<<<< Updated upstream
         //console.log(currentUser);
         const today = formatDate(today);
+=======
+        const today = formatDate();
+        const initialDtr = '1/1/2024 2:30 PM';
+>>>>>>> Stashed changes
 
-        res.render('reserveviewslots', {reservationsData});
-        
+        const initialLab = 'Freddy\'s Frightful Manor';
+        const initialDt = today + ' 9:00 AM - 9:30 AM';
+
+        reservationsData.sort((a, b) => {
+            const seatNumberA = parseInt(a.seat.split(' ')[1]);
+            const seatNumberB = parseInt(b.seat.split(' ')[1]);
+            return seatNumberA - seatNumberB;
+        });
+
+        const sortedAndFilledReservationsData = [];
+
+        let expectedSeatNumber = 1;
+        for (const reservation of reservationsData) {
+            const currentSeatNumber = parseInt(reservation.seat.split(' ')[1]);
+            
+            // Fill in placeholders for missing seat numbers
+            while (expectedSeatNumber < currentSeatNumber) {
+                sortedAndFilledReservationsData.push({
+                    laboratory: '', // Add the appropriate laboratory name
+                    seat: 'Seat ' + expectedSeatNumber,
+                    isAnonymous: false, // Add the appropriate value
+                    dateTimeReservation: '' // Add the appropriate date/time
+                });
+                expectedSeatNumber++;
+            }
+
+            sortedAndFilledReservationsData.push(reservation);
+            expectedSeatNumber++;
+        }
+
+        // If there are any remaining seat numbers after the last reservation, fill them in with placeholders
+        while (expectedSeatNumber <= 10) {
+            sortedAndFilledReservationsData.push({
+                laboratory: '', // Add the appropriate laboratory name
+                seat: 'Seat ' + expectedSeatNumber,
+                isAnonymous: false, // Add the appropriate value
+                dateTimeReservation: '' // Add the appropriate date/time
+            });
+            expectedSeatNumber++;
+        }
+        fillBlanks(sortedAndFilledReservationsData, initialLab);
+        //console.log(sortedAndFilledReservationsData);
+
+        res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt});
     } catch (error){
         console.error(error);
         res.status(500).send("Server error");
     }
 })
 
-function formatDate(date, format = "MM/DD/YYYY") {
-    const d = new Date(date);
+function formatDate( format = "MM/DD/YYYY") {
+    const d = new Date();
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, '0'); 
     const day = String(d.getDate()).padStart(2, '0'); 
@@ -319,7 +385,24 @@ function formatDate(date, format = "MM/DD/YYYY") {
     return format.replace(/MM/, month)
                .replace(/DD/, day)
                .replace(/YYYY/, year);
-  }
+}
+
+function fillBlanks(reservation, initialLab){
+    for (const reserve of reservation) {
+        const currentSeatNumber = parseInt(reserve.seat.split(' ')[1]);
+        console.log('Reserve Laboratory:',reserve.laboratory);
+        console.log('InitialLab:',initialLab);
+        if (reserve.laboratory === initialLab){
+
+        }
+        else{
+            reserve.laboratory = initialLab;
+            reserve.dateTimeReservation = '';
+            reserve.isAnonymous = false;
+        }
+    } 
+    return reservation;
+}
 
 //Make a reservation
 app.get('/reserve', function (req, res) {
