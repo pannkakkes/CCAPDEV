@@ -5,59 +5,75 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="favicon/freddyfazbear.png">
     <style>
-        .group-button{
-            text-align: center;
-        }
-        .search-button{
-            border-bottom-right-radius: 0px;
-            border-bottom-left-radius: 0px;
-            padding: 15px 0px;
-            width: 65px;
-            background-color: #f1cf54;
-        }
-        .search-button.red{
-            background-color: #e54c44; /* Updated red color */
-        }
-        .subcontainer{
-            display: none; /* Hide the subcontainer by default */
-            border-top-right-radius: 0px;
-            border-top-left-radius: 0px;
-            margin-top: -0.3px;
-            text-align: center;
-            width: 440px;
+        .subcontainer-red {
             background-color: #e54c44;
-        }
-        .sub-subcontainer{
-            background-color: #fffcef;
-            width: 400px;
-            margin: 20px auto;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 20px;
             padding: 20px;
             border-radius: 8px;
+            display: flex;
+            align-items: center; /* Center vertically */
         }
-        .lab-title{
-            font-size: 20px;
-            text-align: left;
+
+        #selectLab{
+            background-color:#fffcef;
+            width: 180px;
+            height: 200px;
+            border-radius: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
         }
-        .reserve-button {
-            margin-top: 0px;
-            margin-bottom: 20px;
-            border: 0px;
-            width: 400px;
-            background-color: #e54c44;
-            text-align: center;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            cursor: pointer;
+
+        #leftArrow {
+            width: 0;
+            height: 0;
+            align-self: center;
+            margin-right: 5px;
+            margin-left: -10px;
+            border-top: 15px solid transparent; 
+            border-bottom: 15px solid transparent; 
+            border-right: 30px solid #f1cf54;
+            display: inline-block;
         }
-        p{
-            text-align: left; 
-            margin-top: -10px;
+
+        #rightArrow {
+            width: 0;
+            height: 0;
+            align-self: center;
+            margin-left: 5px;
+            border-top: 15px solid transparent; 
+            border-bottom: 15px solid transparent; 
+            border-left: 30px solid #f1cf54;
+            display: inline-block;
         }
+
+        #rInfo {
+            margin-left: 20px;
+            text-align: left; /* Align text to the left */
+        }
+
+        .seats{
+            width: 34px;
+            height: 34px;
+            display: inline-block;
+            margin: 3px;
+        }
+        #labTitle{
+            font-size: 10px;
+            margin-top: -15px;
+        }
+        #reserve{
+            background-color: #f1cf54;
+            width: 100px;
+            height: 30px;
+        }
+
     </style>
-    <script src = "js/User.js"></script>
-    
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="js/CurrentReservation.js"></script>
+    <script src="js/Reserve.js"></script>
 </head>
 <body>
     <nav>
@@ -89,40 +105,41 @@
         <div><a href="/userlogout">Logout</a></div>
     </nav>
     <div class="container">
-        <h1>Set Reservation</h1>
-        <div class="group-button">
-            <div class="btn-group">
-                <button class="search-button" id="Sunday">SUN</button>
-                <button class="search-button" id="Monday">MON</button>
-                <button class="search-button" id="Tuesday">TUE</button>
-                <button class="search-button" id="Wednesday">WED</button>
-                <button class="search-button" id="Thursday">THU</button>
-                <button class="search-button" id="Friday">FRI</button>
-                <button class="search-button" id="Saturday">SAT</button>
+        <h1>Make Reservation</h1>
+        <div class="subcontainer-red">
+            <!--Add div for the lab selection menu-->
+            <div id="leftArrow"></div>
+            <div id="selectLab">
+                <div id="labTitle"><h1></h1></div>
+                <div class="seats" id="seat1">S1</div>
+                <div class="seats" id="seat2">S2</div>
+                <div class="seats" id="seat3">S3</div>
+                <div class="seats" id="seat4">S4</div>
+                <div class="seats" id="seat5">S5</div>
+                <div class="seats" id="seat6">S6</div>
+                <div class="seats" id="seat7">S7</div>
+                <div class="seats" id="seat8">S8</div>
+                <div class="seats" id="seat9">S9</div>
+                <div class="seats" id="seat10">S10</div>
             </div>
-        </div>
-        <div class="subcontainer" id="subContainer">
-            <div class="sub-subcontainer" id="Lab1">
-                <h1 class="lab-title">Freddy's Frightful Manor</h1>
-                <div class="lab-info">
+            <div id="rightArrow"></div>
+            <div id="rInfo">
+                <div id="infoLabTitle"></div>
+                <div id="infoSeatNum">Seat: </div>
+                <div id="date">Date: <input type="date" id="reservationDate" required></div>
+                <div id="time">
+                    <form id="timeRangeForm">
+                        <label for="startTime">In:</label>
+                        <input type="time" id="startTime" name="startTime" value="09:00" min="09:00" max="15:30" step="1800" required>
+                        <br>
+                        <label for="endTime">Out:</label>
+                        <input type="time" id="endTime" name="endTime" value="14:30" min="09:30" max="16:00" step="1800" required>
+                    </form>
                 </div>
-                <button class="reserve-button" onclick="reserveLab('Freddy\'s Frightful Manor')">Reserve</button>
-            </div>
-            <div class="sub-subcontainer" id="Lab2">
-                <h1 class="lab-title">Chica's Chilling Chamber</h1>
-                <div class="lab-info">
-                </div>
-                <button class="reserve-button" onclick="reserveLab('Chica\'s Chilling Chamber')">Reserve</button>
-            </div>
-            <div class="sub-subcontainer" id="Lab3">
-                <h1 class="lab-title">Puppet's Perilous Palace</h1>
-                <div class="lab-info">
-                </div>
-                <button class="reserve-button" onclick="reserveLab('Puppet\'s Perilous Palace')">Reserve</button>
+                <div id="name">Name: </div>
+                <button id="reserve">Reserve</button>
             </div>
         </div>
     </div>
-    <script src="js/CurrentUser.js"></script>
-    <script src="js/Reserve.js"></script>
 </body>
 </html>
