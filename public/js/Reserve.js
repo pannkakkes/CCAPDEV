@@ -5,6 +5,8 @@ const Lab = function(name, backgroundColor, seatColor) {
 }
 
 let labs = [];
+let click = 0;
+//0 if not clicked and it will become 1 when clicked
 
 labs.push(new Lab("Freddy's Frightful Manor", "#a5a4a4", "#b4653a"));
 labs.push(new Lab("Chica's Chilling Chamber", "#d0d0d0", "#e7a11c"));
@@ -13,7 +15,7 @@ labs.push(new Lab("Puppet's Perilous Palace", "#aba8a8", "#ba2828"));
 document.addEventListener("DOMContentLoaded", () => {
     let currentLabIndex = 0;
     updateLabDetails(currentLabIndex);
-
+    
     // Right arrow event listener
     document.querySelector("#rightArrow").addEventListener("click", function(e) {
         currentLabIndex = (currentLabIndex + 1) % labs.length;
@@ -69,6 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("End time must be after start time.");
             e.preventDefault(); 
         }
+        else if (click == 0) {
+            alert("Select a seat number");
+            e.preventDefault(); 
+        }
         else{
             alert("Reservation Success");
         }
@@ -78,42 +84,52 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#seat1").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 1"
+        click = 1;
     });
     document.querySelector("#seat2").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 2"
+        click = 1;
     });
     document.querySelector("#seat3").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 3"
+        click = 1;
     });
     document.querySelector("#seat4").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 4"
+        click = 1;
     });
     document.querySelector("#seat5").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 5"
+        click = 1;
     });
     document.querySelector("#seat6").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 6"
+        click = 1;
     });
     document.querySelector("#seat7").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 7"
+        click = 1;
     });
     document.querySelector("#seat8").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 8"
+        click = 1;
     });
     document.querySelector("#seat9").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 9"
+        click = 1;
     });
     document.querySelector("#seat10").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 10"
+        click = 1;
     });
 
 });

@@ -401,9 +401,25 @@ function fillBlanks(reservation, initialLab){
 
 //Make a reservation
 app.get('/reserve', function (req, res) {
-    res.sendFile(path.join(__dirname, 'reserve.html'));
+    try {
+        const currentUser = req.session.currentUser;
+        res.render('reserve', { currentUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
 });
 
+//Edit reservation
+app.get('/reserveedit.html', function (req, res) {
+    try {
+        const currentUser = req.session.currentUser;
+        res.render('reserveedit', { currentUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+});
 
 //User Logout
 
