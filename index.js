@@ -238,10 +238,10 @@ app.get('/reserveviewslots', async function(req, res){
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
         //console.log(currentUser);
-        const today = formatDate(today);
+        const today = formatDate();
         console.log(today);
 
-        res.render('reserveviewslots', {reservationsData});
+        res.render('reserveviewslots', {reservationsData, today});
         
     } catch (error){
         console.error(error);
@@ -249,8 +249,8 @@ app.get('/reserveviewslots', async function(req, res){
     }
 })
 
-function formatDate(date, format = "MM/DD/YYYY") {
-    const d = new Date(date);
+function formatDate( format = "MM/DD/YYYY") {
+    const d = new Date();
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, '0'); 
     const day = String(d.getDate()).padStart(2, '0'); 

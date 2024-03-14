@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/labDB')
 var db = mongoose.connection;
-db.collection('reservations').drop();
-db.collection('users').drop();
+//db.collection('reservations').drop();
+//db.collection('users').drop();
 
 const User = require("./database/models/User")
 const Reservation = require("./database/models/Reservation")
