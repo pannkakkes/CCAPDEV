@@ -258,7 +258,6 @@ app.get('/editprofile', function (req, res) {
 });
 
 app.post('/edit', async (req, res) => {
-    const img = req.files;
     const currentUser = req.session.currentUser;
     const ID = currentUser.username;
 
@@ -267,30 +266,23 @@ app.post('/edit', async (req, res) => {
     const formattedBirthdate = `${month}/${day}/${year}`;
 
     const desc = req.body.description;
-    const image = req.body.image.toString();
-
-    //console.log(ID + formattedBirthdate + desc + image);
+    const Otherimage = req.body.image.toString();
 
     try {
         const userToUpdate = await User.findOne({username: ID});
+        //const { image } = req.files.image; // Access the uploaded image file
 
         if (!userToUpdate){
             return res.status(404).send('User not found');
         }
-
-        //console.log(img);
-
-        //img.mv(path.resolve(__dirname, 'public/images', image.name))
         
         userToUpdate.birthdate = formattedBirthdate;
         userToUpdate.description = desc;
-        userToUpdate.profilepicture = "image/"+ image;
+        userToUpdate.profilepicture = "image/"+ Otherimage;
 
-        //console.log(formattedBirthdate + desc + "image/"+ image);
-
+    
         await userToUpdate.save();
-        //images.mv(path.resolve(__dirname, 'public/images', image));
-
+        res.send("<script>alert('Edit was successful.'); window.location.href = '/dashboard'; </script>");
     } catch (err){
         console.error('Error updating user:', err);
         res.status(500).send('Error updating user');
@@ -321,8 +313,8 @@ app.get('/reserveviewslots', async function(req, res){
         let reservationsData = await Reservation.find({});
 
         const today = formatDate();
-        const initialDtr = '1/1/2024 2:30 PM';
-        //const initialDtr = formatDate() + ' 9:00AM';
+        //const initialDtr = '1/1/2024 2:30 PM';
+        const initialDtr = formatDate() + ' 9:00AM';
 
         const initialLab = 'Freddy\'s Frightful Manor';
         const initialDt = formatDate() + ' 9:00 AM - 9:30 AM';
