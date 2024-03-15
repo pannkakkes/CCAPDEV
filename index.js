@@ -317,13 +317,11 @@ app.get('/reserveviewslots', async function(req, res){
     try {
         const currentUser = req.session.currentUser;
         let reservationsData = await Reservation.find({});
-
-        const today = formatDate();
         //const initialDtr = '1/1/2024 2:30 PM';
-        const initialDtr = formatDate() + ' 9:00AM';
+        const initialDtr = (new Date().toLocaleDateString('en-US')) + ' 9:00 AM';
 
         const initialLab = 'Freddy\'s Frightful Manor';
-        const initialDt = formatDate() + ' 9:00 AM - 9:30 AM';
+        const initialDt = (new Date().toLocaleDateString('en-US'))  + ' 9:00 AM - 9:30 AM';
 
         reservationsData.sort((a, b) => {
             const seatNumberA = parseInt(a.seat.split(' ')[1]);
@@ -380,6 +378,7 @@ app.get('/viewother', async function(req, res){
 
 function formatDate( format = "MM/DD/YYYY") {
     const d = new Date();
+    console.log("here");
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1)
     const day = String(d.getDate())
