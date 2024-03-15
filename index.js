@@ -266,10 +266,16 @@ app.post('/edit', async (req, res) => {
     const formattedBirthdate = `${month}/${day}/${year}`;
 
     const desc = req.body.description;
-    const Otherimage = req.body.image.toString();
+    const {image} = req.files;
 
     try {
         const userToUpdate = await User.findOne({username: ID});
+        image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
+            if (error) {
+                console.log("Error!")
+            } else {
+            }
+        })
         //const { image } = req.files.image; // Access the uploaded image file
 
         if (!userToUpdate){
@@ -278,7 +284,7 @@ app.post('/edit', async (req, res) => {
         
         userToUpdate.birthdate = formattedBirthdate;
         userToUpdate.description = desc;
-        userToUpdate.profilepicture = "image/"+ Otherimage;
+        userToUpdate.profilepicture = "images/"+ image.name;
 
     
         await userToUpdate.save();
