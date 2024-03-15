@@ -56,9 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         var selectedDate = new Date(document.getElementById("reservationDate").value);
         var currentDate = new Date();
 
-        var startTime = document.getElementById("startTime").value;
-        var endTime = document.getElementById("endTime").value;
-
         if (!selectedDate || isNaN(new Date(selectedDate))) {
             alert("Please select a valid date.");
             e.preventDefault(); 
@@ -67,10 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Selected date must be today or later.");
             e.preventDefault(); 
         }        
-        else if (startTime >= endTime) {
-            alert("End time must be after start time.");
-            e.preventDefault(); 
-        }
         else if (click == 0) {
             alert("Select a seat number");
             e.preventDefault(); 
