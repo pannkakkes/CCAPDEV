@@ -74,7 +74,7 @@
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="js/User.js"></script>
     <script src="js/CurrentUser.js"></script>
-    <script src="js/Reserve.js"></script>
+    <script src="js/ReserveSaveEdit.js"></script>
 </head>
 <body>
     <nav>
@@ -106,7 +106,7 @@
         <div><a href="/userlogout">Logout</a></div>
     </nav>
     <div class="container">
-        <h1>Make Reservation</h1>
+        <h1>Edit Reservation</h1>
         <div class="subcontainer-red">
             <!--Add div for the lab selection menu-->
             <div id="leftArrow"></div>
@@ -128,18 +128,30 @@
                 <div id="infoLabTitle"></div>
                 <div id="infoSeatNum">Seat: </div>
                 <div id="date">Date: <input type="date" id="reservationDate" required></div>
-                <div id="time">
-                    <form id="timeRangeForm">
-                        <label for="startTime">In:</label>
-                        <input type="time" id="startTime" name="startTime" value="09:00" min="09:00" max="15:30" step="1800" required>
-                        <br>
-                        <label for="endTime">Out:</label>
-                        <input type="time" id="endTime" name="endTime" value="14:30" min="09:30" max="16:00" step="1800" required>
-                    </form>
+                <select id="time_slot" name="time_slot">
+                    <option value="choose-slot">Choose Time</option>
+                    <option value="slot1">Slot 1 (9:00 - 9:30)</option>
+                    <option value="slot2">Slot 2 (9:30 - 10:00)</option>
+                    <option value="slot3">Slot 3 (10:00 - 10:30)</option>
+                    <option value="slot4">Slot 4 (10:30 - 11:00)</option>
+                    <option value="slot5">Slot 5 (11:00 - 11:30)</option>
+                    <option value="slot6">Slot 6 (11:30 - 12:00)</option>
+                    <option value="slot7">Slot 7 (12:00 - 12:30)</option>
+                    <option value="slot8">Slot 8 (12:30 - 1:00)</option>
+                    <option value="slot9">Slot 9 (1:00 - 1:30)</option>
+                    <option value="slot10">Slot 10 (1:30 - 2:00)</option>
+                    <option value="slot11">Slot 11 (2:00 - 2:30)</option>
+                    <option value="slot12">Slot 12 (2:30 - 3:00)</option>
+                    <option value="slot13">Slot 13 (3:00 - 3:30)</option>
+                    <option value="slot14">Slot 14 (3:30 - 4:00)</option>
+				</select>
+                <div id="name">Name: {{currentUser.username}}</div>
+                <div id="inputName">
+                    <span id="userHolder" style="display: none;">{{currentUser.role}}</span>
+                    <div id="studentNameText" style="display: none;">Student Name:</div>
+                    <input type="text" id="roleInput" style="display: none;">
                 </div>
-                <div id="name"></div>
-                {{!-- Name: {{currentUser.username}} --}}
-                <a href="dashboard"><button id="reserve">Save Changes</button></a>
+                <a href="dashboard"><button id="reserve">Save</button></a>
             </div>
         </div>
     </div>

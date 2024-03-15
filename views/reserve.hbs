@@ -145,8 +145,12 @@
                     <option value="slot13">Slot 13 (3:00 - 3:30)</option>
                     <option value="slot14">Slot 14 (3:30 - 4:00)</option>
 				</select>
-                <div id="name"></div>
-                {{!-- Name: {{currentUser.username}} --}}
+                <div id="name">Name: {{currentUser.username}}</div>
+                <div id="inputName">
+                    <span id="userHolder" style="display: none;">{{currentUser.role}}</span>
+                    <div id="studentNameText" style="display: none;">Student Name:</div>
+                    <input type="text" id="roleInput" style="display: none;">
+                </div>
                 <a href="dashboard"><button id="reserve">Reserve</button></a>
             </div>
         </div>

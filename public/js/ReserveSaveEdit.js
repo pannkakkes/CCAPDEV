@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         else{
-            alert("Reservation Success");
+            alert("Reservation Changed Success");
         }
         
     });    
@@ -148,5 +148,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-
-
