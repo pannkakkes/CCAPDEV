@@ -6,6 +6,7 @@ const Lab = function(name, backgroundColor, seatColor) {
 
 let labs = [];
 let click = 0;
+let role = 'S';
 //0 if not clicked and it will become 1 when clicked
 
 labs.push(new Lab("Freddy's Frightful Manor", "#a5a4a4", "#b4653a"));
@@ -15,6 +16,20 @@ labs.push(new Lab("Puppet's Perilous Palace", "#aba8a8", "#ba2828"));
 document.addEventListener("DOMContentLoaded", () => {
     let currentLabIndex = 0;
     updateLabDetails(currentLabIndex);
+
+    var role = document.getElementById("userHolder").textContent; // Get the role value
+    var roleInput = document.getElementById("roleInput"); // Get the input box element
+    var studentText = document.getElementById("studentNameText");
+
+    if (role === 'T') {
+        roleInput.style.display = 'inline-block';
+        studentText.style.display = 'inline-block';
+        role = "T";
+    } else {
+        roleInput.style.display = 'none';
+        studentText.style.display = 'none';
+        role = "S";
+    }
     
     // Right arrow event listener
     document.querySelector("#rightArrow").addEventListener("click", function(e) {
@@ -55,6 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("reserve").addEventListener("click", function(e) { 
         var selectedDate = new Date(document.getElementById("reservationDate").value);
         var currentDate = new Date();
+        var role = document.getElementById("userHolder").textContent;
+        var roleInput = document.getElementById("roleInput").value;
 
         if (!selectedDate || isNaN(new Date(selectedDate))) {
             alert("Please select a valid date.");
@@ -67,6 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (click == 0) {
             alert("Select a seat number");
             e.preventDefault(); 
+        }
+        else if (role === 'T' && !roleInput.trim()) {
+            alert("Please enter a student name.");
+            e.preventDefault();
+            return;
         }
         else{
             alert("Reservation Success");

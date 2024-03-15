@@ -86,10 +86,11 @@
         <div><a href="userlogout.html">Logout</a></div>
     </nav>
     <div class="container">
+        <span id="currentUser" style="display: none;" >{{currentUser.role}}</span>
         <h1>Edit Reservation</h1>
         <div class="subcontainer">
             <h2>Select Reservation to Edit</h2>
-            <div id="buttonsContainer"></div> <!-- Container for dynamic buttons -->
+            <div id="buttonsContainer"></div> 
         </div>
     </div>
     <script>
@@ -114,7 +115,7 @@
         function generateButtons(reservations) {
             var buttonsContainer = document.getElementById("buttonsContainer");
 
-            // Clear existing buttons (if any)
+            // Clear existing buttons
             buttonsContainer.innerHTML = '';
 
             // Generate buttons based on the number of reservations
