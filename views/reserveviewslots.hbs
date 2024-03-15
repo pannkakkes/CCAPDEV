@@ -42,8 +42,8 @@
     <div class = container>
         <h1>View Slot Availability</h1>
 
-        <h2 id="heading-lab"></h2>
-        <p id="date-and-time">{{initialDt}}</p>
+        <h2 id="heading-lab">{{initialLab}}</h2>
+        <p id="date-and-time">{{initialDtr}}</p>
         <table class="center" border="1">
             <thead>
                 <tr>
@@ -79,40 +79,41 @@
             </tbody>
         </table><br>
 
-        <form onsubmit="return validate(event)" method="post">
-            <a>Choose Computer Lab:</a>
+        <form action="/updateview" method="get">
+            <a>Choose Lab:</a>
             <select id="lab" name="lab">
-                <option value="lab1">Freddy's Frightful Manor</option>
-                <option value="lab2">Chica's Chilling Chamber</option>
-                <option value="lab3">Puppet's Perilous Palace</option>
+                <option value="Freddy's Frightful Manor">Freddy's Frightful Manor</option>
+                <option value="Chica's Chilling Chamber">Chica's Chilling Chamber</option>
+                <option value="Puppet's Perilous Palace">Puppet's Perilous Palace</option>
             </select>
             <br>
 
             <a>Select Date:</a>
-            <input type="date" id="date" name="date" value="" class="form-input">
+            <input type="date" id="date" name="date" value={{currDate}} class="form-input">
             <br>
 
             <a>Select Time Slot:</a>
-            <select id="time_slot" name="time_slot" value="9:00 PM - 9:30 PM">
+            <select id="time_slot" name="time_slot" value="9:00 AM">
                 <option value="choose-slot">Choose Slot</option>
-                <option value="9:00 PM - 9:30 PM">Slot 1 (9:00 - 9:30)</option>
-                <option value="9:30 PM - 10:00 PM">Slot 2 (9:30 - 10:00)</option>
-                <option value="10:00 PM - 10:30 PM">Slot 3 (10:00 - 10:30)</option>
-                <option value="10:30 PM - 11:00 PM">Slot 4 (10:30 - 11:00)</option>
-                <option value="11:00 PM - 11:30 PM">Slot 5 (11:00 - 11:30)</option>
-                <option value="11:30 PM - 12:00 PM">Slot 6 (11:30 - 12:00)</option>
-                <option value="12:00 PM - 12:30 PM">Slot 7 (12:00 - 12:30)</option>
-                <option value="12:30 PM - 1:00 PM">Slot 8 (12:30 - 1:00)</option>
-                <option value="1:00 PM - 1:30 PM">Slot 9 (1:00 - 1:30)</option>
-                <option value="1:30 PM - 2:00 PM">Slot 10 (1:30 - 2:00)</option>
-                <option value="2:00 PM - 2:30 PM">Slot 11 (2:00 - 2:30)</option>
-                <option value="2:30 PM - 3:00 PM">Slot 12 (2:30 - 3:00)</option>
-                <option value="3:00 PM - 3:30 PM">Slot 13 (3:00 - 3:30)</option>
-                <option value="3:30 PM - 4:00 PM">Slot 14 (3:30 - 4:00)</option>
+                <option value="9:00 AM">Slot 1 (9:00 - 9:30)</option>
+                <option value="9:30 AM">Slot 2 (9:30 - 10:00)</option>
+                <option value="10:00 AM">Slot 3 (10:00 - 10:30)</option>
+                <option value="10:30 AM">Slot 4 (10:30 - 11:00)</option>
+                <option value="11:00 AM">Slot 5 (11:00 - 11:30)</option>
+                <option value="11:30 AM">Slot 6 (11:30 - 12:00)</option>
+                <option value="12:00 PM">Slot 7 (12:00 - 12:30)</option>
+                <option value="12:30 PM">Slot 8 (12:30 - 1:00)</option>
+                <option value="1:00 PM">Slot 9 (1:00 - 1:30)</option>
+                <option value="1:30 PM">Slot 10 (1:30 - 2:00)</option>
+                <option value="2:00 PM">Slot 11 (2:00 - 2:30)</option>
+                <option value="2:30 PM">Slot 12 (2:30 - 3:00)</option>
+                <option value="3:00 PM">Slot 13 (3:00 - 3:30)</option>
+                <option value="3:30 PM">Slot 14 (3:30 - 4:00)</option>
             </select>
             <br><br>
 
             <input class="submit-button" type="submit" value="Check Availability">
+            {{!-- <a class="submit-buttom" href="/reserveviewslots">Check Availability</a> --}}
         </form>
     </div>
 </body>

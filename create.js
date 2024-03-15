@@ -40,5 +40,7 @@ Reservation.create([
         { reserveId: 1005, username: 'BonnieBunny', seat: 'Seat 2', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
         dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: false},
         { reserveId: 1006, username: 'FoxyThePirate', seat: 'Seat 3', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
-        dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: true}
+        dateTimeReservation: '1/1/2024 2:30 PM', isAnonymous: true},
+        { reserveId: 1001, username: 'FreddyFazbear', seat: 'Seat 2', laboratory: 'Freddy\'s Frightful Manor', dateTimeRequest: '1/1/2024 10:00 AM',
+        dateTimeReservation: '3/15/2024 9:00 AM', isAnonymous: false}
 ]);

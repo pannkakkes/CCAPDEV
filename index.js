@@ -77,7 +77,7 @@ app.post('/login', async function (req, res) {
         // You can generate a session token or set a cookie to maintain the user's session
         // For simplicity, let's just send a success message
         req.session.currentUser = user;
-        console.log(user);
+        //console.log(user);
         res.redirect('/dashboard');
     } catch (error) {
         console.error(error);
@@ -93,7 +93,7 @@ app.get('/userregister', function (req, res) {
 app.post('/register', function (req, res) {
     const { image } = req.files; // Access the uploaded image file
     const { email, username, password, description, birthdate } = req.body;
-    console.log(req.body);
+    //console.log(req.body);
     image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
         if (error) {
             console.log("Error!")
@@ -117,7 +117,7 @@ app.get('/dashboard', function (req, res) {
 app .get('/userdelete', function (req, res){
     // Retrieve current user from session
     const currentUser = req.session.currentUser;
-    console.log(currentUser._id)
+    //console.log(currentUser._id)
     //console.log(currentUser);
     // Render user delete template (userdelete.hbs) with current user's information
     res.render('userdelete', { currentUser});
@@ -235,7 +235,7 @@ app.get('/viewprofile', async function (req, res) {
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
-        console.log(currentUser.profilepicture);
+        //console.log(currentUser.profilepicture);
 
         res.render('userviewprofile',{currentUser, reservationsData});
 
@@ -283,7 +283,7 @@ app.post('/edit', async (req, res) => {
             return res.status(404).send('User not found');
         }
 
-        console.log(img);
+        //console.log(img);
 
         //img.mv(path.resolve(__dirname, 'public/images', image.name))
         
@@ -323,14 +323,14 @@ app.get('/reservesee', async function (req, res){
 app.get('/reserveviewslots', async function(req, res){
     try {
         const currentUser = req.session.currentUser;
-        const reservationsData = await Reservation.find({});
+        let reservationsData = await Reservation.find({});
 
         const today = formatDate();
         const initialDtr = '1/1/2024 2:30 PM';
         //const initialDtr = formatDate() + ' 9:00AM';
 
         const initialLab = 'Freddy\'s Frightful Manor';
-        const initialDt = today + ' 9:00 AM - 9:30 AM';
+        const initialDt = formatDate() + ' 9:00 AM - 9:30 AM';
 
         reservationsData.sort((a, b) => {
             const seatNumberA = parseInt(a.seat.split(' ')[1]);
@@ -338,71 +338,106 @@ app.get('/reserveviewslots', async function(req, res){
             return seatNumberA - seatNumberB;
         });
 
+        //console.log(reservationsData);
+        const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
 
-        fillBlanksDate(reservationsData, initialLab, initialDtr);
-        const sortedAndFilledReservationsData = [];
-
-        let expectedSeatNumber = 1;
-        for (const reservation of reservationsData) {
-            const currentSeatNumber = parseInt(reservation.seat.split(' ')[1]);
-            
-            while (expectedSeatNumber < currentSeatNumber) {
-                sortedAndFilledReservationsData.push({
-                    laboratory: '', 
-                    seat: 'Seat ' + expectedSeatNumber,
-                    isAnonymous: false, 
-                    dateTimeReservation: '' 
-                });
-                expectedSeatNumber++;
-            }
-
-            sortedAndFilledReservationsData.push(reservation);
-            expectedSeatNumber++;
-        }
-
-        while (expectedSeatNumber <= 10) {
-            sortedAndFilledReservationsData.push({
-                laboratory: '', 
-                seat: 'Seat ' + expectedSeatNumber,
-                isAnonymous: false, 
-                dateTimeReservation: '' 
-            });
-            expectedSeatNumber++;
-        }
-
-        res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt});
+        const currDate = CurrentDate()
+        res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate});
     } catch (error){
         console.error(error);
         res.status(500).send("Server error");
     }
 })
 
+app.get('/updateview', async function(req, res){
+    const date = formatDate(req.query.date).toString();//mm/dd/yyyy
+    const timeSlot = req.query.time_slot;//ex: 9:00AM
+    const lab = req.query.lab;
+    const reservationsData = await Reservation.find({});
+
+    const initialDtr = date + " " + timeSlot;
+    const initialLab = lab;
+    const initialDt = timeSlot;
+
+    reservationsData.sort((a, b) => {
+        const seatNumberA = parseInt(a.seat.split(' ')[1]);
+        const seatNumberB = parseInt(b.seat.split(' ')[1]);
+        return seatNumberA - seatNumberB;
+    });
+
+    console.log(initialDtr);
+
+    const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
+    //console.log(sortedAndFilledReservationsData);
+    const currDate = CurrentDate()
+    res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate});
+})
+
 function formatDate( format = "MM/DD/YYYY") {
     const d = new Date();
     const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0'); 
-    const day = String(d.getDate()).padStart(2, '0'); 
+    const month = String(d.getMonth() + 1)
+    const day = String(d.getDate())
   
-    // Replace placeholders in format string
     return format.replace(/MM/, month)
                .replace(/DD/, day)
                .replace(/YYYY/, year);
 }
 
-function fillBlanksDate(reservation, initialLab, initialDtr){
+function formatDate(date, format = "MM/DD/YYYY") {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1);
+    const day = String(d.getDate());
+
+    return format
+        .replace(/MM/, month)
+        .replace(/DD/, day)
+        .replace(/YYYY/, year);
+}
+
+
+function CurrentDate() {
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1; // Add 1 because months are zero-indexed
+    var day = today.getDate();
+
+    // Ensure month and day are two digits
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+
+    return year + '-' + month + '-' + day;
+}
+
+
+
+function fillBlanksDate(reservation, initialLab, initialDtr) {
+    let finalReservation = [];
+    let existingSeats = new Set();
+
+    // Populate existing seats
     for (const reserve of reservation) {
-        const currentSeatNumber = parseInt(reserve.seat.split(' ')[1]);
-
-        if (reserve.dateTimeReservation === initialDtr && reserve.laboratory === initialLab){
-
+        if (reserve.dateTimeReservation === initialDtr && reserve.laboratory === initialLab) {
+            finalReservation.push(reserve);
+            existingSeats.add(reserve.seat);
         }
-        else{
-            reserve.laboratory = initialLab;
-            reserve.dateTimeReservation = '';
-            reserve.isAnonymous = false;
+    }
+
+    // Generate missing seats
+    for (let i = 1; i <= 10; i++) {
+        const seat = 'Seat ' + i;
+        if (!existingSeats.has(seat)) {
+            finalReservation.push({
+                laboratory: initialLab,
+                seat: seat,
+                isAnonymous: false,
+                dateTimeReservation: ''
+            });
         }
-    } 
-    return reservation;
+    }
+
+    return finalReservation;
 }
 
 //Make a reservation
@@ -435,6 +470,7 @@ app.get('/reservesaveedit.html', function (req, res) {
         res.status(500).send("Server error");
     }
 });
+
 
 //User Logout
 
