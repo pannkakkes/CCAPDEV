@@ -235,17 +235,12 @@ app.get('/viewprofile', async function (req, res) {
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
-        //console.log(currentUser.profilepicture);
-
         res.render('userviewprofile',{currentUser, reservationsData});
 
-        //console.log(user);
-        //console.log(reservationsData);
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
     }
-    //res.sendFile(path.join(__dirname, 'userviewprofile.html'));
 });
 
 app.get('/editprofile', function (req, res) {
@@ -365,12 +360,24 @@ app.get('/updateview', async function(req, res){
         return seatNumberA - seatNumberB;
     });
 
-    console.log(initialDtr);
-
     const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
-    //console.log(sortedAndFilledReservationsData);
+    
     const currDate = CurrentDate()
     res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate});
+})
+
+app.get('/viewother', async function(req, res){
+    try {
+        const name = req.query.other;
+        const currentUser = await User.findOne({username: name});
+        const reservationsData = await Reservation.find({ username: currentUser.username});
+
+        res.render('userviewprofile',{currentUser, reservationsData});
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
 })
 
 function formatDate( format = "MM/DD/YYYY") {
@@ -409,8 +416,6 @@ function CurrentDate() {
 
     return year + '-' + month + '-' + day;
 }
-
-
 
 function fillBlanksDate(reservation, initialLab, initialDtr) {
     let finalReservation = [];
