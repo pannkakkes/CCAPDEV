@@ -29,6 +29,7 @@ app.use(session({
   }));
 
 var hbs = require('hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 const { brotliDecompress } = require('zlib');
 app.set('view engine','hbs');
 
@@ -55,12 +56,12 @@ hbs.registerHelper('times', function(n, block) {
 var db = mongoose.connection;
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.render("index", {layout: "layouts/main"});
 });
 
 //User Login
 app.get('/userlogin', function (req, res) {
-    res.sendFile(path.join(__dirname, 'userlogin.html'));
+    res.render("userlogin", {layout: "layouts/main"});
 });
 
 app.post('/login', async function (req, res) {
@@ -87,7 +88,7 @@ app.post('/login', async function (req, res) {
 
 //User Registration
 app.get('/userregister', function (req, res) {
-    res.sendFile(path.join(__dirname, 'userregister.html'));
+    res.render("userregister", {layout: "layouts/main"});
 });
 
 app.post('/register', function (req, res) {
@@ -109,7 +110,7 @@ app.post('/register', function (req, res) {
 //
 
 app.get('/dashboard', function (req, res) {
-    res.sendFile(path.join(__dirname, 'dashboard.html'));
+    res.render("dashboard", {layout: "layouts/main"});
 });
 
 //User Profile Options
@@ -120,7 +121,7 @@ app .get('/userdelete', function (req, res){
     //console.log(currentUser._id)
     //console.log(currentUser);
     // Render user delete template (userdelete.hbs) with current user's information
-    res.render('userdelete', { currentUser});
+    res.render('userdelete', { currentUser, layout: "layouts/main"});
 });   
 
 app.post('/delete', async function (req, res) {
@@ -138,11 +139,11 @@ app.post('/delete', async function (req, res) {
 
 //
 app.get('/details', function (req, res) {
-    res.sendFile(path.join(__dirname, 'details.html'));
+    res.render("details", {layout: "layouts/main"});
 });
 
 app.get('/searchusers', function (req, res) {
-    res.sendFile(path.join(__dirname, 'searchusers.html'));
+    res.render("searchusers", {layout: "layouts/main"});
 });
 
 app.get('/users', async (req, res) => {
@@ -159,7 +160,7 @@ app.get('/users', async (req, res) => {
 })
 
 app.get('/searchslots', function (req, res) {
-    res.render("searchslots", {});
+    res.render("searchslots", {layout: "layouts/main"});
 });
 
 app.get('/slots', async (req, res) => {
@@ -227,7 +228,7 @@ app.get('/slots', async (req, res) => {
     }
 
     const searchResults = await Reservation.find({ dateTimeReservation: newdatetime, laboratory: newlab});
-    res.render("searchslots", {searchResults});
+    res.render("searchslots", {searchResults, layout: "layouts/main"});
 });
 
 app.get('/viewprofile', async function (req, res) {
@@ -235,7 +236,7 @@ app.get('/viewprofile', async function (req, res) {
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
-        res.render('userviewprofile',{currentUser, reservationsData});
+        res.render('userviewprofile',{currentUser, reservationsData, layout: "layouts/main"});
 
     } catch (error) {
         console.error(error);
@@ -249,7 +250,7 @@ app.get('/editprofile', function (req, res) {
         const birthdate = currentUser.birthdate; 
         const [month, day, year] = birthdate.split('/');
 
-        res.render('usereditprofile', { currentUser, formattedBirthdate: `${year}-${month}-${day}` });
+        res.render('usereditprofile', { currentUser, formattedBirthdate: `${year}-${month}-${day}`, layout: "layouts/main"});
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
@@ -303,7 +304,7 @@ app.get('/reservesee', async function (req, res){
 
         //console.log(currentUser);
 
-        res.render('reservesee',{reservationsData});
+        res.render('reservesee',{reservationsData, layout:"layouts/main"});
 
     } catch (error) {
         console.error(error);
@@ -333,7 +334,7 @@ app.get('/reserveviewslots', async function(req, res){
         const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
 
         const currDate = CurrentDate()
-        res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate});
+        res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
     } catch (error){
         console.error(error);
         res.status(500).send("Server error");
@@ -359,16 +360,15 @@ app.get('/updateview', async function(req, res){
     const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
     
     const currDate = CurrentDate()
-    res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate});
+    res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
 })
 
 app.get('/viewother', async function(req, res){
     try {
         const name = req.query.other;
-        const currentUser = await User.findOne({username: name});
-        const reservationsData = await Reservation.find({ username: currentUser.username});
-
-        res.render('userviewprofile',{currentUser, reservationsData});
+        const existUsername = await User.findOne({username: name});
+        const reservationsData = await Reservation.find({ username: existUsername.username});
+        res.render("publicprofile", {existUsername, reservationsData, layout: "layouts/main"});
 
     } catch (error) {
         console.error(error);
@@ -446,7 +446,7 @@ function fillBlanksDate(reservation, initialLab, initialDtr) {
 app.get('/reserve', function (req, res) {
     try {
         const currentUser = req.session.currentUser;
-        res.render('reserve', { currentUser });
+        res.render('reserve', { currentUser});
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
@@ -454,7 +454,7 @@ app.get('/reserve', function (req, res) {
 });
 
 // Edit reservation
-app.get('/reserveedit.html', async function (req, res) {
+app.get('/reserveedit', async function (req, res) {
     // try {
     //     const currentUser = req.session.currentUser;
     //     let reservationsData;
@@ -478,7 +478,7 @@ app.get('/reserveedit.html', async function (req, res) {
     }
 });
 
-app.get('/reservesaveedit.html', function (req, res) {
+app.get('/reservesaveedit', function (req, res) {
     try {
         const currentUser = req.session.currentUser;
         res.render('reservesaveedit', { currentUser });
@@ -493,12 +493,13 @@ app.get('/reservesaveedit.html', function (req, res) {
 
 app.get('/userlogout', function (req, res) {
     const currentUser = req.session.currentUser;
-    res.render('userlogout', { currentUser });
+    res.render('userlogout', { currentUser, layout:"layouts/main"});
 });
 
 app.get('/logout', function (req, res) {
     req.session.currentUser = null; // Reset currentUser in session
     res.sendStatus(200); // Send a success response
+    res.render('index', { layout:"layouts/main"});
 });
 
 

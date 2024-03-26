@@ -57,34 +57,7 @@
     <script src="js/Reservation.js"></script>
 </head>
 <body>
-    <nav>
-			<div class="homebutton"><a href="/dashboard"><img id="home-icon" src="icons/home.png"> Home</a></div>
-			<div class="dropdown">
-				<a href="/viewprofile">User Profile</a>
-				<div class="dropdown-content">
-					<a href="/viewprofile">View Profile</a>
-					<a href="/editprofile">Edit Profile</a>
-					<a href="/userdelete">Delete Profile</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<a href="/reserve">Reserve</a>
-				<div class="dropdown-content">
-					<a href="/reserve">Reserve</a>
-					<a href="reserveedit.html">Edit Reservation</a>
-					<a href="/reservesee">See Reservations</a>
-					<a href="/reserveviewslots">View Available Slots</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<a href="#">Search</a>
-				<div class="dropdown-content">
-					<a href="/searchusers">Search Users</a>
-					<a href="/searchslots">Search Slots</a>
-				</div>
-			</div>
-			<div><a href="/userlogout">Logout</a></div>
-		</nav>
+    {{>nav}}
     <div class="container">
         <span id="userRole" style="display: none;">{{currentUser.role}}</span>
         <span id="userName" style="display: none;">{{currentUser.username}}</span>
@@ -173,7 +146,7 @@
 
         function changeSched(reservationId) {
             // Add your logic to handle the reservation change
-            window.location.href = 'reservesaveedit.html?id=' + reservationId; // Example: Pass reservation id in URL
+            window.location.href = 'reservesaveedit?id=' + reservationId; // Example: Pass reservation id in URL
         }
     </script>
 </body>

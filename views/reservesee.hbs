@@ -1,42 +1,4 @@
-<!DOCTYPE html>
-<head>
-    <title>Reservation Details - Fazbear Entertainment Labs</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="favicon/freddyfazbear.png">
-    <script src = "js/User.js"></script>
-    <script src="js/CurrentUser.js"></script>
-    <script src = "js/ReverseSee.js"></script>
-</head>
-<body>
-
-    <nav>
-			<div class="homebutton"><a href="/dashboard"><img id="home-icon" src="icons/home.png"> Home</a></div>
-			<div class="dropdown">
-				<a href="/viewprofile">User Profile</a>
-				<div class="dropdown-content">
-					<a href="/viewprofile">View Profile</a>
-					<a href="/editprofile">Edit Profile</a>
-					<a href="/userdelete">Delete Profile</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<a href="/reserve">Reserve</a>
-				<div class="dropdown-content">
-					<a href="/reserve">Reserve</a>
-					<a href="reserveedit.html">Edit Reservation</a>
-					<a href="/reservesee">See Reservations</a>
-					<a href="/reserveviewslots">View Available Slots</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<a href="#">Search</a>
-				<div class="dropdown-content">
-					<a href="/searchusers">Search Users</a>
-					<a href="/searchslots">Search Slots</a>
-				</div>
-			</div>
-			<div><a href="/userlogout">Logout</a></div>
-		</nav>
+{{>nav}}
 
     <div class="container" style="width: 700px; position: relative; height: 500px">
         <h1>Reservation Details</h1>
@@ -70,5 +32,3 @@
     <br>
 
 </div>
-</body>
-</html>
