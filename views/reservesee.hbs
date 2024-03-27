@@ -6,6 +6,7 @@
 
     <div class="table-container" style="left: 0; right: 0">
         <table style="left: 0">
+            {{#if reservationsData.length}}
             <thead>
                 <tr>
                     <th>Seat</th>
@@ -15,7 +16,6 @@
                 </tr>
             </thead>
             <tbody id="reservationTableBody">
-            {{#if reservationsData.length}}
                 {{#each reservationsData}}
                 <tr>
                     <td>{{ this.seat }}</td> <td>{{ this.laboratory }}</td>
@@ -24,7 +24,7 @@
                 </tr>
                 {{/each}}
             {{else}}
-                <p class="reservation-none" id="reservation-none">No reservations found.</p>
+                <p style="margin-left:285px">No reservations found.</p>
             {{/if}}
             </tbody>
         </table>
