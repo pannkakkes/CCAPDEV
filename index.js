@@ -267,25 +267,31 @@ app.post('/edit', async (req, res) => {
     const formattedBirthdate = `${month}/${day}/${year}`;
 
     const desc = req.body.description;
-    const {image} = req.files;
+    //const {image} = req.files;
 
     try {
         const userToUpdate = await User.findOne({username: ID});
-        image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
-            if (error) {
-                console.log("Error!")
-            } else {
-            }
-        })
-        //const { image } = req.files.image; // Access the uploaded image file
 
         if (!userToUpdate){
             return res.status(404).send('User not found');
         }
         
+        let profilePicture = userToUpdate.profilepicture;
+
+        if (req.files && req.files.image) {
+            console.log("Hello");
+            const { image } = req.files;
+            profilePicture = "images/" + image.name;
+            image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
+                if (error) {
+                    console.log("Error moving image:", error);
+                }
+            });
+        }
+
         userToUpdate.birthdate = formattedBirthdate;
         userToUpdate.description = desc;
-        userToUpdate.profilepicture = "images/"+ image.name;
+        userToUpdate.profilepicture = profilePicture;
 
     
         await userToUpdate.save();
