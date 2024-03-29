@@ -8,8 +8,6 @@ $(document).ready(function() {
         }
     });
 
-    // No need for AJAX, let the form handle submission naturally
-
     //Submitting as a Lab Technician
     $("#submitT").on("click", function(event) {
         var email = $("#email").val();
@@ -38,6 +36,7 @@ $(document).ready(function() {
         }
 
         if (isValid) {
+   
         } else {
             event.preventDefault(); // Prevent the form from submitting if not valid
         }
@@ -71,9 +70,10 @@ $(document).ready(function() {
         }
 
         if (isValid) {
-            
+ 
         } else {
             event.preventDefault(); // Prevent the form from submitting if not valid
         }
     });
+
 });

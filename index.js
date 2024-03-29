@@ -13,6 +13,7 @@ const Reservation = require("./database/models/Reservation")
 const path = require('path')
 
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -70,7 +71,14 @@ app.post('/login', async function (req, res) {
     try {
         const user = await User.findOne({ email });
 
-        if (!user || user.password !== password) {
+        if (!user) {
+            return res.status(400).send("Invalid email or password.");
+        }
+
+        // Compare the hashed password with the provided password
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        if (!passwordMatch) {
             return res.status(400).send("Invalid email or password.");
         }
         
@@ -78,7 +86,6 @@ app.post('/login', async function (req, res) {
         // You can generate a session token or set a cookie to maintain the user's session
         // For simplicity, let's just send a success message
         req.session.currentUser = user;
-        //console.log(user);
         res.redirect('/dashboard');
     } catch (error) {
         console.error(error);
@@ -91,22 +98,55 @@ app.get('/userregister', function (req, res) {
     res.render("userregister", {layout: "layouts/main"});
 });
 
-app.post('/register', function (req, res) {
+app.post('/register', async function (req, res) {
     const { image } = req.files; // Access the uploaded image file
     const { email, username, password, description, birthdate } = req.body;
-    //console.log(req.body);
-    image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
-        if (error) {
-            console.log("Error!")
-        } else {
-            User.create({
-                ...req.body,
-                profilepicture: '/images/' + image.name
-            });
-            res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
+
+    try {
+        // Check if email or username already exists in the database
+        const existingEmail = await User.findOne({ email });
+        const existingUsername = await User.findOne({ username });
+
+        if (existingEmail) {
+            res.send('<script>alert("Email already exists.");</script>');
         }
-    })
+
+        if (existingUsername) {
+            res.send('<script>alert("Username already exists."); </script>');
+        }
+
+        // Hash the password
+        bcrypt.hash(password, 10, async function (err, hashedPassword) {
+            if (err) {
+                console.error("Error hashing password:", err);
+                return res.status(500).send("Error registering user.");
+            }
+
+            try {
+                // Save the user with hashed password
+                await image.mv(path.resolve(__dirname, 'public/images', image.name));
+
+                await User.create({
+                    email,
+                    username,
+                    password: hashedPassword, // Save the hashed password
+                    description,
+                    birthdate,
+                    profilepicture: '/images/' + image.name
+                });
+
+                res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
+            } catch (error) {
+                console.error("Error creating user:", error);
+                res.status(500).send("Error registering user.");
+            }
+        });
+    } catch (error) {
+        console.error("Error checking existing email and username:", error);
+        res.status(500).send("Error checking existing email and username.");
+    }
 });
+
 //
 
 app.get('/dashboard', function (req, res) {
