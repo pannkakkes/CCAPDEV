@@ -1,8 +1,10 @@
+// Add event listener to the login form submit button
 document.getElementById("submitButton").addEventListener("click", async function(event) {
     event.preventDefault();
 
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+    var keepLoggedIn = document.getElementById("keepLoggedIn").checked; // Get the state of the "Keep me logged in" checkbox
 
     try {
         const response = await fetch('/login', {
@@ -10,7 +12,7 @@ document.getElementById("submitButton").addEventListener("click", async function
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, keepLoggedIn }) // Include the state of the checkbox in the request body
         });
 
         const data = await response.text();

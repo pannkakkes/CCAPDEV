@@ -35,6 +35,12 @@ $(document).ready(function() {
             isValid = false;
         }
 
+        var birthYear = new Date(birthdate).getFullYear();
+        if (birthYear > 2010) {
+            alert("Birthdate must be in or before the year 2010.");
+            isValid = false;
+        }
+
         if (isValid) {
    
         } else {
@@ -66,6 +72,11 @@ $(document).ready(function() {
 
         if (!email.endsWith("@dlsu.edu.ph")) {
             alert("Please enter a valid email ending with @dlsu.edu.ph");
+            isValid = false;
+        }
+
+        if (birthYear > 2010) {
+            alert("Birthdate must be in or before the year 2010.");
             isValid = false;
         }
 
