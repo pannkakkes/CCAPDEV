@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const main = require("./mainRoutes");
 const bcrypt = require('bcrypt');
+const path = require('path');
 
 const User = require("../database/models/User")
 
@@ -104,7 +105,7 @@ router.post('/register', async function (req, res) {
 
             try {
                 // Save the user with hashed password
-                await image.mv(path.resolve(__dirname, 'public/images', image.name));
+                await image.mv(path.resolve(__dirname, '../public/images', image.name));
 
                 await User.create({
                     email,
