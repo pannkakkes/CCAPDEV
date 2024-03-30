@@ -31,7 +31,7 @@
                             {{#if this.isAnonymous}}
                             <td class="reserved-by"><a>Anonymous</a></td>
                             {{else}}
-                            <td class="reserved-by"><a href="/viewother?other={{ this.username }}" name="other" value="{{ this.username }}" method="get" class="user-link">{{ this.username }}</a></td>
+                            <td class="reserved-by"><a href="/app/main/reserve/viewother?other={{ this.username }}" name="other" value="{{ this.username }}" method="get" class="user-link">{{ this.username }}</a></td>
                             {{/if}}
                             <td class="availability">Unavailable</td>
                     </tr>
@@ -40,7 +40,7 @@
             </tbody>
         </table><br>
 
-        <form action="/updateview" method="get">
+        <form action="/app/main/reserve/updateview" method="get">
             <a>Choose Lab:</a>
             <select id="lab" name="lab">
                 <option value="Freddy's Frightful Manor">Freddy's Frightful Manor</option>

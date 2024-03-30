@@ -1,8 +1,11 @@
 const router = require("express").Router();
 const mongoose = require('mongoose')
+const express = require('express')
 
 mongoose.connect('mongodb://localhost/labDB')
+router.use(express.static('public'))
 
+const User = require("../database/models/User")
 const Reservation = require("../database/models/Reservation")
 
 //Make a reservation
