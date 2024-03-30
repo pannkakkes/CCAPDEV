@@ -13,6 +13,10 @@ router.get('/searchusers', function (req, res) {
 });
 
 router.get('/users', async (req, res) => {
+    if (!req.query.username) {
+        res.send("<script>alert('Please enter a username.'); window.location.href = '/app/main/search/searchusers'; </script>");
+    }
+    else {
     var regex = new RegExp(["^", req.query.username, "$"].join(""), "i");
     const existUsername = await User.findOne({ username: regex});
 
@@ -22,7 +26,7 @@ router.get('/users', async (req, res) => {
     }
     else {
         res.send("<script>alert('No users found.'); window.location.href = '/app/main/search/searchusers'; </script>");
-    }
+    }}
 })
 
 router.get('/searchslots', function (req, res) {
@@ -30,6 +34,9 @@ router.get('/searchslots', function (req, res) {
 });
 
 router.get('/slots', async (req, res) => {
+    console.log(req.query.selected_date);
+    if (req.query.selected_date && req.query.time_slot != "choose-slot" && req.query.lab != "choose-lab") {
+
     var new_date = (new Date(req.query.selected_date)).toLocaleDateString('en-US');
     const time_slot = req.query.time_slot;
     var new_time;
@@ -92,9 +99,12 @@ router.get('/slots', async (req, res) => {
         case "lab3":
             newlab = "Puppet's Perilous Palace";
     }
-
     const searchResults = await Reservation.find({ dateTimeReservation: newdatetime, laboratory: newlab});
     res.render("searchslots", {searchResults, layout: "layouts/main"});
+    }
+    else {
+        res.send("<script>alert('Please fill in all the fields.'); window.location.href = '/app/main/search/searchslots'; </script>");
+    }
 });
 
 module.exports = router;
