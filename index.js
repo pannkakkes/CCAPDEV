@@ -15,6 +15,8 @@ const path = require('path')
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
+const apps = require("./routes/appRoutes");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -69,7 +71,7 @@ const sessionChecker = (req, res, next) => {
 //Routes if not keep me logged in
 // Route for the home page
 app.get('/', sessionChecker, (req, res) => {
-    res.render('index', { layout: "layouts/main" });
+    res.redirect("app");
 });
 
 // User Login
@@ -82,10 +84,9 @@ app.get('/userregister', sessionChecker, function (req, res) {
     res.render("userregister", { layout: "layouts/main" });
 });
 
-
-///////////////////////////
+/////////////////////////
 app.get('/', function (req, res) {
-    res.render("index", {layout: "layouts/main"});
+    res.redirect("app");
 });
 
 //User Login
@@ -595,3 +596,5 @@ app.get('/logout', function (req, res) {
 var server = app.listen(3000, function () {
     console.log('Node server is running...');
 });
+
+app.use("/app", apps);
