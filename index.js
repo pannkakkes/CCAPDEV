@@ -62,7 +62,7 @@ var db = mongoose.connection;
 
 const sessionChecker = (req, res, next) => {
     if (req.session.currentUser) {
-        res.redirect('/dashboard'); // Redirect to dashboard if currentUser is set in the session
+        res.redirect('app/main'); // Redirect to dashboard if currentUser is set in the session
     } else {
         next(); // Continue to the next middleware if session is not active
     }
@@ -85,10 +85,6 @@ app.get('/', function (req, res) {
 });
 
 //
-
-app.get('/dashboard', function (req, res) {
-    res.render("dashboard", {layout: "layouts/main"});
-});
 
 //User Profile Options
 
@@ -266,7 +262,7 @@ app.post('/edit', async (req, res) => {
 
     
         await userToUpdate.save();
-        res.send("<script>alert('Edit was successful.'); window.location.href = '/dashboard'; </script>");
+        res.send("<script>alert('Edit was successful.'); window.location.href = 'app/main'; </script>");
     } catch (err){
         console.error('Error updating user:', err);
         res.status(500).send('Error updating user');

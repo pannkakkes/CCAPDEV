@@ -1,10 +1,12 @@
 const router = require("express").Router();
+const main = require("./mainRoutes");
+const bcrypt = require('bcrypt');
 
 const User = require("../database/models/User")
 
 const sessionChecker = (req, res, next) => {
     if (req.session.currentUser) {
-        res.redirect('/dashboard'); // Redirect to dashboard if currentUser is set in the session
+        res.redirect('main'); // Redirect to dashboard if currentUser is set in the session
     } else {
         next(); // Continue to the next middleware if session is not active
     }
@@ -42,7 +44,7 @@ router.post('/login', async function (req, res) {
                 req.session.cookie.maxAge = 604800000; // 7 days
             } else {
             }            
-            return res.redirect('/dashboard');
+            return res.redirect('main');
         }
 
         // If not an exception, proceed with regular login process
@@ -64,7 +66,7 @@ router.post('/login', async function (req, res) {
             req.session.cookie.maxAge = 604800000;  // 7 days
         } else {
         }
-                res.redirect('/dashboard');
+                res.redirect('main');
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
@@ -128,5 +130,7 @@ router.post('/register', async function (req, res) {
 router.get('/details', function (req, res) {
     res.render("details", {layout: "layouts/main"});
 });
+
+router.use("/main", main);
 
 module.exports = router;
