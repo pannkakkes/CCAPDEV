@@ -7,7 +7,7 @@ document.getElementById("submitButton").addEventListener("click", async function
     var keepLoggedIn = document.getElementById("keepLoggedIn").checked; // Get the state of the "Keep me logged in" checkbox
 
     try {
-        const response = await fetch('/login', {
+        const response = await fetch('login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
