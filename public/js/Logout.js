@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function logoutUser() {
-    fetch('/logout', {
+    fetch('/app/main/logout', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

@@ -1,4 +1,12 @@
 const router = require("express").Router();
+const mongoose = require('mongoose')
+const express = require('express')
+
+mongoose.connect('mongodb://localhost/labDB')
+router.use(express.static('public'))
+
+const Reservation = require("../database/models/Reservation")
+const User = require("../database/models/User")
 
 router.get('/searchusers', function (req, res) {
     res.render("searchusers", {layout: "layouts/main"});
@@ -10,10 +18,10 @@ router.get('/users', async (req, res) => {
 
     if (existUsername) {
         const reservationsData = await Reservation.find({ username: existUsername.username });
-        res.render("publicprofile", {existUsername, reservationsData});
+        res.render("publicprofile", {existUsername, reservationsData, layout: "layouts/main"});
     }
     else {
-        res.send("<script>alert('No users found.'); window.location.href = '/searchusers'; </script>");
+        res.send("<script>alert('No users found.'); window.location.href = '/app/main/search/searchusers'; </script>");
     }
 })
 
