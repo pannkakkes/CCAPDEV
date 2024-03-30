@@ -4,7 +4,7 @@
         document.getElementById('deleteUserButton').addEventListener('click', async function() {
             if (confirm('Are you sure you want to delete this user?')) {
                 try {
-                    const response = await fetch('/delete', {
+                    const response = await fetch('/app/main/profile/delete', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

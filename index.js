@@ -7,11 +7,6 @@ const session = require('express-session');
 
 const fileUpload = require('express-fileupload')
 
-const User = require("./database/models/User")
-const Reservation = require("./database/models/Reservation")
-
-const path = require('path')
-
 const bodyParser = require('body-parser');
 
 const apps = require("./routes/appRoutes");

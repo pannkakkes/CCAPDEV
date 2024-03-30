@@ -1,15 +1,17 @@
 const router = require("express").Router();
 const mongoose = require('mongoose')
 const express = require('express')
+const path = require('path')
 
 mongoose.connect('mongodb://localhost/labDB')
 router.use(express.static('public'))
 
 const Reservation = require("../database/models/Reservation")
+const User = require("../database/models/User")
 
 router.get('/', async function (req, res) {
     try {
-        const currentUser = req.session.currentUser;
+        const currentUser = await User.findOne({ username: req.session.currentUser.username });
         const reservationsData = await Reservation.find({ username: currentUser.username });
 
         res.render('userviewprofile',{currentUser, reservationsData, layout: "layouts/main"});
@@ -20,9 +22,9 @@ router.get('/', async function (req, res) {
     }
 });
 
-router.get('/editprofile', function (req, res) {
+router.get('/editprofile', async function (req, res) {
     try {
-        const currentUser = req.session.currentUser;
+        const currentUser = await User.findOne({ username: req.session.currentUser.username });
         const birthdate = currentUser.birthdate; 
         const [month, day, year] = birthdate.split('/');
 
@@ -35,7 +37,7 @@ router.get('/editprofile', function (req, res) {
 });
 
 router.post('/edit', async (req, res) => {
-    const currentUser = req.session.currentUser;
+    const currentUser = await User.findOne({ username: req.session.currentUser.username });
     const ID = currentUser.username;
 
     const date = req.body.birthdate.toString();
@@ -58,7 +60,7 @@ router.post('/edit', async (req, res) => {
             console.log("Hello");
             const { image } = req.files;
             profilePicture = "images/" + image.name;
-            image.mv(path.resolve(__dirname, 'public/images', image.name), (error) => {
+            image.mv(path.resolve('./public/images', image.name), (error) => {
                 if (error) {
                     console.log("Error moving image:", error);
                 }
@@ -68,19 +70,17 @@ router.post('/edit', async (req, res) => {
         userToUpdate.birthdate = formattedBirthdate;
         userToUpdate.description = desc;
         userToUpdate.profilepicture = profilePicture;
-
-    
         await userToUpdate.save();
-        res.send("<script>alert('Edit was successful.'); window.location.href = 'app/main'; </script>");
+        res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
     } catch (err){
         console.error('Error updating user:', err);
         res.status(500).send('Error updating user');
     }
 })
 
-router.get('/deleteprofile', function (req, res){
+router.get('/deleteprofile', async function (req, res){
     // Retrieve current user from session
-    const currentUser = req.session.currentUser;
+    const currentUser = await User.findOne({ username: req.session.currentUser.username });
     //console.log(currentUser._id)
     //console.log(currentUser);
     // Render user delete template (userdelete.hbs) with current user's information
@@ -92,6 +92,7 @@ router.post('/delete', async function (req, res) {
 
     try {
         await User.deleteOne({ _id: idTobeDeleted });
+        req.session.currentUser = null;
         res.status(200).send('User deleted successfully');
     } catch (error) {
         console.error('Error deleting user:', error);
