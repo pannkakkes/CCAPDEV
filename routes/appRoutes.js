@@ -79,25 +79,31 @@ router.get('/userregister', function (req, res) {
     res.render("userregister", {layout: "layouts/main"});
 });
 
+router.get('/app/userregister', function (req, res) {
+    res.render("userregister", { layout: "layouts/main"});
+});
+
 router.post('/register', async function (req, res) {
     const { image } = req.files;
     const { email, username, password, description, birthdate, role } = req.body; // Retrieve role from request body
 
     try {
-        // Check if email or username already exists in the database
-        const existingEmail = await User.findOne({ email });
-        const existingUsername = await User.findOne({ username });
-
-        if (existingEmail) {
-            return res.status(400).json({ error: "Email already exists." });
-        }
-
-        if (existingUsername) {
-            return res.status(400).json({ error: "Username already exists." });
-        }
 
         // Hash the password
         bcrypt.hash(password, 10, async function (err, hashedPassword) {
+            
+            const existingEmail = await User.findOne({ email });
+            const existingUsername = await User.findOne({ username });
+
+            if (existingEmail) {
+                return res.status(400).send('<script>alert("Email already exists."); window.location.href="/app/userregister";</script>');
+            }
+
+            if (existingUsername) {
+                return res.status(400).send('<script>alert("Username already exists."); window.location.href="/app/userregister";</script>');
+            }
+            
+            
             if (err) {
                 console.error("Error hashing password:", err);
                 return res.status(500).send("Error registering user.");

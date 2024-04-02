@@ -9,7 +9,7 @@ $(document).ready(function() {
     });
 
     //Submitting as a Lab Technician
-    $("#submitT").on("click", function(event) {
+    $("#submitT").on("click", async function(event) {
         var email = $("#email").val();
         var username = $("#username").val();
         var password = $("#password").val();
@@ -49,7 +49,7 @@ $(document).ready(function() {
     });
 
     //Submitting as a Student
-    $("#submitV").on("click", function(event) {
+    $("#submitV").on("click", async function(event) {
         var email = $("#email").val();
         var username = $("#username").val();
         var password = $("#password").val();
