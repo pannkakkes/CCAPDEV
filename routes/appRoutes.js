@@ -80,8 +80,8 @@ router.get('/userregister', function (req, res) {
 });
 
 router.post('/register', async function (req, res) {
-    const { image } = req.files; // Access the uploaded image file
-    const { email, username, password, description, birthdate } = req.body;
+    const { image } = req.files;
+    const { email, username, password, description, birthdate, role } = req.body; // Retrieve role from request body
 
     try {
         // Check if email or username already exists in the database
@@ -110,10 +110,11 @@ router.post('/register', async function (req, res) {
                 await User.create({
                     email,
                     username,
-                    password: hashedPassword, // Save the hashed password
+                    password: hashedPassword,
                     description,
                     birthdate,
-                    profilepicture: '/images/' + image.name
+                    profilepicture: '/images/' + image.name,
+                    role: role // Save the role
                 });
 
                 res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
@@ -127,6 +128,7 @@ router.post('/register', async function (req, res) {
         res.status(500).send("Error checking existing email and username.");
     }
 });
+
 
 router.get('/details', function (req, res) {
     res.render("details", {layout: "layouts/main"});
