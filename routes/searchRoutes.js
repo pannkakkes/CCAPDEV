@@ -17,16 +17,9 @@ router.get('/users', async (req, res) => {
         res.send("<script>alert('Please enter a username.'); window.location.href = '/app/main/search/searchusers'; </script>");
     }
     else {
-    var regex = new RegExp(["^", req.query.username, "$"].join(""), "i");
-    const existUsername = await User.findOne({ username: regex});
-
-    if (existUsername) {
-        const reservationsData = await Reservation.find({ username: existUsername.username });
-        res.render("publicprofile", {existUsername, reservationsData, layout: "layouts/main"});
+    const existUsername = await User.find({username: {$regex: req.query.username, $options: "i"}})
+    res.render("searchusers", {existUsername, layout: "layouts/main"});
     }
-    else {
-        res.send("<script>alert('No users found.'); window.location.href = '/app/main/search/searchusers'; </script>");
-    }}
 })
 
 router.get('/searchslots', function (req, res) {
@@ -34,7 +27,6 @@ router.get('/searchslots', function (req, res) {
 });
 
 router.get('/slots', async (req, res) => {
-    console.log(req.query.selected_date);
     if (req.query.selected_date && req.query.time_slot != "choose-slot" && req.query.lab != "choose-lab") {
 
     var new_date = (new Date(req.query.selected_date)).toLocaleDateString('en-US');

@@ -6,5 +6,17 @@
 					<input type="text" class="form-input" placeholder="Username" id="username" name="username">
 					<button class="search-button" id="submitButton">Search for Users</button>
 				</form>
-		</div>
-        <script src = "/js/CurrentUser.js"></script>
+			</div>
+			{{#if existUsername.length includeZero=true}}
+				<p id="search-results">
+					{{#if existUsername.length}}
+					User Matches:<br>
+					{{#each existUsername}}
+					<a href="/app/main/reserve/viewother?other={{ this.username }}" name="other" value="{{ this.username }}" method="get" class="user-link">{{this.username}}</a><br>
+					{{/each}}
+					{{else}}
+					No users found.
+					{{/if}}
+				</p>
+				{{/if}}
+</div>
