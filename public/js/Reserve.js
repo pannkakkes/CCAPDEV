@@ -5,9 +5,8 @@ const Lab = function(name, backgroundColor, seatColor) {
 }
 
 let labs = [];
-let click = 0;
+let click = 0; //if seat number is clicked or not; 0 if not clicked and it will become 1 when clicked
 let role = 'S';
-//0 if not clicked and it will become 1 when clicked
 
 labs.push(new Lab("Freddy's Frightful Manor", "#a5a4a4", "#b4653a"));
 labs.push(new Lab("Chica's Chilling Chamber", "#d0d0d0", "#e7a11c"));
@@ -67,10 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }); 
     
     document.getElementById("reserve").addEventListener("click", function(e) { 
-        
-        var labTitle = document.querySelector("#infoLabTitle").textContent;
-        var seatNumber = document.querySelector("#infoSeatNum").textContent;
-        var selectedSlot = document.querySelector("#time_slot").textContent;
         var selectedDate = new Date(document.getElementById("reservationDate").value);
         var currentDate = new Date();
         var role = document.getElementById("userHolder").textContent;

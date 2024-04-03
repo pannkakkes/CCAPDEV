@@ -97,6 +97,7 @@
                 <div class="seats" id="seat10">S10</div>
             </div>
             <div id="rightArrow"></div>
+            <form id="reserve_form" action="reserve" method="post">
             <div id="rInfo">
                 <div id="infoLabTitle"></div>
                 <div id="infoSeatNum">Seat: </div>
@@ -119,7 +120,7 @@
                     <option value="slot14">Slot 14 (3:30 - 4:00)</option>
 				</select>
                 <div id="name">Name: {{currentUser.username}}</div>
-                <div id="inputName">
+                <div id="inputName">{{currentUser.role}}
                     <span id="userHolder" style="display: none;">{{currentUser.role}}</span>
                     <div id="studentNameText" style="display: none;">Student Name:</div>
                     <input type="text" id="roleInput" style="display: none;">
@@ -128,6 +129,7 @@
                     <span> Anonymous</span>
                 <a href="/app/main"><button id="reserve">Reserve</button></a>
             </div>
+            </form>
         </div>
     </div>
 </body>
