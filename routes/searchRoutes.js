@@ -91,8 +91,12 @@ router.get('/slots', async (req, res) => {
         case "lab3":
             newlab = "Puppet's Perilous Palace";
     }
-    const searchResults = await Reservation.find({ dateTimeReservation: newdatetime, laboratory: newlab});
-    res.render("searchslots", {searchResults, newlab, newdatetime, layout: "layouts/main"});
+    const searchResults = await Reservation.find({ dateTimeReservation: newdatetime, laboratory: newlab}).sort({seat:1});
+
+    var isAvailableSeat = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; 
+    searchResults.forEach((element) => isAvailableSeat[parseInt(element.seat.slice(-1)) - 1] = 0);
+
+    res.render("searchslots", {isAvailableSeat, newlab, newdatetime, layout: "layouts/main"});
     }
     else {
         res.send("<script>alert('Please fill in all the fields.'); window.location.href = '/app/main/search/searchslots'; </script>");

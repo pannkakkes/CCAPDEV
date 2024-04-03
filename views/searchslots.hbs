@@ -29,16 +29,66 @@
 					</select><br><br>
 					<button class="search-button">Search for Slots</button>
 				</form>
-				{{#if searchResults.length includeZero=true}}
+				{{#if isAvailableSeat}}
 				<p id="search-results">
 					<br><b>{{newlab}} {{newdatetime}}</b><br>
-					{{#if searchResults.length}}
-					{{#each searchResults}}
+					{{!-- {{#each searchResults}}
 					{{this.seat}}<br>
-					{{/each}}
-					{{else}}
-					All seats are available!
-					{{/if}}
+					{{/each}} --}}
+					<div id="selectLab">
+						{{#if isAvailableSeat.[0]}}
+						<div class="seats">S1</div>
+						{{else}}
+						<div class="takenseat">S1</div>
+						{{/if}}
+						{{#if isAvailableSeat.[1]}}
+						<div class="seats">S2</div>
+						{{else}}
+						<div class="takenseat">S2</div>
+						{{/if}}
+						{{#if isAvailableSeat.[2]}}
+						<div class="seats">S3</div>
+						{{else}}
+						<div class="takenseat">S3</div>
+						{{/if}}
+						{{#if isAvailableSeat.[3]}}
+						<div class="seats">S4</div>
+						{{else}}
+						<div class="takenseat">S4</div>
+						{{/if}}
+						{{#if isAvailableSeat.[4]}}
+						<div class="seats">S5</div>
+						{{else}}
+						<div class="takenseat">S5</div>
+						{{/if}}
+						{{#if isAvailableSeat.[5]}}
+						<div class="seats">S6</div>
+						{{else}}
+						<div class="takenseat">S6</div>
+						{{/if}}
+						{{#if isAvailableSeat.[6]}}
+						<div class="seats">S7</div>
+						{{else}}
+						<div class="takenseat">S7</div>
+						{{/if}}
+						{{#if isAvailableSeat.[7]}}
+						<div class="seats">S8</div>
+						{{else}}
+						<div class="takenseat">S8</div>
+						{{/if}}
+						{{#if isAvailableSeat.[8]}}
+						<div class="seats">S9</div>
+						{{else}}
+						<div class="takenseat">S9</div>
+						{{/if}}
+						{{#if isAvailableSeat.[9]}}
+						<div class="seats">S10</div>
+						{{else}}
+						<div class="takenseat">S10</div>
+						{{/if}}
+					</div>
+				
 				</p>
+				<b id="available">Available</b><b id="unavailable">Unvailable</b>
 				{{/if}}
 		</div>

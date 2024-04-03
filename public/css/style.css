@@ -189,3 +189,38 @@ nav div {
     text-align: center;
     margin-top: 20px;
 }
+
+#selectLab{
+    background-color:#fffcef;
+    width: 180px;
+    height: 130px;
+    border-radius: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.seats{
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+    margin: 3px;
+    background-color: #49d182;
+}
+
+.takenseat{
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+    margin: 3px;
+    background-color: #d14949;
+}
+
+#available{
+    color: #49d182;
+    margin-right: 20px;
+}
+
+#unavailable{
+    color: #d14949;
+}
