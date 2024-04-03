@@ -108,7 +108,7 @@ router.get('/updateview', async function(req, res){
     const initialDtr = date + " " + timeSlot;
     const initialLab = lab;
     const initialDt = timeSlot;
-
+    
     reservationsData.sort((a, b) => {
         const seatNumberA = parseInt(a.seat.split(' ')[1]);
         const seatNumberB = parseInt(b.seat.split(' ')[1]);
