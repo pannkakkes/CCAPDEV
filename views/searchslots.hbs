@@ -31,8 +31,8 @@
 				</form>
 				{{#if searchResults.length includeZero=true}}
 				<p id="search-results">
+					<br><b>{{newlab}} {{newdatetime}}</b><br>
 					{{#if searchResults.length}}
-					The following seats are taken:<br>
 					{{#each searchResults}}
 					{{this.seat}}<br>
 					{{/each}}

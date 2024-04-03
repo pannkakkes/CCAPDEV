@@ -92,7 +92,7 @@ router.get('/slots', async (req, res) => {
             newlab = "Puppet's Perilous Palace";
     }
     const searchResults = await Reservation.find({ dateTimeReservation: newdatetime, laboratory: newlab});
-    res.render("searchslots", {searchResults, layout: "layouts/main"});
+    res.render("searchslots", {searchResults, newlab, newdatetime, layout: "layouts/main"});
     }
     else {
         res.send("<script>alert('Please fill in all the fields.'); window.location.href = '/app/main/search/searchslots'; </script>");
