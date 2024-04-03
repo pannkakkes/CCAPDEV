@@ -66,8 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
         updateLabDetails(currentLabIndex);
     }); 
     
-    //errors in time and date
     document.getElementById("reserve").addEventListener("click", function(e) { 
+        
+        var labTitle = document.querySelector("#infoLabTitle").textContent;
+        var seatNumber = document.querySelector("#infoSeatNum").textContent;
+        var selectedSlot = document.querySelector("#time_slot").textContent;
         var selectedDate = new Date(document.getElementById("reservationDate").value);
         var currentDate = new Date();
         var role = document.getElementById("userHolder").textContent;
