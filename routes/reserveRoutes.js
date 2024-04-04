@@ -2,7 +2,7 @@ const router = require("express").Router();
 const mongoose = require('mongoose')
 const express = require('express')
 
-mongoose.connect(process.env.MONGOD_CONNECT_URI)
+mongoose.connect("mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB")
 router.use(express.static('public'))
 
 const User = require("../database/models/User")
