@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/labDB')
+mongoose.connect(process.env.MONGOD_CONNECT_URI)
 
 const express = require('express')
 const app = new express()
@@ -78,9 +78,10 @@ app.get('/', function (req, res) {
     res.redirect("app");
 });
 
+const PORT = process.env.PORT;
 
-var server = app.listen(3000, function () {
-    console.log('Node server is running...');
+var server = app.listen(PORT, function () {
+    console.log('Node server is running on port', PORT);
 });
 
 app.use("/app", apps);

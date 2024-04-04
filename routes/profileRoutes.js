@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const path = require('path')
 
-mongoose.connect('mongodb://localhost/labDB')
+mongoose.connect(process.env.MONGOD_CONNECT_URI)
 router.use(express.static('public'))
 
 const Reservation = require("../database/models/Reservation")
