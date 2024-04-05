@@ -140,6 +140,10 @@ router.get('/details', function (req, res) {
     res.render("details", {layout: "layouts/main"});
 });
 
+router.get('/about', function (req, res) {
+    res.render("about", {layout: "layouts/main"});
+});
+
 router.use("/main", main);
 
 module.exports = router;
