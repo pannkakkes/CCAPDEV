@@ -2,6 +2,7 @@ const router = require("express").Router();
 const main = require("./mainRoutes");
 const bcrypt = require('bcryptjs');
 const path = require('path');
+const moment = require('moment'); // Used for transforming birthdate to mm/dd/yyyy format
 
 const User = require("../database/models/User")
 
@@ -93,13 +94,15 @@ router.get('/app/userregister', function (req, res) {
 
 router.post('/register', async function (req, res) {
     const { image } = req.files;
-    const { email, username, password, description, birthdate, role } = req.body; // Retrieve role from request body
+    const { email, username, password, description, birthdate, role } = req.body;
 
     try {
-
-        // Hash the password
         bcrypt.hash(password, 10, async function (err, hashedPassword) {
-            
+            if (err) {
+                console.error("Error hashing password:", err);
+                return res.status(500).send("Error registering user.");
+            }
+
             const existingEmail = await User.findOne({ email });
             const existingUsername = await User.findOne({ username });
 
@@ -110,15 +113,11 @@ router.post('/register', async function (req, res) {
             if (existingUsername) {
                 return res.status(400).send('<script>alert("Username already exists."); window.location.href="/app/userregister";</script>');
             }
-            
-            
-            if (err) {
-                console.error("Error hashing password:", err);
-                return res.status(500).send("Error registering user.");
-            }
 
             try {
-                // Save the user with hashed password
+                // Transform birthdate to mm/dd/yyyy format
+                const formattedBirthdate = moment(birthdate, 'YYYY-MM-DD').format('MM/DD/YYYY');
+
                 await image.mv(path.resolve(__dirname, '../public/images', image.name));
 
                 await User.create({
@@ -126,9 +125,9 @@ router.post('/register', async function (req, res) {
                     username,
                     password: hashedPassword,
                     description,
-                    birthdate,
+                    birthdate: formattedBirthdate,
                     profilepicture: '/images/' + image.name,
-                    role: role // Save the role
+                    role: role
                 });
 
                 res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
