@@ -115,10 +115,15 @@ router.post('/register', async function (req, res) {
             }
 
             try {
+                // Generate unique filename with date and time
+                const timestamp = moment().format('YYYYMMDDHHmmss');
+                const fileExtension = path.extname(image.name);
+                const uniqueFilename = `${timestamp}_${username}${fileExtension}`;
+
+                await image.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
+
                 // Transform birthdate to mm/dd/yyyy format
                 const formattedBirthdate = moment(birthdate, 'YYYY-MM-DD').format('MM/DD/YYYY');
-
-                await image.mv(path.resolve(__dirname, '../public/images', image.name));
 
                 await User.create({
                     email,
@@ -126,7 +131,7 @@ router.post('/register', async function (req, res) {
                     password: hashedPassword,
                     description,
                     birthdate: formattedBirthdate,
-                    profilepicture: '/images/' + image.name,
+                    profilepicture: '/images/' + uniqueFilename, 
                     role: role
                 });
 
