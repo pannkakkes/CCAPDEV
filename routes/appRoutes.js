@@ -9,7 +9,15 @@ const sessionChecker = (req, res, next) => {
     if (req.session.currentUser) {
         res.redirect('main'); // Redirect to dashboard if currentUser is set in the session
     } else {
+        next(); // Redirect to index if currentUser is not set in the session
+    }
+};
+
+const sessionCheckerForMain = (req, res, next) => {
+    if (!req.session.currentUser) {
         res.redirect('/'); // Redirect to index if currentUser is not set in the session
+    } else {
+        next(); // Continue to the next middleware if session is active
     }
 };
 
@@ -144,6 +152,6 @@ router.get('/about', function (req, res) {
     res.render("about", {layout: "layouts/main"});
 });
 
-router.use("/main", main);
+router.use("/main", sessionCheckerForMain, main);
 
 module.exports = router;
