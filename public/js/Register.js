@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var form = $("#register_form");
-
+    var isValid = true; 
     //Prevents resetting of form when enter is pressed
     form.on("keypress", function(event) {
         if (event.keyCode == 13) {
@@ -21,13 +21,30 @@ $(document).ready(function() {
     // Real-time validation for email field
     $("#email").on("input", function() {
         var email = $(this).val();
-        if (!email.endsWith("@dlsu.edu.ph")) {
-            displayError("email", "Please enter a valid email ending with @dlsu.edu.ph");
+        var emailRegex = /^[a-zA-Z0-9._%+-]+@dlsu\.edu\.ph$/; // Regex for valid email format
+    
+        if (!emailRegex.test(email)) {
+            displayError("email", "Please enter a valid email ending with @dlsu.edu.ph and containing only alphanumeric characters, ., _, %, +, and - before the @ symbol.");
+            isValid = false;
         } else {
             clearError("email");
         }
     });
     
+    // Real-time validation for password and confirm password fields
+    $("#password, #confirmPassword").on("input", function() {
+        var password = $("#password").val();
+        var confirmPassword = $("#confirmPassword").val();
+        if (password !== confirmPassword) {
+            displayError("password", "Passwords do not match.");
+            displayError("confirmPassword", "Passwords do not match.");
+            isValid = false;
+        } else {
+            clearError("password");
+            clearError("confirmPassword");
+            isValid = true;
+        }
+    });
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
         var email = $("#email").val();
@@ -38,7 +55,6 @@ $(document).ready(function() {
         var birthdate = $("#birthdate").val();
         var profilePicture = $("#pfp").prop('files'); // Get the file object
         var status = "T";
-        var isValid = true;
 
         if (password !== confirmPassword) {
             alert("Passwords do not match.");
@@ -47,11 +63,6 @@ $(document).ready(function() {
 
         if (!email || !username || !password || !confirmPassword || !description || !birthdate || !profilePicture) {
             alert("Please fill in all the fields.");
-            isValid = false;
-        }
-
-        if (!email.endsWith("@dlsu.edu.ph")) {
-            alert("Please enter a valid email ending with @dlsu.edu.ph");
             isValid = false;
         }
 
@@ -78,7 +89,6 @@ $(document).ready(function() {
         var birthdate = $("#birthdate").val();
         var profilePicture = $("#pfp").prop('files'); // Get the file object
         var status = "V";
-        var isValid = true;
 
         if (password !== confirmPassword) {
             alert("Passwords do not match.");
