@@ -96,14 +96,6 @@ $(document).ready(function() {
         var profilePicture = $("#pfp").prop('files'); // Get the file object
         var status = "T";
 
-
-        if (!email || !username || !password || !confirmPassword || !description || !birthdate || !profilePicture) {
-            alert("Please fill in all the fields.");
-            isValid = false;
-        }
-
-
-
         if (isValid) {
    
         } else {
@@ -121,26 +113,6 @@ $(document).ready(function() {
         var birthdate = $("#birthdate").val();
         var profilePicture = $("#pfp").prop('files'); // Get the file object
         var status = "V";
-
-        if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            isValid = false;
-        }
-
-        if (!email || !username || !password || !confirmPassword || !description || !birthdate || !profilePicture) {
-            alert("Please fill in all the fields.");
-            isValid = false;
-        }
-
-        if (!email.endsWith("@dlsu.edu.ph")) {
-            alert("Please enter a valid email ending with @dlsu.edu.ph");
-            isValid = false;
-        }
-
-        if (birthYear > 2010) {
-            alert("Birthdate must be in or before the year 2010.");
-            isValid = false;
-        }
 
         if (isValid) {
  
