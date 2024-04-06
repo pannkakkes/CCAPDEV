@@ -74,6 +74,10 @@ $(document).ready(function() {
         }
     });    
 
+    if ($("#pfp").val() === '') {
+        displayError("image", "Please upload a profile picture.");
+    }
+    
     // Function to handle file input change
        $("#pfp").on("change", function() {
         var file = this.files[0];
@@ -83,9 +87,6 @@ $(document).ready(function() {
                 $("#preview_image").attr("src", e.target.result); // Set preview image src
             };
             reader.readAsDataURL(file); // Read the file as Data URL
-        }
-        else{
-            displayError("image", "Please upload a profile picture.");
         }
     });
 
