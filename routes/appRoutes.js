@@ -131,7 +131,7 @@ router.post('/register', async function (req, res) {
                     password: hashedPassword,
                     description,
                     birthdate: formattedBirthdate,
-                    profilepicture: image !== 0 ? '/images/' + uniqueFilename : '', // If image is present and not equal to 0, include it in the user object
+                    profilepicture: image != 0 ? '/images/' + uniqueFilename : '', // If image is present and not equal to 0, include it in the user object
                     role: role
                 });
 
