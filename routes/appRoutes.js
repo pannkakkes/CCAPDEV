@@ -121,7 +121,7 @@ router.post('/register', async function (req, res) {
                     email,
                     username,
                     password: hashedPassword,
-                    description,
+                    description : "No description provided.",
                     birthdate: formattedBirthdate,
                     profilepicture: '/images/default.jpg', 
                     role: role
