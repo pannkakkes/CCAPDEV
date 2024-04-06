@@ -2,7 +2,6 @@ const router = require("express").Router();
 const mongoose = require('mongoose')
 const express = require('express')
 const path = require('path')
-const moment = require('moment'); // Used for profile picture renaming
 
 
 mongoose.connect("mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB")

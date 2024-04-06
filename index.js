@@ -78,9 +78,12 @@ app.get('/', function (req, res) {
     res.redirect("app");
 });
 
-
 var server = app.listen(3000, function () {
     console.log('Node server is running...');
 });
 
 app.use("/app", apps);
+
+app.get('*', function(req, res){
+    res.render('404', { layout: "layouts/main" });
+  });
