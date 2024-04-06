@@ -1,4 +1,4 @@
-<form id="register_form" action="register" method="post" enctype="multipart/form-data">
+<form id="register_form" action="register" method="post">
     <div class="container">
         <h1>Register User</h1>
 
@@ -20,15 +20,10 @@
         <span class="error" id="password_error"></span> <!-- password error -->
         <br><br>
 
-
         <span>*Confirm Password:<br/></span>
         <input type="password" class="form-input" id="confirmPassword" name="confirmPassword"/>
         <br><br>
         <span class="error" id="confirmPassword_error"></span> <!-- confirmPassword error -->
-        <br><br>
-
-        <span>Description:<br/></span>
-        <textarea rows="4" cols="50" class="form-input" id="description" name="description">{{description}}</textarea>
         <br><br>
 
         <span>*Birthdate:<br/></span>
@@ -37,12 +32,6 @@
         <span class="error" id="birthdate_error"></span> <!-- birthdate error -->
         <br><br>
 
-        <span>*Profile Picture:<br/></span>
-        <div class="first">
-            <p><input type="file" name="image" id="pfp" class="form-input"/></p>
-            <p><img id="preview_image" width="200"/></p> <!-- Preview image -->
-        </div>
-        <br><br>
         <!-- Hidden input fields for role -->
         <input type="hidden" id="role" name="role" value=""/>
         <input type="submit" class="submit-button" id="submitT" value="Register as Lab Technician" onclick="setRole('T')"/>

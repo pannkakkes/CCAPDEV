@@ -74,20 +74,6 @@ $(document).ready(function() {
         }
     });    
     
-    // Function to handle file input change
-       $("#pfp").on("change", function() {
-        isValid = false;
-        var file = this.files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $("#preview_image").attr("src", e.target.result); // Set preview image src
-            };
-            reader.readAsDataURL(file); // Read the file as Data URL
-            isValid = true;
-        }
-    });
-
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
         if (isValid) {
