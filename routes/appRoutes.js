@@ -93,6 +93,7 @@ router.get('/app/userregister', function (req, res) {
 });
 
 router.post('/register', async function (req, res) {
+    let uniqueFilename = 'default.jpg';
     if (req.files){
         const { image } = req.files;
     }
@@ -123,11 +124,8 @@ router.post('/register', async function (req, res) {
                 if (req.files){
                     const timestamp = moment().format('YYYYMMDDHHmmss');
                     const fileExtension = path.extname(image.name);
-                    const uniqueFilename = `${timestamp}_${username}${fileExtension}`;
+                    uniqueFilename = `${timestamp}_${username}${fileExtension}`;
                     await image.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
-                }
-                else{
-                    const uniqueFilename = 'default.jpg';
                 }
 
                 // Transform birthdate to mm/dd/yyyy format
