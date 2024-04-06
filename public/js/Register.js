@@ -88,6 +88,9 @@ $(document).ready(function() {
             };
             reader.readAsDataURL(file); // Read the file as Data URL
         }
+        else {
+            isValid = false;
+        }
     });
 
     //Submitting as a Lab Technician
