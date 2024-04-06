@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const path = require('path')
 
+
 mongoose.connect("mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB")
 router.use(express.static('public'))
 
@@ -57,10 +58,13 @@ router.post('/edit', async (req, res) => {
         let profilePicture = userToUpdate.profilepicture;
 
         if (req.files && req.files.image) {
-            console.log("Hello");
             const { image } = req.files;
-            profilePicture = "images/" + image.name;
-            image.mv(path.resolve('./public/images', image.name), (error) => {
+            const timestamp = Date.now(); // Get current timestamp
+            const fileExtension = path.extname(image.name);
+            const uniqueFilename = `${timestamp}_${image.name}`; // Append timestamp to image name
+            profilePicture = "images/" + uniqueFilename;
+
+            image.mv(path.resolve('./public/images', uniqueFilename), (error) => {
                 if (error) {
                     console.log("Error moving image:", error);
                 }

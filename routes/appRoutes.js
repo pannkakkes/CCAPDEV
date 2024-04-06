@@ -2,6 +2,7 @@ const router = require("express").Router();
 const main = require("./mainRoutes");
 const bcrypt = require('bcryptjs');
 const path = require('path');
+const moment = require('moment'); // Used for transforming birthdate to mm/dd/yyyy format
 
 const User = require("../database/models/User")
 
@@ -9,7 +10,15 @@ const sessionChecker = (req, res, next) => {
     if (req.session.currentUser) {
         res.redirect('main'); // Redirect to dashboard if currentUser is set in the session
     } else {
-        next(); // Continue to the next middleware if session is not active
+        next(); // Redirect to index if currentUser is not set in the session
+    }
+};
+
+const sessionCheckerForMain = (req, res, next) => {
+    if (!req.session.currentUser) {
+        res.redirect('/'); // Redirect to index if currentUser is not set in the session
+    } else {
+        next(); // Continue to the next middleware if session is active
     }
 };
 
@@ -84,14 +93,15 @@ router.get('/app/userregister', function (req, res) {
 });
 
 router.post('/register', async function (req, res) {
-    const { image } = req.files;
-    const { email, username, password, description, birthdate, role } = req.body; // Retrieve role from request body
+    const { email, username, password, description, birthdate, role } = req.body;
 
     try {
-
-        // Hash the password
         bcrypt.hash(password, 10, async function (err, hashedPassword) {
-            
+            if (err) {
+                console.error("Error hashing password:", err);
+                return res.status(500).send("Error registering user.");
+            }
+
             const existingEmail = await User.findOne({ email });
             const existingUsername = await User.findOne({ username });
 
@@ -102,25 +112,19 @@ router.post('/register', async function (req, res) {
             if (existingUsername) {
                 return res.status(400).send('<script>alert("Username already exists."); window.location.href="/app/userregister";</script>');
             }
-            
-            
-            if (err) {
-                console.error("Error hashing password:", err);
-                return res.status(500).send("Error registering user.");
-            }
 
             try {
-                // Save the user with hashed password
-                await image.mv(path.resolve(__dirname, '../public/images', image.name));
+                // Transform birthdate to mm/dd/yyyy format
+                const formattedBirthdate = moment(birthdate, 'YYYY-MM-DD').format('MM/DD/YYYY');
 
                 await User.create({
                     email,
                     username,
                     password: hashedPassword,
-                    description,
-                    birthdate,
-                    profilepicture: '/images/' + image.name,
-                    role: role // Save the role
+                    description : "No description provided.",
+                    birthdate: formattedBirthdate,
+                    profilepicture: '/images/default.jpg', 
+                    role: role
                 });
 
                 res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
@@ -135,11 +139,14 @@ router.post('/register', async function (req, res) {
     }
 });
 
-
 router.get('/details', function (req, res) {
     res.render("details", {layout: "layouts/main"});
 });
 
-router.use("/main", main);
+router.get('/about', function (req, res) {
+    res.render("about", {layout: "layouts/main"});
+});
+
+router.use("/main", sessionCheckerForMain, main);
 
 module.exports = router;
