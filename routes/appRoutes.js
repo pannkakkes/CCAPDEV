@@ -93,7 +93,7 @@ router.get('/app/userregister', function (req, res) {
 });
 
 router.post('/register', async function (req, res) {
-    const { image } = req.files;
+    const {image} = req.files ? req.files.image : 0;
     const { email, username, password, description, birthdate, role } = req.body;
 
     try {
@@ -120,7 +120,7 @@ router.post('/register', async function (req, res) {
                 const fileExtension = path.extname(image.name);
                 const uniqueFilename = `${timestamp}_${username}${fileExtension}`;
 
-                if (image) {
+                if (image != 0) {
                     await image.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
                 }
                 // Transform birthdate to mm/dd/yyyy format
@@ -132,7 +132,7 @@ router.post('/register', async function (req, res) {
                     password: hashedPassword,
                     description,
                     birthdate: formattedBirthdate,
-                    profilepicture: image ? '/images/' + uniqueFilename : '', // If image is present, include it in the user object
+                    profilepicture: image !== 0 ? '/images/' + uniqueFilename : '', // If image is present and not equal to 0, include it in the user object
                     role: role
                 });
 

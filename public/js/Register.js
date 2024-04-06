@@ -85,17 +85,9 @@ $(document).ready(function() {
             reader.readAsDataURL(file); // Read the file as Data URL
         }
     });
+    
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
-        var email = $("#email").val();
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var confirmPassword = $("#confirmPassword").val();
-        var description = $("#description").val();
-        var birthdate = $("#birthdate").val();
-        var profilePicture = $("#pfp").prop('files'); // Get the file object
-        var status = "T";
-
         if (isValid) {
    
         } else {
@@ -105,15 +97,6 @@ $(document).ready(function() {
 
     //Submitting as a Student
     $("#submitV").on("click", async function(event) {
-        var email = $("#email").val();
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var confirmPassword = $("#confirmPassword").val();
-        var description = $("#description").val();
-        var birthdate = $("#birthdate").val();
-        var profilePicture = $("#pfp").prop('files'); // Get the file object
-        var status = "V";
-
         if (isValid) {
  
         } else {
