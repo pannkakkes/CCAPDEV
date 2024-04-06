@@ -122,6 +122,9 @@ router.post('/register', async function (req, res) {
                     const uniqueFilename = `${timestamp}_${username}${fileExtension}`;
                     await image.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
                 }
+                else{
+                    const uniqueFilename = 'default.jpg';
+                }
                 // Transform birthdate to mm/dd/yyyy format
                 const formattedBirthdate = moment(birthdate, 'YYYY-MM-DD').format('MM/DD/YYYY');
 
@@ -131,7 +134,7 @@ router.post('/register', async function (req, res) {
                     password: hashedPassword,
                     description,
                     birthdate: formattedBirthdate,
-                    profilepicture: image != 0 ? '/images/' + uniqueFilename : '', // If image is present and not equal to 0, include it in the user object
+                    profilepicture: '/images/' + uniqueFilename, 
                     role: role
                 });
 
