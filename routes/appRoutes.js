@@ -93,7 +93,7 @@ router.get('/app/userregister', function (req, res) {
 });
 
 router.post('/register', async function (req, res) {
-    const imageFile = req.files ? req.files.image : undefined;
+    const {image} = req.files ? req.files.image : 0;
     const { email, username, password, description, birthdate, role } = req.body;
 
     try {
@@ -115,20 +115,14 @@ router.post('/register', async function (req, res) {
             }
 
             try {
-                if (imageFile) {
+                if (image != 0) {
                     // Generate unique filename with date and time
                     const timestamp = moment().format('YYYYMMDDHHmmss');
-                    const fileExtension = path.extname(imageFile.name);
+                    const fileExtension = path.extname(image.name);
                     const uniqueFilename = `${timestamp}_${username}${fileExtension}`;
 
-                    await imageFile.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
-
-                    const profilepicture = '/images/' + uniqueFilename;
-                } else {
-                    // If no profile picture uploaded, set profilepicture to an empty string
-                    const profilepicture = '';
+                    await image.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
                 }
-
                 // Transform birthdate to mm/dd/yyyy format
                 const formattedBirthdate = moment(birthdate, 'YYYY-MM-DD').format('MM/DD/YYYY');
 
@@ -138,8 +132,8 @@ router.post('/register', async function (req, res) {
                     password: hashedPassword,
                     description,
                     birthdate: formattedBirthdate,
-                    profilepicture,
-                    role
+                    profilepicture: image !== 0 ? '/images/' + uniqueFilename : '', // If image is present and not equal to 0, include it in the user object
+                    role: role
                 });
 
                 res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
@@ -153,7 +147,6 @@ router.post('/register', async function (req, res) {
         res.status(500).send("Error checking existing email and username.");
     }
 });
-
 
 
 router.get('/details', function (req, res) {
