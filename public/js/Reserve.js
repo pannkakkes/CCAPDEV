@@ -16,30 +16,32 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentLabIndex = 0;
     updateLabDetails(currentLabIndex);
 
-    var role = document.getElementById("userHolder").textContent; // Get the role value
-    var roleInput = document.getElementById("roleInput"); // Get the input box element
-    var studentText = document.getElementById("studentNameText");
+    // var role = document.getElementById("userHolder").textContent; // Get the role value
+    // var roleInput = document.getElementById("roleInput"); // Get the input box element
+    // var studentText = document.getElementById("studentNameText");
 
-    if (role === 'T') {
-        roleInput.style.display = 'inline-block';
-        studentText.style.display = 'inline-block';
-        role = "T";
-    } else {
-        roleInput.style.display = 'none';
-        studentText.style.display = 'none';
-        role = "S";
-    }
+    // // if (role === 'T') {
+    // //     roleInput.style.display = 'inline-block';
+    // //     studentText.style.display = 'inline-block';
+    // //     role = "T";
+    // // } else {
+    // //     roleInput.style.display = 'none';
+    // //     studentText.style.display = 'none';
+    // //     role = "S";
+    // // }
     
     // Right arrow event listener
     document.querySelector("#rightArrow").addEventListener("click", function(e) {
         currentLabIndex = (currentLabIndex + 1) % labs.length;
         updateLabDetails(currentLabIndex);
+        document.getElementById("infoSeatNum").textContent = "Seat:";
     }); 
 
     // Left arrow event listener
     document.querySelector("#leftArrow").addEventListener("click", function(e) {
         currentLabIndex = (currentLabIndex - 1 + labs.length) % labs.length;
         updateLabDetails(currentLabIndex);
+        document.getElementById("infoSeatNum").textContent = "Seat:";
     });
 
     // Function to update lab details based on the current index
@@ -96,52 +98,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#seat1").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 1"
+        seatNum.textContent = "Seat 1"
         click = 1;
     });
     document.querySelector("#seat2").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 2"
+        seatNum.textContent = "Seat 2"
         click = 1;
     });
     document.querySelector("#seat3").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 3"
+        seatNum.textContent = "Seat 3"
         click = 1;
     });
     document.querySelector("#seat4").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 4"
+        seatNum.textContent = "Seat 4"
         click = 1;
     });
     document.querySelector("#seat5").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 5"
+        seatNum.textContent = "Seat 5"
         click = 1;
     });
     document.querySelector("#seat6").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 6"
+        seatNum.textContent = "Seat 6"
         click = 1;
     });
     document.querySelector("#seat7").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 7"
+        seatNum.textContent = "Seat 7"
         click = 1;
     });
     document.querySelector("#seat8").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 8"
+        seatNum.textContent = "Seat 8"
         click = 1;
     });
     document.querySelector("#seat9").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 9"
+        seatNum.textContent = "Seat 9"
         click = 1;
     });
     document.querySelector("#seat10").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 10"
+        seatNum.textContent = "Seat 10"
         click = 1;
     });
 

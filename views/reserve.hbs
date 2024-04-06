@@ -71,10 +71,7 @@
         }
 
     </style>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    <script src="/js/User.js"></script>
-    <script src="/js/CurrentUser.js"></script>
-    <script src="/js/Reserve.js"></script>
+    
 </head>
 <body>
     {{>nav}}
@@ -119,17 +116,89 @@
                     <option value="slot13">Slot 13 (3:00 - 3:30)</option>
                     <option value="slot14">Slot 14 (3:30 - 4:00)</option>
 				</select>
-                <div id="name">Name: {{currentUser.username}}</div>
-                <div id="inputName">{{currentUser.role}}
-                    <span id="userHolder" style="display: none;">{{currentUser.role}}</span>
-                    <div id="studentNameText" style="display: none;">Student Name:</div>
-                    <input type="text" id="roleInput" style="display: none;">
-                </div>
-                <input type="checkbox" class="check-box" id="Anonymous"> 
-                    <span> Anonymous</span>
-                <a href="/app/main"><button id="reserve">Reserve</button></a>
+                {{#if (compareStrings currentUser.role 'T')}}   
+                    <input type="text" id="reservename" class="form-input" name="reservename">
+                {{else}}
+                    <div id="name" class="form-input" name="reservename">{{currentUser.username}}</div>
+                {{/if}}
+                <button id="reserve">Reserve</button>
+                {{!-- <a href="/app/main"></a> --}}
             </div>
             </form>
         </div>
     </div>
+    <script src="/js/Reserve.js"></script>
+    {{!-- <script>
+        // JavaScript code for switching lab titles
+        document.addEventListener("DOMContentLoaded", function() {
+            const labTitles = ["Freddy's Frightful Manor", "Chica's Chilling Chamber", "Puppet's Perilous Palace"];
+            const labColors = {
+                "Freddy's Frightful Manor": "#a5a4a4",
+                "Chica's Chilling Chamber": "#d0d0d0",
+                "Puppet's Perilous Palace": "#aba8a8"
+            };
+            const seatColors = {
+                "Freddy's Frightful Manor": "#b4653a",
+                "Chica's Chilling Chamber": "#e7a11c",
+                "Puppet's Perilous Palace": "#ba2828"
+            };
+            let currentIndex = 0;
+            const labTitleElement = document.getElementById("labTitle").querySelector("h1");
+            const selectLabElement = document.getElementById("selectLab");
+            const infoLabTitleElement = document.getElementById("infoLabTitle");
+
+            function updateLabTitle() {
+                const currentLab = labTitles[currentIndex];
+                labTitleElement.textContent = currentLab;
+                selectLabElement.style.backgroundColor = labColors[currentLab];
+                const seats = selectLabElement.querySelectorAll(".seats");
+                seats.forEach(seat => {
+                    seat.style.backgroundColor = seatColors[currentLab];
+                });
+                updateInfoLabTitle(); // Update infoLabTitle when labTitle changes
+            }
+
+            function switchLabTitle(direction) {
+                // Reset infoSeatNum text when switching lab title
+                document.getElementById("infoSeatNum").textContent = "Seat:";
+                
+                if (direction === "right") {
+                    currentIndex = (currentIndex + 1) % labTitles.length;
+                } else if (direction === "left") {
+                    currentIndex = (currentIndex - 1 + labTitles.length) % labTitles.length;
+                }
+                updateLabTitle();
+            }
+
+            function handleSeatClick(seatNumber) {
+                document.getElementById("infoSeatNum").textContent = "Seat: " + seatNumber;
+            }
+
+            document.getElementById("rightArrow").addEventListener("click", function() {
+                switchLabTitle("right");
+            });
+
+            document.getElementById("leftArrow").addEventListener("click", function() {
+                switchLabTitle("left");
+            });
+
+            // Assuming seats have IDs seat1, seat2, etc.
+            const seatElements = document.querySelectorAll(".seats");
+            seatElements.forEach(function(seat) {
+                seat.addEventListener("click", function() {
+                    handleSeatClick(seat.textContent);
+                });
+            });
+
+            // Function to update infoLabTitle based on labTitle
+            function updateInfoLabTitle() {
+                const currentLab = labTitles[currentIndex];
+                infoLabTitleElement.textContent = currentLab;
+            }
+
+            // Initial update
+            updateLabTitle();
+        });
+    </script> --}}
 </body>
+</html>
