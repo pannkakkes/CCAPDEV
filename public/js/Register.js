@@ -31,6 +31,20 @@ $(document).ready(function() {
         }
     });
     
+    // Real-time validation for username field
+    $("#username").on("input", function() {
+        var username = $(this).val();
+        var usernameRegex = /^[a-zA-Z0-9._-]+$/; // Regex for valid username format
+    
+        if (!usernameRegex.test(username)) {
+            displayError("username", "Please enter a valid username containing only alphanumeric characters, ., _, and -.");
+            isValid = false;
+        } else {
+            clearError("username");
+        }
+    });
+
+    
     // Real-time validation for password and confirm password fields
     $("#password, #confirmPassword").on("input", function() {
         var password = $("#password").val();
@@ -45,6 +59,21 @@ $(document).ready(function() {
             isValid = true;
         }
     });
+
+    // Real-time validation for birthdate field
+    $("#birthdate").on("input", function() {
+        var birthdate = $(this).val();
+        var birthYear = new Date(birthdate).getFullYear();
+    
+        if (birthYear > 2010) {
+            displayError("birthdate", "Birthdate must be in or before the year 2010.");
+            isValid = false;
+        } else {
+            clearError("birthdate");
+            isValid = true;
+        }
+    });    
+
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
         var email = $("#email").val();
@@ -56,21 +85,13 @@ $(document).ready(function() {
         var profilePicture = $("#pfp").prop('files'); // Get the file object
         var status = "T";
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            isValid = false;
-        }
 
         if (!email || !username || !password || !confirmPassword || !description || !birthdate || !profilePicture) {
             alert("Please fill in all the fields.");
             isValid = false;
         }
 
-        var birthYear = new Date(birthdate).getFullYear();
-        if (birthYear > 2010) {
-            alert("Birthdate must be in or before the year 2010.");
-            isValid = false;
-        }
+
 
         if (isValid) {
    
