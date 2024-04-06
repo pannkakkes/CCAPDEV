@@ -76,6 +76,7 @@ $(document).ready(function() {
     
     // Function to handle file input change
        $("#pfp").on("change", function() {
+        isValid = false;
         var file = this.files[0];
         if (file) {
             var reader = new FileReader();
@@ -83,9 +84,7 @@ $(document).ready(function() {
                 $("#preview_image").attr("src", e.target.result); // Set preview image src
             };
             reader.readAsDataURL(file); // Read the file as Data URL
-        }
-        else {
-            isValid = false;
+            isValid = true;
         }
     });
 
