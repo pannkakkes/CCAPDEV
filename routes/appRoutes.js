@@ -120,22 +120,17 @@ router.post('/register', async function (req, res) {
                 const fileExtension = path.extname(image.name);
                 const uniqueFilename = `${timestamp}_${username}${fileExtension}`;
 
-                // Check if description is present, if not, set it to an empty string
-                const userDescription = description ? description : '';
-                
-                // Transform birthdate to mm/dd/yyyy format
-                const formattedBirthdate = moment(birthdate, 'YYYY-MM-DD').format('MM/DD/YYYY');
-
-                // Check if profile picture is present
                 if (image) {
                     await image.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
                 }
+                // Transform birthdate to mm/dd/yyyy format
+                const formattedBirthdate = moment(birthdate, 'YYYY-MM-DD').format('MM/DD/YYYY');
 
                 await User.create({
                     email,
                     username,
                     password: hashedPassword,
-                    description: userDescription,
+                    description,
                     birthdate: formattedBirthdate,
                     profilepicture: image ? '/images/' + uniqueFilename : '', // If image is present, include it in the user object
                     role: role
@@ -152,7 +147,6 @@ router.post('/register', async function (req, res) {
         res.status(500).send("Error checking existing email and username.");
     }
 });
-
 
 
 router.get('/details', function (req, res) {
