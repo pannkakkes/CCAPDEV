@@ -84,8 +84,11 @@ $(document).ready(function() {
             };
             reader.readAsDataURL(file); // Read the file as Data URL
         }
+        else{
+            displayError("image", "Please upload a profile picture.");
+        }
     });
-    
+
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
         if (isValid) {
