@@ -73,10 +73,6 @@ $(document).ready(function() {
             isValid = true;
         }
     });    
-
-    if ($("#pfp").val() === '') {
-        displayError("image", "Please upload a profile picture.");
-    }
     
     // Function to handle file input change
        $("#pfp").on("change", function() {
