@@ -118,7 +118,7 @@ router.post('/register', async function (req, res) {
                 // Generate unique filename with date and time
                 const timestamp = moment().format('YYYYMMDDHHmmss');
                 const fileExtension = path.extname(image.name);
-                const uniqueFilename = ${timestamp}_${username}${fileExtension};
+                const uniqueFilename = `${timestamp}_${username}${fileExtension}`;
 
                 await image.mv(path.resolve(__dirname, '../public/images', uniqueFilename));
 
@@ -146,7 +146,6 @@ router.post('/register', async function (req, res) {
         res.status(500).send("Error checking existing email and username.");
     }
 });
-
 
 router.get('/details', function (req, res) {
     res.render("details", {layout: "layouts/main"});
