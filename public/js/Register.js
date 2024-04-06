@@ -74,6 +74,17 @@ $(document).ready(function() {
         }
     });    
 
+    // Function to handle file input change
+       $("#pfp").on("change", function() {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#preview_image").attr("src", e.target.result); // Set preview image src
+            };
+            reader.readAsDataURL(file); // Read the file as Data URL
+        }
+    });
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
         var email = $("#email").val();
