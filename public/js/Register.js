@@ -8,6 +8,26 @@ $(document).ready(function() {
         }
     });
 
+    // Function to display errors
+    function displayError(fieldId, errorMessage) {
+        $("#" + fieldId + "_error").text(errorMessage);
+    }
+
+    // Function to clear errors
+    function clearError(fieldId) {
+        $("#" + fieldId + "_error").text("");
+    }
+
+    // Real-time validation for email field
+    $("#email").on("input", function() {
+        var email = $(this).val();
+        if (!email.endsWith("@dlsu.edu.ph")) {
+            displayError("email", "Please enter a valid email ending with @dlsu.edu.ph");
+        } else {
+            clearError("email");
+        }
+    });
+    
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
         var email = $("#email").val();
