@@ -54,6 +54,41 @@ router.get('/saveedit', function (req, res) {
     }
 });
 
+router.post('/save',async function(req, res){
+    try {
+        const currentUser = req.session.currentUser;
+        const reservationList = await Reservation.find({username: currentUser.username});
+        const seatNum = req.body.infoSeatNum;
+
+        const dateEdit = req.body.dateCheck;
+        const slotEdit = req.body.time_slot;
+
+
+        const dateTimeReservation = formatDate(dateEdit) + " " + slotEdit;
+
+        let currentEdits;
+
+        if (currentUser.role == "V"){
+            currentEdits = {
+                seat: seatNum,
+                dateTimeReservation: dateTimeReservation
+            }
+        }else{
+            currentEdits = {
+                seat: seatNum,
+                dateTimeReservation: dateTimeReservation,
+                username: req.body.studentNameText
+            }
+        }
+
+        console.log(currentEdits);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
+    }
+});
+
 //Reservation
 router.get('/see', async function (req, res){
     try {
