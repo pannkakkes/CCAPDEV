@@ -16,6 +16,7 @@
 
         <div>
             <h2>Reserved Seats</h2>
+            {{#if reservationsData.length}}
             <table>
         <thead>
           <tr>
@@ -26,7 +27,6 @@
           </tr>
         </thead>
         <tbody id="reservationTableBody">
-          {{#if reservationsData.length}}
             {{#each reservationsData}}
               <tr>
                 <td>{{ this.seat }}</td> <td>{{ this.laboratory }}</td>
