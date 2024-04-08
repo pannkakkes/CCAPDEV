@@ -57,16 +57,12 @@ router.get('/saveedit', function (req, res) {
 //reserve
 router.post('/reserve', async function (req, res) {
     const { laboratory, seat, slot, date, isAnonymous } = req.body;
-    const currentUser = req.session.currentUser;
     var role = currentUser.role;
     var dateTimeReservation = `${date} ${slot}`; // Combine date and slot
-    var currentDate = new Date(); // Get current date and time
+    var currentDate = moment().format('MM/DD/YYYY h:mm A');
 
-    // Format currentDate to MM/DD/YYYY h:mm A
-    var formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-    var formattedTime = (currentDate.getHours() % 12 || 12) + ':' + currentDate.getMinutes() + ' ' + (currentDate.getHours() >= 12 ? 'PM' : 'AM');
-    currentDate = formattedDate + ' ' + formattedTime;
-
+    // Format dateTimeReservation to MM/DD/YYYY XX:XX XM
+    dateTimeReservation = moment(dateTimeReservation, 'YYYY-MM-DD HH:mm').format('MM/DD/YYYY h:mm A');
     var inputname;
 
     if (role == 'T') {
@@ -104,7 +100,6 @@ router.post('/reserve', async function (req, res) {
         res.status(500).send("Error creating reservation.");
     }
 });
-
 
 //Reservation
 router.get('/see', async function (req, res){
