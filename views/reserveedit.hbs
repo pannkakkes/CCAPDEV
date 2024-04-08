@@ -64,90 +64,24 @@
         <h1>Edit Reservation</h1>
         <div class="subcontainer">
             <h2>Select Reservation to Edit</h2>
-            <div id="buttonsContainer"></div> <!-- Container for dynamic buttons -->
+            <div id="buttonsContainer">
+                {{#each reservationsData}}
+                <button class="schedule-list">
+                    <div class="content">
+                        {{#if this.anonymous}}
+                            <p class="float-left">Anonymous</p>
+                        {{else}}
+                            <p class="float-left">{{this.username}}</p>
+                        {{/if}}
+                        <p class="float-left">{{this.laboratory}}</p>
+                        <p class="float-left">{{this.seat}}</p>
+                        <p class="float-right1">Reserve Time: {{this.dateTimeReservation}}</p>
+                        <p class="float-right2">Request Time: {{this.dateTimeRequest}}</p>
+                    </div>
+                </button>
+                {{/each}}
+            </div> <!-- Container for dynamic buttons -->
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var name = document.getElementById("userName").textContent;
-            var role = document.getElementById("userRole").textContent;
-            var userReservations;
-
-            console.log(name);
-            console.log(role);
-
-            if (role === "T") {
-                userReservations = getAllReservations();
-            } else {
-                userReservations = getReservations(name);
-            }
-
-            generateButtons(userReservations);
-        });
-
-        function generateButtons(reservations) {
-            var buttonsContainer = document.getElementById("buttonsContainer");
-
-            // Clear existing buttons
-            buttonsContainer.innerHTML = '';
-
-            // Generate buttons based on the number of reservations
-            reservations.forEach(function (reservation) {
-                var button = document.createElement('button');
-                button.classList.add('schedule-list');
-                
-                // Create content for the button
-                var content = document.createElement('div');
-                content.classList.add('content');
-                
-                var labTitle = document.createElement('p');
-                labTitle.textContent = reservation.labTitle;
-                labTitle.classList.add('float-left');
-                
-                var seatNumber = document.createElement('p');
-                seatNumber.textContent = reservation.seatNum;
-                seatNumber.classList.add('float-left');
-                
-                if (reservation.anonymous) {
-                    var anonimity = document.createElement('p');
-                    anonimity.textContent = 'Anonymous';
-                    anonimity.classList.add('float-left');
-                    content.appendChild(anonimity); // Append to content
-                } else {
-                    var nameElement = document.createElement('p'); // Renamed variable to avoid conflict
-                    nameElement.textContent = reservation.student;
-                    nameElement.classList.add('float-left');
-                    content.appendChild(nameElement); // Append to content
-                }
-
-                
-                var reserveTime = document.createElement('p');
-                reserveTime.textContent = 'Reserve Time: ' + reservation.reserveTime;
-                reserveTime.classList.add('float-right1');
-                
-                var requestTime = document.createElement('p');
-                requestTime.textContent = 'Request Time: ' + reservation.requestTime;
-                requestTime.classList.add('float-right2');
-                
-                content.appendChild(labTitle);
-                content.appendChild(seatNumber);
-                content.appendChild(reserveTime);
-                content.appendChild(requestTime);
-                
-                button.appendChild(content);
-
-                button.onclick = function () {
-                    changeSched(reservation.id); // Pass reservation id to changeSched function
-                };
-                
-                buttonsContainer.appendChild(button);
-            });
-        }
-
-        function changeSched(reservationId) {
-            // Add your logic to handle the reservation change
-            window.location.href = 'saveedit?id=' + reservationId; // Example: Pass reservation id in URL
-        }
-    </script>
 </body>
 </html>

@@ -37,7 +37,8 @@ router.get('/edit', async function (req, res) {
     // }
     try {
         const currentUser = req.session.currentUser;
-        res.render('reserveedit', { currentUser });
+        const reservationsData = await Reservation.find({ username: currentUser.username });
+        res.render('reserveedit', { currentUser, reservationsData });
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
