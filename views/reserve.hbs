@@ -1,110 +1,204 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Reservation</title>
+    <title>Lab Reservation System - Reserve</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/favicon/freddyfazbear.png">
     <style>
         .subcontainer-red {
             background-color: #e54c44;
-            margin-left: 20px;
-            padding: 20px;
-            text-align: left;
+            text-align: center;
             border-radius: 10px;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center; /* Center vertically */
+        }
+
+        #selectLab{
+            background-color:#fffcef;
+            width: 180px;
+            height: 200px;
+            border-radius: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        #leftArrow {
+            width: 0;
+            height: 0;
+            align-self: center;
+            margin-right: 5px;
+            margin-left: -10px;
+            border-top: 15px solid transparent; 
+            border-bottom: 15px solid transparent; 
+            border-right: 30px solid #f1cf54;
+            display: inline-block;
+        }
+
+        #rightArrow {
+            width: 0;
+            height: 0;
+            align-self: center;
+            margin-left: 5px;
+            border-top: 15px solid transparent; 
+            border-bottom: 15px solid transparent; 
+            border-left: 30px solid #f1cf54;
+            display: inline-block;
+        }
+
+        #rInfo {
+            margin-left: 20px;
+            text-align: left; /* Align text to the left */
+        }
+
+        .seats{
+            width: 34px;
+            height: 34px;
+            display: inline-block;
+            margin: 3px;
+        }
+        #labTitle{
+            font-size: 10px;
+            margin-top: -15px;
         }
         #reserve{
             background-color: #f1cf54;
             width: 100px;
             height: 30px;
         }
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .form-group label {
-            margin-right: 10px;
-        }
-        .form-group select, .form-group input[type="date"] {
-            margin-left: 10px;
-        }
-        #reserve-button {
-            background-color: #f1cf54;
-        }
+
     </style>
+    
 </head>
 <body>
     {{>nav}}
     <div class="container">
-        <h1>Edit Reservation</h1>
-        {{!-- <form action="reserve" id="reserve_form" method="post"> --}}
-            <div class="subcontainer-red">
-                {{#if (compareStrings currentUser.role 'T')}}
-                    <div class="form-group">
-                        <label for="reservename">Name:</label>
-                        <input type="text" id="reservename" class="form-input" name="reservename" value="">
-                    </div>
-                {{else}}
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <div id="name" Name="reservename"><p>{{currentUser.username}}</p></div>
-                    </div>
-                {{/if}}
-                <div class="form-group">
-                    <label for="laboratory">Select Laboratory:</label>
-                    <select name="laboratory" id="laboratory" required>
-                        <option value="choose-lab">Choose Lab</option>
-                        <option value="lab1">Freddy's Frightful Manor</option>
-                        <option value="lab2">Chica's Chilling Chamber</option>
-                        <option value="lab3">Puppet's Perilous Palace</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="seat">Select Seat:</label>
-                    <select name="seat" id="seat" required>
-                        <option value="choose-seat">Choose Seat</option>
-                        <option value="seat1">Seat 1</option>
-                        <option value="seat2">Seat 2</option>
-                        <option value="seat3">Seat 3</option>
-                        <option value="seat4">Seat 4</option>
-                        <option value="seat5">Seat 5</option>
-                        <option value="seat6">Seat 6</option>
-                        <option value="seat7">Seat 7</option>
-                        <option value="seat8">Seat 8</option>
-                        <option value="seat9">Seat 9</option>
-                        <option value="seat10">Seat 10</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="slot">Select Slot Number:</label>
-                    <select name="slot" id="slot" required>
-                        <option value="choose-seat">Choose slot</option>
-                        <option value="slot1">Slot 1 (9:00 - 9:30)</option>
-                        <option value="slot2">Slot 2 (9:30 - 10:00)</option>
-                        <option value="slot3">Slot 3 (10:00 - 10:30)</option>
-                        <option value="slot4">Slot 4 (10:30 - 11:00)</option>
-                        <option value="slot5">Slot 5 (11:00 - 11:30)</option>
-                        <option value="slot6">Slot 6 (11:30 - 12:00)</option>
-                        <option value="slot7">Slot 7 (12:00 - 12:30)</option>
-                        <option value="slot8">Slot 8 (12:30 - 1:00)</option>
-                        <option value="slot9">Slot 9 (1:00 - 1:30)</option>
-                        <option value="slot10">Slot 10 (1:30 - 2:00)</option>
-                        <option value="slot11">Slot 11 (2:00 - 2:30)</option>
-                        <option value="slot12">Slot 12 (2:30 - 3:00)</option>
-                        <option value="slot13">Slot 13 (3:00 - 3:30)</option>
-                        <option value="slot14">Slot 14 (3:30 - 4:00)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Select Date:</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <button id="reserve-button">Reserve</button>
-                {{!-- <a href="/app/main"><input type="submit" class="submit-button" id="reserve-button" value="Reserve"/></a> --}}
+        <h1>Make Reservation</h1>
+        <div class="subcontainer-red">
+            <!--Add div for the lab selection menu-->
+            <div id="leftArrow"></div>
+            <div id="selectLab">
+                <div id="labTitle"><h1></h1></div>
+                <div class="seats" id="seat1">S1</div>
+                <div class="seats" id="seat2">S2</div>
+                <div class="seats" id="seat3">S3</div>
+                <div class="seats" id="seat4">S4</div>
+                <div class="seats" id="seat5">S5</div>
+                <div class="seats" id="seat6">S6</div>
+                <div class="seats" id="seat7">S7</div>
+                <div class="seats" id="seat8">S8</div>
+                <div class="seats" id="seat9">S9</div>
+                <div class="seats" id="seat10">S10</div>
             </div>
-        {{!-- </form> --}}
+            <div id="rightArrow"></div>
+            <form id="reserve_form" action="reserve" method="post">
+            <div id="rInfo">
+                <div id="infoLabTitle"></div>
+                <div id="infoSeatNum">Seat: </div>
+                <div id="date">Date: <input type="date" id="reservationDate" required></div>
+                <select id="time_slot" name="time_slot">
+                    <option value="choose-slot">Choose Time</option>
+                    <option value="slot1">Slot 1 (9:00 - 9:30)</option>
+                    <option value="slot2">Slot 2 (9:30 - 10:00)</option>
+                    <option value="slot3">Slot 3 (10:00 - 10:30)</option>
+                    <option value="slot4">Slot 4 (10:30 - 11:00)</option>
+                    <option value="slot5">Slot 5 (11:00 - 11:30)</option>
+                    <option value="slot6">Slot 6 (11:30 - 12:00)</option>
+                    <option value="slot7">Slot 7 (12:00 - 12:30)</option>
+                    <option value="slot8">Slot 8 (12:30 - 1:00)</option>
+                    <option value="slot9">Slot 9 (1:00 - 1:30)</option>
+                    <option value="slot10">Slot 10 (1:30 - 2:00)</option>
+                    <option value="slot11">Slot 11 (2:00 - 2:30)</option>
+                    <option value="slot12">Slot 12 (2:30 - 3:00)</option>
+                    <option value="slot13">Slot 13 (3:00 - 3:30)</option>
+                    <option value="slot14">Slot 14 (3:30 - 4:00)</option>
+				</select>
+                {{#if (compareStrings currentUser.role 'T')}}   
+                    <input type="text" id="reservename" class="form-input" name="reservename">
+                {{else}}
+                    <div id="name" class="form-input" name="reservename">{{currentUser.username}}</div>
+                {{/if}}
+                <button id="reserve">Reserve</button>
+                {{!-- <a href="/app/main"></a> --}}
+            </div>
+            </form>
+        </div>
     </div>
     <script src="/js/Reserve.js"></script>
-    <div id="role" style="display: none;">{{currentUser.role}}</div>
+    {{!-- <script>
+        // JavaScript code for switching lab titles
+        document.addEventListener("DOMContentLoaded", function() {
+            const labTitles = ["Freddy's Frightful Manor", "Chica's Chilling Chamber", "Puppet's Perilous Palace"];
+            const labColors = {
+                "Freddy's Frightful Manor": "#a5a4a4",
+                "Chica's Chilling Chamber": "#d0d0d0",
+                "Puppet's Perilous Palace": "#aba8a8"
+            };
+            const seatColors = {
+                "Freddy's Frightful Manor": "#b4653a",
+                "Chica's Chilling Chamber": "#e7a11c",
+                "Puppet's Perilous Palace": "#ba2828"
+            };
+            let currentIndex = 0;
+            const labTitleElement = document.getElementById("labTitle").querySelector("h1");
+            const selectLabElement = document.getElementById("selectLab");
+            const infoLabTitleElement = document.getElementById("infoLabTitle");
+
+            function updateLabTitle() {
+                const currentLab = labTitles[currentIndex];
+                labTitleElement.textContent = currentLab;
+                selectLabElement.style.backgroundColor = labColors[currentLab];
+                const seats = selectLabElement.querySelectorAll(".seats");
+                seats.forEach(seat => {
+                    seat.style.backgroundColor = seatColors[currentLab];
+                });
+                updateInfoLabTitle(); // Update infoLabTitle when labTitle changes
+            }
+
+            function switchLabTitle(direction) {
+                // Reset infoSeatNum text when switching lab title
+                document.getElementById("infoSeatNum").textContent = "Seat:";
+                
+                if (direction === "right") {
+                    currentIndex = (currentIndex + 1) % labTitles.length;
+                } else if (direction === "left") {
+                    currentIndex = (currentIndex - 1 + labTitles.length) % labTitles.length;
+                }
+                updateLabTitle();
+            }
+
+            function handleSeatClick(seatNumber) {
+                document.getElementById("infoSeatNum").textContent = "Seat: " + seatNumber;
+            }
+
+            document.getElementById("rightArrow").addEventListener("click", function() {
+                switchLabTitle("right");
+            });
+
+            document.getElementById("leftArrow").addEventListener("click", function() {
+                switchLabTitle("left");
+            });
+
+            // Assuming seats have IDs seat1, seat2, etc.
+            const seatElements = document.querySelectorAll(".seats");
+            seatElements.forEach(function(seat) {
+                seat.addEventListener("click", function() {
+                    handleSeatClick(seat.textContent);
+                });
+            });
+
+            // Function to update infoLabTitle based on labTitle
+            function updateInfoLabTitle() {
+                const currentLab = labTitles[currentIndex];
+                infoLabTitleElement.textContent = currentLab;
+            }
+
+            // Initial update
+            updateLabTitle();
+        });
+    </script> --}}
 </body>
 </html>
