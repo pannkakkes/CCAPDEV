@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const mongoose = require('mongoose')
-const express = require('express')
+const mongoose = require('mongoose');
+const express = require('express');
+const moment = require("moment-timezone");
 
 mongoose.connect("mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB")
 router.use(express.static('public'))
@@ -64,15 +65,14 @@ router.post('/save',async function(req, res){
 
 
         //Time edited
-        const now = new Date();
-        const hour = now.getHours();
-        const minutes = now.getMinutes();
+        const utcNow = moment.utc();
+        const philippinesTime = utcNow.tz('Asia/Manila');
 
-        const formattedMinutes = minutes.toString().padStart(2, '0');
+        const hour = philippinesTime.format('h'); 
+        const minutes = philippinesTime.format('mm');
+        const meridian = philippinesTime.format('A'); 
 
-        const meridian = (hour < 12) ? "AM" : "PM";
-
-        const timeRequest = formatDate(now) + " " + (hour % 12) + ":" + formattedMinutes + " " + meridian;
+        const timeRequest = philippinesTime.format('M/D/YYYY') + " " + hour + ":" + minutes + " " + meridian;
 
         //Checking if the user actually exist.
         if(currentUser.role == "T"){
