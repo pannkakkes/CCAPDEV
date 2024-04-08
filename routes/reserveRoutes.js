@@ -21,23 +21,15 @@ router.get('/', function (req, res) {
 
 // Edit reservation
 router.get('/edit', async function (req, res) {
-    // try {
-    //     const currentUser = req.session.currentUser;
-    //     let reservationsData;
-    //     if(currentUser.role == "V"){
-    //         reservationsData = await Reservation.find({ username: currentUser.username });
-    //     }
-    //     else{
-    //         reservationsData = await Reservation.find();
-    //     }
-    //     res.render('reserveedit', { currentUser, reservationsData });
-    // } catch (error) {
-    //     console.error(error);
-    //     res.status(500).send("Server error");
-    // }
     try {
         const currentUser = req.session.currentUser;
-        const reservationsData = await Reservation.find({ username: currentUser.username });
+        let reservationsData;
+        if(currentUser.role == "V"){
+            reservationsData = await Reservation.find({ username: currentUser.username });
+        }
+        else{
+            reservationsData = await Reservation.find({});
+        }
         res.render('reserveedit', { currentUser, reservationsData });
     } catch (error) {
         console.error(error);

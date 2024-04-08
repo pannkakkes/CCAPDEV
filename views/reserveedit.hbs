@@ -66,7 +66,7 @@
             <h2>Select Reservation to Edit</h2>
             <div id="buttonsContainer">
                 {{#each reservationsData}}
-                <button class="schedule-list">
+                <button class="schedule-list" onclick="window.location.href='saveedit?id=' + {{this.reserveId}}">
                     <div class="content">
                         {{#if this.anonymous}}
                             <p class="float-left">Anonymous</p>
