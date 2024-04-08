@@ -53,7 +53,6 @@ router.post('/save',async function(req, res){
     try {
         const currentUser = req.session.currentUser;
         const currentReservation = await Reservation.findOne({reserveId: currentId});
-        const ReservationList = await Reservation.find({});
 
         const seatNum = req.body.infoSeatNum;
 
@@ -63,6 +62,19 @@ router.post('/save',async function(req, res){
         const dateTimeReservation = formatDate(dateEdit) + " " + slotEdit;
         let validCheck = await Reservation.findOne({dateTimeReservation: dateTimeReservation, seat: seatNum})
 
+
+        //Time edited
+        const now = new Date();
+        const hour = now.getHours();
+        const minutes = now.getMinutes();
+
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+
+        const meridian = (hour < 12) ? "AM" : "PM";
+
+        const timeRequest = formatDate(now) + " " + (hour % 12) + ":" + formattedMinutes + " " + meridian;
+
+        //Checking if the user actually exist.
         if(currentUser.role == "T"){
             if (await Reservation.findOne({username: req.body.studentNameText})){
 
@@ -83,10 +95,12 @@ router.post('/save',async function(req, res){
         if (currentUser.role == "V"){
             currentReservation.seat = seatNum;
             currentReservation.dateTimeReservation = dateTimeReservation;
+            currentReservation.dateTimeRequest = timeRequest;
         }else{
             currentReservation.seat = seatNum;
             currentReservation.dateTimeReservation = dateTimeReservation;
             currentReservation.username = req.body.studentNameText;
+            currentReservation.dateTimeRequest = timeRequest;
         }
 
         await currentReservation.save();
@@ -180,7 +194,7 @@ router.get('/viewother', async function(req, res){
     }
 })
 
-function formatDate( format = "MM/DD/YYYY") {
+function formatDate(format = "MM/DD/YYYY") {
     const d = new Date();
     console.log("here");
     const year = d.getFullYear();
