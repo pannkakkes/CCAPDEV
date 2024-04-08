@@ -2,12 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("reserve-button").addEventListener("click", function(e) { 
         var selectedDate = new Date(document.getElementById("date").value);
         var currentDate = new Date();
-        var role = document.getElementById("role").textContent.trim();
-        var roleInput;
-        if (role === 'T'){
-            roleInput = document.getElementById("inputname").value;
-        }
+        var role = document.getElementById("role").textContent.trim(); // Get the role from the hidden div
+        var roleInput = document.getElementById("name").textContent.trim(); // Get the username from the div with id "name"
         var seatValue = document.getElementById("seat").value;
+
         if (!selectedDate || isNaN(selectedDate)) {
             alert("Please select a valid date.");
             e.preventDefault(); 
