@@ -99,51 +99,82 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#seat1").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 1"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 1";
+
         click = 1;
     });
     document.querySelector("#seat2").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 2"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 2";
         click = 1;
     });
     document.querySelector("#seat3").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 3"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 3";
         click = 1;
     });
     document.querySelector("#seat4").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 4"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 4";
         click = 1;
     });
     document.querySelector("#seat5").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 5"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 5";
         click = 1;
     });
     document.querySelector("#seat6").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 6"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 6";
         click = 1;
     });
     document.querySelector("#seat7").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 7"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 7";
         click = 1;
     });
     document.querySelector("#seat8").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 8"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 8";
         click = 1;
     });
     document.querySelector("#seat9").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 9"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 9";
         click = 1;
     });
     document.querySelector("#seat10").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
         seatNum.textContent = "Seat: 10"
+
+        let accessSeatNum = document.getElementById("infoSeatNumHidden")
+        accessSeatNum.value = "Seat 10";
         click = 1;
     });
 
