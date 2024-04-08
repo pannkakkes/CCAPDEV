@@ -1,153 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Reservation - Fazbear Entertainment Labs</title>
+    <title>Edit Reservation</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/favicon/freddyfazbear.png">
     <style>
-        .subcontainer {
-            border-radius: 8px;
-            margin-top: -0.3px;
-            text-align: center;
-            width: 440px;
+        .subcontainer-red {
             background-color: #e54c44;
-        }
-        h2 {
-            font-family: "Press Start 2P", system-ui;
-            font-size: 15px;
-            margin-bottom: 10px;
-            font-weight: 400;
-            line-height: 1.2;
-            color: #fffcef;
-        }
-        .content {
-            display: flex;
-            flex-direction: column;
-        }
-        .content p {
-            margin: 0;
-        }
-        .schedule-list {
-            background-color: #fffcef;
-            width: 440px;
-            margin: 20px auto;
+            margin-left: 20px;
             padding: 20px;
-            border-radius: 8px;
-            border: none;
-            overflow: hidden; /* Clear floats */
-            position: relative; /* Add position relative */
+            text-align: left;
+            border-radius: 10px;
         }
-        .float-right1 {
-            position: absolute; /* Change position to absolute */
-            right: 20px; /* Adjust right positioning */
-            text-align: right; /* Align text to the right */
+        #reserve{
+            background-color: #f1cf54;
+            width: 100px;
+            height: 30px;
         }
-        .float-right2 {
-            position: absolute; /* Change position to absolute */
-            right: 20px; /* Adjust right positioning */
-            top: 38px;
-            text-align: right; /* Align text to the right */
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
         }
-        .float-left {
-            text-align: left; /* Align text to the left */
+        .form-group label {
+            margin-right: 10px;
+        }
+        .form-group select, .form-group input[type="date"] {
+            margin-left: 10px;
+        }
+        #reserve-button {
+            background-color: #f1cf54;
         }
     </style>
-    <script src = "/js/User.js"></script>
-    <script src="/js/CurrentUser.js"></script>
-    <script src="/js/Reservation.js"></script>
 </head>
 <body>
     {{>nav}}
     <div class="container">
-        <span id="userRole" style="display: none;">{{currentUser.role}}</span>
-        <span id="userName" style="display: none;">{{currentUser.username}}</span>
         <h1>Edit Reservation</h1>
-        <div class="subcontainer">
-            <h2>Select Reservation to Edit</h2>
-            <div id="buttonsContainer"></div> <!-- Container for dynamic buttons -->
-        </div>
+        <form action="editreserve" id="editreserve_form" method="post">
+            <div class="subcontainer-red">
+                {{#if (compareStrings currentUser.role 'T')}}
+                    <div class="form-group">
+                        <label for="input-name">Name:</label>
+                        <input type="text" id="input-name" class="form-input" name="reservename">
+                    </div>
+                {{else}}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <div id="name" Name="reservename"><p>{{currentUser.username}}</p></div>
+                    </div>
+                {{/if}}
+                <div class="form-group">
+                    <label for="laboratory">Select Laboratory:</label>
+                    <select name="laboratory" id="laboratory" required>
+                        <option value="choose-lab">Choose Lab</option>
+                        <option value="lab1">Freddy's Frightful Manor</option>
+                        <option value="lab2">Chica's Chilling Chamber</option>
+                        <option value="lab3">Puppet's Perilous Palace</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="seat">Select Seat:</label>
+                    <select name="seat" id="seat" required>
+                        <option value="choose-seat">Choose Seat</option>
+                        <option value="seat1">Seat 1</option>
+                        <option value="seat2">Seat 2</option>
+                        <option value="seat3">Seat 3</option>
+                        <option value="seat4">Seat 4</option>
+                        <option value="seat5">Seat 5</option>
+                        <option value="seat6">Seat 6</option>
+                        <option value="seat7">Seat 7</option>
+                        <option value="seat8">Seat 8</option>
+                        <option value="seat9">Seat 9</option>
+                        <option value="seat10">Seat 10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="slot">Select Slot Number:</label>
+                    <select name="slot" id="slot" required>
+                        <option value="choose-seat">Choose slot</option>
+                        <option value="slot1">9:00 AM</option>
+                        <option value="slot2">9:30 AM</option>
+                        <option value="slot3">10:00 AM</option>
+                        <option value="slot4">10:30 AM</option>
+                        <option value="slot5">11:00 AM</option>
+                        <option value="slot6">11:30 AM</option>
+                        <option value="slot7">12:00 PM</option>
+                        <option value="slot8">12:30 PM</option>
+                        <option value="slot9">1:00 PM</option>
+                        <option value="slot10">1:30 PM</option>
+                        <option value="slot11">2:00 PM</option>
+                        <option value="slot12">2:30 PM</option>
+                        <option value="slot13">3:00 PM</option>
+                        <option value="slot14">3:30 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="isAnonymous" name="isAnonymous">
+                    <label for="isAnonymous">Anonymous</label>
+                </div>
+                <input type="submit" class="submit-button" id="reserve-button" value="Save"/>
+            </div>
+        </form>
+        <a href="/app/main"></a>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var name = document.getElementById("userName").textContent;
-            var role = document.getElementById("userRole").textContent;
-            var userReservations;
-
-            console.log(name);
-            console.log(role);
-
-            if (role === "T") {
-                userReservations = getAllReservations();
-            } else {
-                userReservations = getReservations(name);
-            }
-
-            generateButtons(userReservations);
-        });
-
-        function generateButtons(reservations) {
-            var buttonsContainer = document.getElementById("buttonsContainer");
-
-            // Clear existing buttons
-            buttonsContainer.innerHTML = '';
-
-            // Generate buttons based on the number of reservations
-            reservations.forEach(function (reservation) {
-                var button = document.createElement('button');
-                button.classList.add('schedule-list');
-                
-                // Create content for the button
-                var content = document.createElement('div');
-                content.classList.add('content');
-                
-                var labTitle = document.createElement('p');
-                labTitle.textContent = reservation.labTitle;
-                labTitle.classList.add('float-left');
-                
-                var seatNumber = document.createElement('p');
-                seatNumber.textContent = reservation.seatNum;
-                seatNumber.classList.add('float-left');
-                
-                if (reservation.anonymous) {
-                    var anonimity = document.createElement('p');
-                    anonimity.textContent = 'Anonymous';
-                    anonimity.classList.add('float-left');
-                    content.appendChild(anonimity); // Append to content
-                } else {
-                    var nameElement = document.createElement('p'); // Renamed variable to avoid conflict
-                    nameElement.textContent = reservation.student;
-                    nameElement.classList.add('float-left');
-                    content.appendChild(nameElement); // Append to content
-                }
-
-                
-                var reserveTime = document.createElement('p');
-                reserveTime.textContent = 'Reserve Time: ' + reservation.reserveTime;
-                reserveTime.classList.add('float-right1');
-                
-                var requestTime = document.createElement('p');
-                requestTime.textContent = 'Request Time: ' + reservation.requestTime;
-                requestTime.classList.add('float-right2');
-                
-                content.appendChild(labTitle);
-                content.appendChild(seatNumber);
-                content.appendChild(reserveTime);
-                content.appendChild(requestTime);
-                
-                button.appendChild(content);
-
-                button.onclick = function () {
-                    changeSched(reservation.id); // Pass reservation id to changeSched function
-                };
-                
-                buttonsContainer.appendChild(button);
-            });
-        }
-
-        function changeSched(reservationId) {
-            // Add your logic to handle the reservation change
-            window.location.href = 'saveedit?id=' + reservationId; // Example: Pass reservation id in URL
-        }
-    </script>
+    <script src="/js/Reserve.js"></script>
+    <div id="role" style="display: none;">{{currentUser.role}}</div>
 </body>
 </html>
