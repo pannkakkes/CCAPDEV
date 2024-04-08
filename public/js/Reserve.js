@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         else{
-            alert("Reservatio Succesns");
+            console.log("passed the jvs");
         }
         
     });    

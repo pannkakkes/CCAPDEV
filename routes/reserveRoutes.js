@@ -265,7 +265,7 @@ router.post('/reserve', async function (req, res) {
     const { infoLabTitle, infoSeatNum, time_slot, dateCheck } = req.body;
     const currentUser = req.session.currentUser;
     const role = currentUser.role;
-    const dateTimeReservation = `${dateCheck} ${time_slot}`; // Combine date and slot
+    const dateTimeReservation = new Date(`${dateCheck} ${time_slot}`); // Combine date and slot
     const currentDate = new Date(); // Get current date and time
 
     // Format currentDate to MM/DD/YYYY h:mm A
@@ -279,23 +279,37 @@ router.post('/reserve', async function (req, res) {
     }
 
     try {
-        // Create new reservation
-        await Reservation.create({
-            username: inputname || currentUser.username,
-            seat: infoSeatNum,
-            laboratory: infoLabTitle,
-            dateTimeRequest: currentDateTime,
-            dateTimeReservation: dateTimeReservation,
-            isAnonymous: req.body.isAnonymous === 'on' ? true : false // Check if checkbox is checked
+        // Check if the reservation slot is already taken
+        const existingReservation = await Reservation.findOne({ 
+            laboratory: infoLabTitle, 
+            seat: infoSeatNum, 
+            dateTimeReservation: dateTimeReservation 
         });
+        
+        if (existingReservation) {
+            // Reservation slot is already taken
+            return res.status(400).send('<script>alert("This seat and slot are already reserved. Please select another one."); window.location.href="/app/main/reserve";</script>');
+        }
 
-        res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
+        else{
+            // Create new reservation
+            await Reservation.create({
+                username: inputname || currentUser.username,
+                seat: infoSeatNum,
+                laboratory: infoLabTitle,
+                dateTimeRequest: currentDateTime,
+                dateTimeReservation: dateTimeReservation,
+                isAnonymous: req.body.isAnonymous === 'on' ? true : false // Check if checkbox is checked
+            });
+
+            res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
+        }
+        
     } catch (error) {
         console.error("Error creating reservation:", error);
         res.status(500).send("Error creating reservation.");
     }
 });
-
 
 
 module.exports = router;
