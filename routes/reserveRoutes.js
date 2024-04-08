@@ -246,4 +246,55 @@ function fillBlanksDate(reservation, initialLab, initialDtr) {
     return finalReservation;
 }
 
+//reserve
+router.post('/reserve', async function (req, res) {
+    const { laboratory, seat, slot, date, isAnonymous } = req.body;
+    const currentUser = req.session.currentUser;
+    var role = currentUser.role;
+    var dateTimeReservation = `${date} ${slot}`; // Combine date and slot
+    var currentDate = new Date(); // Get current date and time
+
+    // Format currentDate to MM/DD/YYYY h:mm A
+    var formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+    var formattedTime = (currentDate.getHours() % 12 || 12) + ':' + currentDate.getMinutes() + ' ' + (currentDate.getHours() >= 12 ? 'PM' : 'AM');
+    currentDate = formattedDate + ' ' + formattedTime;
+    var inputname;
+
+    if (role == 'T') {
+        inputname = req.body.reservename; // Access input field with name reservename
+    }
+
+    try {
+        // Check if the selected seat and slot are available
+        // const existingReservation = await Reservation.findOne({ seat, slot, date });
+        // if (existingReservation) {
+        //     return res.status(400).send('<script>alert("This seat and slot are already reserved. Please select another one."); window.location.href="/app/main/reserve";</script>');
+        // }
+        
+        var finalName;
+        if (role == 'T') {
+            finalName = inputname;
+        } else {
+            finalName = currentUser.username;
+        }
+
+        // Create new reservation
+        await Reservation.create({
+            //create id here
+            username: finalName,
+            seat,
+            laboratory,
+            dateTimeRequest: currentDate,
+            dateTimeReservation,
+            isAnonymous
+        });
+
+        res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
+    } catch (error) {
+        console.error("Error creating reservation:", error);
+        res.status(500).send("Error creating reservation.");
+    }
+});
+
+
 module.exports = router;
