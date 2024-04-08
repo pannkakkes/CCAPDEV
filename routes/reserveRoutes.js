@@ -7,7 +7,7 @@ router.use(express.static('public'))
 
 const User = require("../database/models/User")
 const Reservation = require("../database/models/Reservation")
-
+let currentId;
 //Make a reservation
 router.get('/', function (req, res) {
     try {
@@ -39,6 +39,8 @@ router.get('/edit', async function (req, res) {
 
 router.get('/saveedit', function (req, res) {
     try {
+        currentId = req.query.id;
+
         const currentUser = req.session.currentUser;
         res.render('reservesaveedit', { currentUser });
     } catch (error) {
@@ -50,32 +52,62 @@ router.get('/saveedit', function (req, res) {
 router.post('/save',async function(req, res){
     try {
         const currentUser = req.session.currentUser;
-        const reservationList = await Reservation.find({username: currentUser.username});
+        const currentReservation = await Reservation.findOne({reserveId: currentId});
+
         const seatNum = req.body.infoSeatNum;
 
         const dateEdit = req.body.dateCheck;
         const slotEdit = req.body.time_slot;
 
-
         const dateTimeReservation = formatDate(dateEdit) + " " + slotEdit;
+        let validCheck = await Reservation.findOne({dateTimeReservation: dateTimeReservation, seat: seatNum})
 
-        let currentEdits;
 
-        if (currentUser.role == "V"){
-            currentEdits = {
-                seat: seatNum,
-                dateTimeReservation: dateTimeReservation
-            }
-        }else{
-            currentEdits = {
-                seat: seatNum,
-                dateTimeReservation: dateTimeReservation,
-                username: req.body.studentNameText
+        //Time edited
+        const now = new Date();
+        const hour = now.getHours();
+        const minutes = now.getMinutes();
+
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+
+        const meridian = (hour < 12) ? "AM" : "PM";
+
+        const timeRequest = formatDate(now) + " " + (hour % 12) + ":" + formattedMinutes + " " + meridian;
+
+        //Checking if the user actually exist.
+        if(currentUser.role == "T"){
+            if (await Reservation.findOne({username: req.body.studentNameText})){
+
+            }else {
+                res.send("<script>alert('Edit was unsuccessful. This name does not exist'); window.location.href = '/app/main'; </script>");
+                return;
             }
         }
 
-        console.log(currentEdits);
+        //This already Exist
+        if (validCheck){
+            res.send("<script>alert('Edit was unsuccessful. This Slot and Date has already been taken'); window.location.href = '/app/main'; </script>");
+            return;
+        }
 
+        console.log();
+
+        if (currentUser.role == "V"){
+            currentReservation.seat = seatNum;
+            currentReservation.dateTimeReservation = dateTimeReservation;
+            currentReservation.dateTimeRequest = timeRequest;
+        }else{
+            currentReservation.seat = seatNum;
+            currentReservation.dateTimeReservation = dateTimeReservation;
+            currentReservation.username = req.body.studentNameText;
+            currentReservation.dateTimeRequest = timeRequest;
+        }
+
+        await currentReservation.save();
+        console.log(currentReservation);
+
+
+        res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
@@ -162,7 +194,7 @@ router.get('/viewother', async function(req, res){
     }
 })
 
-function formatDate( format = "MM/DD/YYYY") {
+function formatDate(format = "MM/DD/YYYY") {
     const d = new Date();
     console.log("here");
     const year = d.getFullYear();
