@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/labDB')
+mongoose.connect('mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB')
 
 const express = require('express')
 const app = new express()
