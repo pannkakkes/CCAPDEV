@@ -230,45 +230,31 @@ function fillBlanksDate(reservation, initialLab, initialDtr) {
 
 //reserve
 router.post('/reserve', async function (req, res) {
-    const { laboratory, seat, slot, date, isAnonymous } = req.body;
+    const { infoLabTitle, infoSeatNum, time_slot, dateCheck } = req.body;
     const currentUser = req.session.currentUser;
-    var role = currentUser.role;
-    var dateTimeReservation = `${date} ${slot}`; // Combine date and slot
-    var currentDate = new Date(); // Get current date and time
+    const role = currentUser.role;
+    const dateTimeReservation = `${dateCheck} ${time_slot}`; // Combine date and slot
+    const currentDate = new Date(); // Get current date and time
 
     // Format currentDate to MM/DD/YYYY h:mm A
-    var formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-    var formattedTime = (currentDate.getHours() % 12 || 12) + ':' + currentDate.getMinutes() + ' ' + (currentDate.getHours() >= 12 ? 'PM' : 'AM');
-    currentDate = formattedDate + ' ' + formattedTime;
-    var inputname;
+    const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+    const formattedTime = (currentDate.getHours() % 12 || 12) + ':' + currentDate.getMinutes() + ' ' + (currentDate.getHours() >= 12 ? 'PM' : 'AM');
+    const currentDateTime = formattedDate + ' ' + formattedTime;
 
-    if (role == 'T') {
-        inputname = req.body.reservename; // Access input field with name reservename
+    let inputname = null;
+    if (role === 'T') {
+        inputname = req.body.studentNameText; 
     }
 
     try {
-        // Check if the selected seat and slot are available
-        // const existingReservation = await Reservation.findOne({ seat, slot, date });
-        // if (existingReservation) {
-        //     return res.status(400).send('<script>alert("This seat and slot are already reserved. Please select another one."); window.location.href="/app/main/reserve";</script>');
-        // }
-        
-        var finalName;
-        if (role == 'T') {
-            finalName = inputname;
-        } else {
-            finalName = currentUser.username;
-        }
-
         // Create new reservation
         await Reservation.create({
-            //create id here
-            username: finalName,
-            seat,
-            laboratory,
-            dateTimeRequest: currentDate,
-            dateTimeReservation,
-            isAnonymous
+            username: inputname || currentUser.username,
+            seat: infoSeatNum,
+            laboratory: infoLabTitle,
+            dateTimeRequest: currentDateTime,
+            dateTimeReservation: dateTimeReservation,
+            isAnonymous: req.body.isAnonymous === 'on' ? true : false // Check if checkbox is checked
         });
 
         res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
@@ -277,6 +263,7 @@ router.post('/reserve', async function (req, res) {
         res.status(500).send("Error creating reservation.");
     }
 });
+
 
 
 module.exports = router;

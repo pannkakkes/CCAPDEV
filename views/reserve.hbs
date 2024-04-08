@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lab Reservation System - Reserve</title>
+    <title>Make Reservation</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/favicon/freddyfazbear.png">
     <style>
@@ -71,7 +71,8 @@
         }
 
     </style>
-    
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="/js/Reserve.js"></script>
 </head>
 <body>
     {{>nav}}
@@ -94,111 +95,47 @@
                 <div class="seats" id="seat10">S10</div>
             </div>
             <div id="rightArrow"></div>
-            <form id="reserve_form" action="reserve" method="post">
             <div id="rInfo">
+            <form action="reserve" method ="post" enctype="multipart/form-data">
                 <div id="infoLabTitle"></div>
+                <input id="infoLabTitleHidden" type="hidden" name="infoLabTitle">
                 <div id="infoSeatNum">Seat: </div>
-                <div id="date">Date: <input type="date" id="reservationDate" required></div>
+                <input id="infoSeatNumHidden" type="hidden" name="infoSeatNum">
+                <div id="date">Date: <input type="date" id="reservationDate" name="dateCheck" required></div>
                 <select id="time_slot" name="time_slot">
                     <option value="choose-slot">Choose Time</option>
-                    <option value="slot1">Slot 1 (9:00 - 9:30)</option>
-                    <option value="slot2">Slot 2 (9:30 - 10:00)</option>
-                    <option value="slot3">Slot 3 (10:00 - 10:30)</option>
-                    <option value="slot4">Slot 4 (10:30 - 11:00)</option>
-                    <option value="slot5">Slot 5 (11:00 - 11:30)</option>
-                    <option value="slot6">Slot 6 (11:30 - 12:00)</option>
-                    <option value="slot7">Slot 7 (12:00 - 12:30)</option>
-                    <option value="slot8">Slot 8 (12:30 - 1:00)</option>
-                    <option value="slot9">Slot 9 (1:00 - 1:30)</option>
-                    <option value="slot10">Slot 10 (1:30 - 2:00)</option>
-                    <option value="slot11">Slot 11 (2:00 - 2:30)</option>
-                    <option value="slot12">Slot 12 (2:30 - 3:00)</option>
-                    <option value="slot13">Slot 13 (3:00 - 3:30)</option>
-                    <option value="slot14">Slot 14 (3:30 - 4:00)</option>
+                    <option value="9:00 AM">Slot 1 (9:00 - 9:30)</option>
+                    <option value="9:30 AM">Slot 2 (9:30 - 10:00)</option>
+                    <option value="10:00 AM">Slot 3 (10:00 - 10:30)</option>
+                    <option value="10:30 AM">Slot 4 (10:30 - 11:00)</option>
+                    <option value="11:00 AM">Slot 5 (11:00 - 11:30)</option>
+                    <option value="11:30 AM">Slot 6 (11:30 - 12:00)</option>
+                    <option value="12:00 AM">Slot 7 (12:00 - 12:30)</option>
+                    <option value="12:30 PM">Slot 8 (12:30 - 1:00)</option>
+                    <option value="1:00 PM">Slot 9 (1:00 - 1:30)</option>
+                    <option value="1:30 PM">Slot 10 (1:30 - 2:00)</option>
+                    <option value="2:00 PM">Slot 11 (2:00 - 2:30)</option>
+                    <option value="2:30 PM">Slot 12 (2:30 - 3:00)</option>
+                    <option value="3:00 PM">Slot 13 (3:00 - 3:30)</option>
+                    <option value="3:30 PM">Slot 14 (3:30 - 4:00)</option>
 				</select>
-                {{#if (compareStrings currentUser.role 'T')}}   
-                    <input type="text" id="reservename" class="form-input" name="reservename">
-                {{else}}
-                    <div id="name" class="form-input" name="reservename">{{currentUser.username}}</div>
-                {{/if}}
-                <button id="reserve">Reserve</button>
-                {{!-- <a href="/app/main"></a> --}}
-            </div>
+                <!--Get date and time here and put it in a -->
+                <div id="name">Name: {{currentUser.username}}</div>
+                <div id="inputName">
+                    <span id="userHolder" style="display: none;">{{currentUser.role}}</span>
+                    <div id="studentNameText" style="display: none;">Student Name:</div>
+                    <input type="text" id="roleInput" name="studentNameText" style="display: none;">
+                </div>
+                <div id="anonimity">
+                    <label for="anonymous">Anonymous:</label>
+                    <input type="checkbox" id="anonymous" name="isAnonymous">
+                </div>
+                <input type="submit" class="submit-button" id="reserve" value="Reserve"/>
             </form>
+            <a href="/app/main"></a>
+            </div>
         </div>
     </div>
-    <script src="/js/Reserve.js"></script>
-    {{!-- <script>
-        // JavaScript code for switching lab titles
-        document.addEventListener("DOMContentLoaded", function() {
-            const labTitles = ["Freddy's Frightful Manor", "Chica's Chilling Chamber", "Puppet's Perilous Palace"];
-            const labColors = {
-                "Freddy's Frightful Manor": "#a5a4a4",
-                "Chica's Chilling Chamber": "#d0d0d0",
-                "Puppet's Perilous Palace": "#aba8a8"
-            };
-            const seatColors = {
-                "Freddy's Frightful Manor": "#b4653a",
-                "Chica's Chilling Chamber": "#e7a11c",
-                "Puppet's Perilous Palace": "#ba2828"
-            };
-            let currentIndex = 0;
-            const labTitleElement = document.getElementById("labTitle").querySelector("h1");
-            const selectLabElement = document.getElementById("selectLab");
-            const infoLabTitleElement = document.getElementById("infoLabTitle");
-
-            function updateLabTitle() {
-                const currentLab = labTitles[currentIndex];
-                labTitleElement.textContent = currentLab;
-                selectLabElement.style.backgroundColor = labColors[currentLab];
-                const seats = selectLabElement.querySelectorAll(".seats");
-                seats.forEach(seat => {
-                    seat.style.backgroundColor = seatColors[currentLab];
-                });
-                updateInfoLabTitle(); // Update infoLabTitle when labTitle changes
-            }
-
-            function switchLabTitle(direction) {
-                // Reset infoSeatNum text when switching lab title
-                document.getElementById("infoSeatNum").textContent = "Seat:";
-                
-                if (direction === "right") {
-                    currentIndex = (currentIndex + 1) % labTitles.length;
-                } else if (direction === "left") {
-                    currentIndex = (currentIndex - 1 + labTitles.length) % labTitles.length;
-                }
-                updateLabTitle();
-            }
-
-            function handleSeatClick(seatNumber) {
-                document.getElementById("infoSeatNum").textContent = "Seat: " + seatNumber;
-            }
-
-            document.getElementById("rightArrow").addEventListener("click", function() {
-                switchLabTitle("right");
-            });
-
-            document.getElementById("leftArrow").addEventListener("click", function() {
-                switchLabTitle("left");
-            });
-
-            // Assuming seats have IDs seat1, seat2, etc.
-            const seatElements = document.querySelectorAll(".seats");
-            seatElements.forEach(function(seat) {
-                seat.addEventListener("click", function() {
-                    handleSeatClick(seat.textContent);
-                });
-            });
-
-            // Function to update infoLabTitle based on labTitle
-            function updateInfoLabTitle() {
-                const currentLab = labTitles[currentIndex];
-                infoLabTitleElement.textContent = currentLab;
-            }
-
-            // Initial update
-            updateLabTitle();
-        });
-    </script> --}}
 </body>
 </html>
+
