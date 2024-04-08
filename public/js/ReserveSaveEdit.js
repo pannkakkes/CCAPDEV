@@ -90,10 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             return;
         }
-        else{
-            alert("Reservation Changed Success");
-        }
-        
     });    
 
     document.querySelector("#seat1").addEventListener("click", function(e) {
