@@ -290,20 +290,27 @@ router.post('/reserve', async function (req, res) {
             // Reservation slot is already taken
             return res.status(400).send('<script>alert("This seat and slot are already reserved. Please select another one."); window.location.href="/app/main/reserve";</script>');
         }
+        
 
-        else{
-            // Create new reservation
-            await Reservation.create({
-                username: inputname || currentUser.username,
-                seat: infoSeatNum,
-                laboratory: infoLabTitle,
-                dateTimeRequest: currentDateTime,
-                dateTimeReservation: dateTimeReservation,
-                isAnonymous: req.body.isAnonymous === 'on' ? true : false // Check if checkbox is checked
-            });
-
-            res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
+        if (role === 'T'){
+            //make it so that if username inputted does not exist it will not reserve
+            const userExists = await User.exists({ username: inputname });
+            if (!userExists) {
+                return res.status(400).send('<script>alert("Reservation unsuccessful. This username does not exist."); window.location.href="/app/main/reserve";</script>');
+            }
         }
+
+        // Create new reservation
+        await Reservation.create({
+            username: inputname || currentUser.username,
+            seat: infoSeatNum,
+            laboratory: infoLabTitle,
+            dateTimeRequest: currentDateTime,
+            dateTimeReservation: dateTimeReservation,
+            isAnonymous: req.body.isAnonymous === 'on' ? true : false // Check if checkbox is checked
+        });
+
+        res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
         
     } catch (error) {
         console.error("Error creating reservation:", error);
