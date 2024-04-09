@@ -303,6 +303,7 @@ router.post('/reserve', async function (req, res) {
 
         // Create new reservation
         await Reservation.create({
+            reserveId: (await Reservation.findOne().sort({reserveId:-1})).reserveId + 1,
             username: inputname || currentUser.username,
             seat: infoSeatNum,
             laboratory: infoLabTitle,
