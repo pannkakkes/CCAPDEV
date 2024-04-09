@@ -269,10 +269,14 @@ router.post('/reserve', async function (req, res) {
     const dateTimeReservation = formatDate(dateEdit) + " " + time_slot;
     const currentDate = new Date(); // Get current date and time
 
-    // Format currentDate to MM/DD/YYYY h:mm A
-    const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-    const formattedTime = (currentDate.getHours() % 12 || 12) + ':' + currentDate.getMinutes() + ' ' + (currentDate.getHours() >= 12 ? 'PM' : 'AM');
-    const currentDateTime = formattedDate + ' ' + formattedTime;
+    const utcNow = moment.utc();
+    const philippinesTime = utcNow.tz('Asia/Manila');
+
+    const hour = philippinesTime.format('h'); 
+    const minutes = philippinesTime.format('mm');
+    const meridian = philippinesTime.format('A'); 
+
+    const timeRequest = philippinesTime.format('M/D/YYYY') + " " + hour + ":" + minutes + " " + meridian;
 
     let inputname = null;
     if (role === 'T') {
@@ -307,7 +311,7 @@ router.post('/reserve', async function (req, res) {
             username: inputname || currentUser.username,
             seat: infoSeatNum,
             laboratory: infoLabTitle,
-            dateTimeRequest: currentDateTime,
+            dateTimeRequest: timeRequest,
             dateTimeReservation: dateTimeReservation,
             isAnonymous: req.body.isAnonymous === 'on' ? true : false // Check if checkbox is checked
         });
