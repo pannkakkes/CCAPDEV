@@ -265,7 +265,8 @@ router.post('/reserve', async function (req, res) {
     const { infoLabTitle, infoSeatNum, time_slot, dateCheck } = req.body;
     const currentUser = req.session.currentUser;
     const role = currentUser.role;
-    const dateTimeReservation = new Date(`${dateCheck} ${time_slot}`); // Combine date and slot
+    const dateEdit = req.body.dateCheck;
+    const dateTimeReservation = formatDate(dateEdit) + " " + time_slot;
     const currentDate = new Date(); // Get current date and time
 
     // Format currentDate to MM/DD/YYYY h:mm A
