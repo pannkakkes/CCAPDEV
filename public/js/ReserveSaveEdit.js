@@ -20,14 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
     var role = document.getElementById("userHolder").textContent; // Get the role value
     var roleInput = document.getElementById("roleInput"); // Get the input box element
     var studentText = document.getElementById("studentNameText");
+    var deleteButton = document.getElementById("delete");
 
     if (role === 'T') {
         roleInput.style.display = 'inline-block';
         studentText.style.display = 'inline-block';
+        deleteButton.style.display = 'inline-block';
         role = "T";
     } else {
         roleInput.style.display = 'none';
         studentText.style.display = 'none';
+        deleteButton.style.display = 'none';
         role = "S";
     }
     

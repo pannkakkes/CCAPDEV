@@ -38,12 +38,13 @@ router.get('/edit', async function (req, res) {
     }
 });
 
-router.get('/saveedit', function (req, res) {
+router.get('/saveedit', async function (req, res) {
     try {
-        currentId = req.query.id;
-
         const currentUser = req.session.currentUser;
-        res.render('reservesaveedit', { currentUser });
+
+        let reservationsData = await Reservation.findOne({ reserveId: req.query.id });
+
+        res.render('reservesaveedit', { currentUser, reservationsData });
     } catch (error) {
         console.error(error);
         res.status(500).send("Server error");
@@ -79,14 +80,14 @@ router.post('/save',async function(req, res){
             if (await Reservation.findOne({username: req.body.studentNameText})){
 
             }else {
-                res.send("<script>alert('Edit was unsuccessful. This name does not exist'); window.location.href = '/app/main'; </script>");
+                res.send("<script>alert('Edit was unsuccessful. The username does not exist'); window.location.href = '/app/main'; </script>");
                 return;
             }
         }
 
         //This already Exist
         if (validCheck){
-            res.send("<script>alert('Edit was unsuccessful. This Slot and Date has already been taken'); window.location.href = '/app/main'; </script>");
+            res.send("<script>alert('Edit was unsuccessful. This slot has already been taken'); window.location.href = '/app/main'; </script>");
             return;
         }
 
@@ -104,7 +105,6 @@ router.post('/save',async function(req, res){
         }
 
         await currentReservation.save();
-        console.log(currentReservation);
 
 
         res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
@@ -196,7 +196,6 @@ router.get('/viewother', async function(req, res){
 
 function formatDate(format = "MM/DD/YYYY") {
     const d = new Date();
-    console.log("here");
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1)
     const day = String(d.getDate())
@@ -330,5 +329,34 @@ router.post('/reserve', async function (req, res) {
     res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
 });
 
+router.post('/deletereservation', async function (req, res) {
+    let splitDateTime = req.body.deleteDate.split(" ");
+    let _date = new Date(splitDateTime[0]);
+    // let _date = new Date(splitDateTime[0]).toLocaleString('en-US', { timeZone: 'Asia/Manila' });
+    let _time = splitDateTime[1];
+    let splitTime = _time.split(":");
+    let hour = parseInt(splitTime[0]);
+    let minute = parseInt(splitTime[1]);
+
+    if (hour < 9) {
+        hour += 12;
+    }
+
+    _date.setHours(hour);
+    _date.setMinutes(minute);
+    let curDate = new Date().getTime();
+
+    if ((curDate - _date.getTime()) / 60000 >= 10) {
+        await Reservation.deleteOne({
+            reserveId: req.body.toDelete
+        });
+        res.send('<script>alert("Reservation deleted!"); window.location.href="/app/main";</script>');
+    }
+
+    else {
+        res.send('<script>alert("This reservation cannot be cancelled yet."); window.location.href="/app/main";</script>');
+    }
+    
+});
 
 module.exports = router;
