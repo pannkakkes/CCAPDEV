@@ -96,6 +96,7 @@ router.post('/delete', async function (req, res) {
 
     try {
         await User.deleteOne({ _id: idTobeDeleted });
+        await Reservation.deleteMany({username: req.session.currentUser.username});
         req.session.currentUser = null;
         res.status(200).send('User deleted successfully');
     } catch (error) {

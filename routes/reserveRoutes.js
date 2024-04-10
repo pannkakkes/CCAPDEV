@@ -354,7 +354,7 @@ router.post('/deletereservation', async function (req, res) {
     }
 
     else {
-        res.send('<script>alert("This reservation cannot be cancelled yet."); window.location.href="/app/main";</script>');
+        res.send('This reservation cannot be cancelled yet."); window.location.href="/app/main";</script>');
     }
     
 });
