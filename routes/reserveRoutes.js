@@ -282,20 +282,21 @@ router.post('/reserve', async function (req, res) {
     if (role === 'T') {
         inputname = req.body.studentNameText; 
     }
+    
+    const seatArr = infoSeatNum.split("+");
 
-    try {
+    for (let i = 0; i < seatArr.length; i++) {
         // Check if the reservation slot is already taken
         const existingReservation = await Reservation.findOne({ 
             laboratory: infoLabTitle, 
-            seat: infoSeatNum, 
+            seat: seatArr[i], 
             dateTimeReservation: dateTimeReservation 
         });
         
         if (existingReservation) {
             // Reservation slot is already taken
-            return res.status(400).send('<script>alert("This seat and slot are already reserved. Please select another one."); window.location.href="/app/main/reserve";</script>');
+            return res.status(400).send('<script>alert("This seat and slot have already been reserved. Please select another one."); window.location.href="/app/main/reserve";</script>');
         }
-        
 
         if (role === 'T'){
             //make it so that if username inputted does not exist it will not reserve
@@ -304,24 +305,29 @@ router.post('/reserve', async function (req, res) {
                 return res.status(400).send('<script>alert("Reservation unsuccessful. This username does not exist."); window.location.href="/app/main/reserve";</script>');
             }
         }
+    }
+
+    for (let i = 0; i < seatArr.length; i++) {
+    try {
 
         // Create new reservation
         await Reservation.create({
             reserveId: (await Reservation.findOne().sort({reserveId:-1})).reserveId + 1,
             username: inputname || currentUser.username,
-            seat: infoSeatNum,
+            seat: seatArr[i],
             laboratory: infoLabTitle,
             dateTimeRequest: timeRequest,
             dateTimeReservation: dateTimeReservation,
             isAnonymous: req.body.isAnonymous === 'on' ? true : false // Check if checkbox is checked
         });
-
-        res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
         
     } catch (error) {
         console.error("Error creating reservation:", error);
         res.status(500).send("Error creating reservation.");
     }
+    }
+    
+    res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
 });
 
 

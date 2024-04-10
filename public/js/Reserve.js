@@ -7,6 +7,7 @@ const Lab = function(name, backgroundColor, seatColor) {
 let labs = [];
 let click = 0;
 let role = 'S';
+let clicked = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 //0 if not clicked and it will become 1 when clicked
 
 labs.push(new Lab("Freddy's Frightful Manor", "#a5a4a4", "#b4653a"));
@@ -14,6 +15,9 @@ labs.push(new Lab("Chica's Chilling Chamber", "#d0d0d0", "#e7a11c"));
 labs.push(new Lab("Puppet's Perilous Palace", "#aba8a8", "#ba2828"));
 
 document.addEventListener("DOMContentLoaded", () => {
+    let accessSeatNum = document.getElementById("infoSeatNumHidden")
+    accessSeatNum.value = "";
+
     let currentLabIndex = 0;
     updateLabDetails(currentLabIndex);
 
@@ -101,83 +105,192 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#seat1").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 1"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 1";
 
+        if (clicked[0] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 1"
+            accessSeatNum.value = "Seat 1";
+        }
+        else {
+            seatNum.textContent += ", 1"
+            accessSeatNum.value += "+Seat 1";
+        }
+        clicked[0] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat2").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 2"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 2";
+
+        if (clicked[1] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 2"
+            accessSeatNum.value = "Seat 2";
+        }
+        else {
+            seatNum.textContent += ", 2"
+            accessSeatNum.value += "+Seat_2";
+        }
+        clicked[1] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat3").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 3"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 3";
+
+        if (clicked[2] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 3"
+            accessSeatNum.value = "Seat 3";
+        }
+        else {
+            seatNum.textContent += ", 3"
+            accessSeatNum.value += "+Seat 3";
+        }
+        clicked[2] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat4").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 4"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 4";
+
+        if (clicked[3] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 4"
+            accessSeatNum.value = "Seat 4";
+        }
+        else {
+            seatNum.textContent += ", 4"
+            accessSeatNum.value += "+Seat 4";
+        }
+        clicked[3] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat5").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 5"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 5";
+
+        if (clicked[4] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 5"
+            accessSeatNum.value = "Seat 5";
+        }
+        else {
+            seatNum.textContent += ", 5"
+            accessSeatNum.value += "+Seat 5";
+        }
+        clicked[4] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat6").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 6"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 6";
+
+        if (clicked[5] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 6"
+            accessSeatNum.value = "Seat 6";
+        }
+        else {
+            seatNum.textContent += ", 6"
+            accessSeatNum.value += "+Seat 6";
+        }
+        clicked[5] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat7").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 7"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 7";
+
+        if (clicked[6] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 7"
+            accessSeatNum.value = "Seat 7";
+        }
+        else {
+            seatNum.textContent += ", 7"
+            accessSeatNum.value += "+Seat_7";
+        }
+        clicked[6] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat8").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 8"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 8";
+
+        if (clicked[7] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 8"
+            accessSeatNum.value = "Seat 8";
+        }
+        else {
+            seatNum.textContent += ", 8"
+            accessSeatNum.value += "+Seat 8";
+        }
+        clicked[7] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat9").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 9"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 9";
+
+        if (clicked[8] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 9"
+            accessSeatNum.value = "Seat 9";
+        }
+        else {
+            seatNum.textContent += ", 9"
+            accessSeatNum.value += "+Seat 9";
+        }
+        clicked[8] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
     document.querySelector("#seat10").addEventListener("click", function(e) {
         let seatNum = document.querySelector("#infoSeatNum");
-        seatNum.textContent = "Seat: 10"
-
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 10";
+
+        if (clicked[9] == 0) {
+        if (seatNum.textContent.length < 7) {
+            seatNum.textContent += " 10"
+            accessSeatNum.value = "Seat 10";
+        }
+        else {
+            seatNum.textContent += ", 10"
+            accessSeatNum.value += "+Seat 10";
+        }
+        clicked[9] = 1;
+        }
+
+        console.log(accessSeatNum.value)
         click = 1;
     });
 
