@@ -110,7 +110,7 @@ router.post('/save',async function(req, res){
         res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
     } catch (error) {
         console.error(error);
-        res.status(500).send(error);
+        res.status(500).send("Server error");
     }
 });
 

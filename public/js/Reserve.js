@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else {
             seatNum.textContent += ", 2"
-            accessSeatNum.value += "+Seat_2";
+            accessSeatNum.value += "+Seat 2";
         }
         clicked[1] = 1;
         }
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else {
             seatNum.textContent += ", 7"
-            accessSeatNum.value += "+Seat_7";
+            accessSeatNum.value += "+Seat 7";
         }
         clicked[6] = 1;
         }
