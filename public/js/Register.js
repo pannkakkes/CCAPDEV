@@ -1,6 +1,9 @@
 $(document).ready(function() {
     var form = $("#register_form");
-    var isValid = true; 
+    var emailValid = false; 
+    var usernameValid = false; 
+    var passwordValid = false; 
+    var birthdateValid = false; 
     //Prevents resetting of form when enter is pressed
     form.on("keypress", function(event) {
         if (event.keyCode == 13) {
@@ -25,9 +28,10 @@ $(document).ready(function() {
     
         if (!emailRegex.test(email)) {
             displayError("email", "Please enter a valid email ending with @dlsu.edu.ph and containing only alphanumeric characters, ., _, %, +, and - before the @ symbol.");
-            isValid = false;
+            emailValid = false;
         } else {
             clearError("email");
+            emailValid = true;
         }
     });
     
@@ -38,9 +42,10 @@ $(document).ready(function() {
     
         if (!usernameRegex.test(username)) {
             displayError("username", "Please enter a valid username containing only alphanumeric characters, ., _, and -.");
-            isValid = false;
+            usernameValid = false;
         } else {
             clearError("username");
+            usernameValid = true;
         }
     });
 
@@ -52,11 +57,11 @@ $(document).ready(function() {
         if (password !== confirmPassword) {
             displayError("password", "Passwords do not match.");
             displayError("confirmPassword", "Passwords do not match.");
-            isValid = false;
+            passwordValid = false;
         } else {
             clearError("password");
             clearError("confirmPassword");
-            isValid = true;
+            passwordValid = false;
         }
     });
 
@@ -67,16 +72,16 @@ $(document).ready(function() {
     
         if (birthYear > 2010) {
             displayError("birthdate", "Birthdate must be in or before the year 2010.");
-            isValid = false;
+            birthdateValid = false;
         } else {
             clearError("birthdate");
-            isValid = true;
+            birthdateValid = true;
         }
     });    
     
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
-        if (isValid) {
+        if (emailValid && usernameValid && passwordValid && birthdateValid) {
    
         } else {
             event.preventDefault(); // Prevent the form from submitting if not valid
@@ -85,7 +90,7 @@ $(document).ready(function() {
 
     //Submitting as a Student
     $("#submitV").on("click", async function(event) {
-        if (isValid) {
+        if (emailValid && usernameValid && passwordValid && birthdateValid) {
  
         } else {
             event.preventDefault(); // Prevent the form from submitting if not valid
