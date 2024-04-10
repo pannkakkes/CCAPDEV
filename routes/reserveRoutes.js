@@ -110,7 +110,7 @@ router.post('/save',async function(req, res){
         res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        res.status(500).send(error);
     }
 });
 
@@ -354,7 +354,7 @@ router.post('/deletereservation', async function (req, res) {
     }
 
     else {
-        res.send('This reservation cannot be cancelled yet."); window.location.href="/app/main";</script>');
+        res.send('<script>alert("This reservation cannot be cancelled yet."); window.location.href="/app/main";</script>');
     }
     
 });
