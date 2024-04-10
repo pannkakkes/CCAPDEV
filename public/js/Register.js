@@ -1,9 +1,9 @@
 $(document).ready(function() {
     var form = $("#register_form");
-    var emailValid = false; 
-    var usernameValid = false; 
-    var passwordValid = false; 
-    var birthdateValid = false; 
+    var emailValid = true; 
+    var usernameValid = true; 
+    var passwordValid = true; 
+    var birthdateValid = true; 
     //Prevents resetting of form when enter is pressed
     form.on("keypress", function(event) {
         if (event.keyCode == 13) {
@@ -61,7 +61,7 @@ $(document).ready(function() {
         } else {
             clearError("password");
             clearError("confirmPassword");
-            passwordValid = false;
+            passwordValid = true;
         }
     });
 
@@ -81,6 +81,7 @@ $(document).ready(function() {
     
     //Submitting as a Lab Technician
     $("#submitT").on("click", async function(event) {
+        console.log(emailValid, usernameValid, passwordValid, birthdateValid)
         if (emailValid && usernameValid && passwordValid && birthdateValid) {
    
         } else {
@@ -90,6 +91,7 @@ $(document).ready(function() {
 
     //Submitting as a Student
     $("#submitV").on("click", async function(event) {
+        console.log(emailValid, usernameValid, passwordValid, birthdateValid)
         if (emailValid && usernameValid && passwordValid && birthdateValid) {
  
         } else {
