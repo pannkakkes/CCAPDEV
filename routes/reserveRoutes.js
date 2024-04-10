@@ -43,6 +43,7 @@ router.get('/saveedit', async function (req, res) {
         const currentUser = req.session.currentUser;
 
         let reservationsData = await Reservation.findOne({ reserveId: req.query.id });
+        currentId = req.query.id;
 
         res.render('reservesaveedit', { currentUser, reservationsData });
     } catch (error) {
