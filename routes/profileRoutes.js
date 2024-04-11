@@ -14,7 +14,6 @@ router.get('/', async function (req, res) {
     try {
         const currentUser = await User.findOne({ username: req.session.currentUser.username });
         const reservationsData = await Reservation.find({ username: currentUser.username });
-
         res.render('userviewprofile',{currentUser, reservationsData, layout: "layouts/main"});
 
     } catch (error) {

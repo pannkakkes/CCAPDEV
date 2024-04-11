@@ -2,9 +2,10 @@ const router = require("express").Router();
 const mongoose = require('mongoose');
 const express = require('express');
 const moment = require("moment-timezone");
+const path = require('path')
 
 mongoose.connect("mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB")
-router.use(express.static('public'))
+router.use(express.static('public'));
 
 const User = require("../database/models/User")
 const Reservation = require("../database/models/Reservation")
@@ -182,9 +183,9 @@ router.get('/updateview', async function(req, res){
     res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
 })
 
-router.get('/viewother', async function(req, res){
+router.get('/users/:name', async function(req, res){
     try {
-        const name = req.query.other;
+        const name = req.params.name;
         const existUsername = await User.findOne({username: name});
         const reservationsData = await Reservation.find({ username: existUsername.username});
         res.render("publicprofile", {existUsername, reservationsData, layout: "layouts/main"});

@@ -31,7 +31,7 @@
                             {{#if this.isAnonymous}}
                             <td class="reserved-by"><a>Anonymous</a></td>
                             {{else}}
-                            <td class="reserved-by"><a href="/app/main/reserve/viewother?other={{ this.username }}" name="other" value="{{ this.username }}" method="get" class="user-link">{{ this.username }}</a></td>
+                            <td class="reserved-by"><a href="/app/main/reserve/users/{{ this.username }}" name="name" value="{{ this.username }}" method="get" class="user-link">{{ this.username }}</a></td>
                             {{/if}}
                             <td class="availability">Unavailable</td>
                     </tr>
