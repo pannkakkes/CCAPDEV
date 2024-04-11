@@ -10,9 +10,17 @@
 			{{#if existUsername.length includeZero=true}}
 				<p id="search-results">
 					{{#if existUsername.length}}
-					User Matches:<br>
 					{{#each existUsername}}
-					<a href="/app/main/reserve/users/{{ this.username }}" name="name" value="{{ this.username }}" method="get" class="user-link">{{this.username}}</a><br>
+					<button class="button-class">
+						<div class="small-picture-container float-left">
+								<img class="small-picture" src="{{ this.profilepicture }}" alt="Profile Image" width="50">
+						</div>
+						<div class="content">
+							<a href="/app/main/reserve/users/{{ this.username }}" name="name" value="{{ this.username }}" method="get" class="user-link float-left">{{this.username}}</a><br>
+							<p class="float-left">{{this.description}}</p>
+							<p class="float-right1">Role: {{this.role}}</p>
+						</div>
+					</button>
 					{{/each}}
 					{{else}}
 					No users found.

@@ -185,6 +185,22 @@ nav div {
     height: 100%;
 }
 
+.small-picture-container {
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 50px;
+    background-color:bisque;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.small-picture{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
 .reservation-none{
     text-align: center;
     margin-top: 20px;
@@ -223,4 +239,39 @@ nav div {
 
 #unavailable{
     color: #d14949;
+}
+
+.button-class {
+    background-color: #fffcef;
+    width: 440px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    border: none;
+    overflow: hidden; /* Clear floats */
+    position: relative; /* Add position relative */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.content p {
+    margin: 0;
+}
+
+.float-left {
+    text-align: left; /* Align text to the left */
+}
+
+div .float-left {
+    float: left;
+    margin-right: 15px;
+}
+
+.float-right1 {
+    position: absolute; /* Change position to absolute */
+    right: 20px; /* Adjust right positioning */
+    text-align: right; /* Align text to the right */
 }
