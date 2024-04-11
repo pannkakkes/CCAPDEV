@@ -61,7 +61,7 @@ router.post('/edit', async (req, res) => {
             const timestamp = Date.now(); // Get current timestamp
             const fileExtension = path.extname(image.name);
             const uniqueFilename = `${timestamp}_${image.name}`; // Append timestamp to image name
-            profilePicture = "images/" + uniqueFilename;
+            profilePicture = "/images/" + uniqueFilename;
 
             image.mv(path.resolve('./public/images', uniqueFilename), (error) => {
                 if (error) {
