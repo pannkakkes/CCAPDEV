@@ -146,37 +146,6 @@ router.get('/about', function (req, res) {
 
 router.use("/main", sessionCheckerForMain, main);
 
-router.get("/main", sessionCheckerForMain, async function (req, res) { 
-    console.log("nyehehehe");
-    try {
-        // Ensure that the session contains the current user information
-        if (!req.session.currentUser) {
-            return res.redirect('/'); // Redirect to index if currentUser is not set in the session
-        }
-
-        // Fetch the current user from the database
-        const currentUser = await User.findOne({ username: req.session.currentUser.username });
-
-        // Fetch reservations data associated with the current user
-        const reservationsData = await Reservation.find({ username: currentUser.username });
-        reservationsData.reverse();
-
-        // Split the birthdate to format it as MM/DD/YYYY
-        const birthdate = currentUser.birthdate; 
-        const [month, day, year] = birthdate.split('/');
-        
-        // Render the dashboard template with the current user and reservations data
-        return res.render('dashboard', {
-            currentUser,
-            reservationsData,
-            formattedBirthdate: `${year}-${month}-${day}`,
-            layout: "layouts/main"
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).send("Server error");
-    }
-});
 
 
 module.exports = router;
