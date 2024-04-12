@@ -187,9 +187,8 @@ router.get('/users/:name', async function(req, res){
     try {
         const name = req.params.name;
         const existUsername = await User.findOne({username: name});
-
-        if (!existUsername) {
-            res.render('404', { layout: "layouts/main" });
+        if (existUsername == null) {
+            return res.render('404', { layout: "layouts/main" });
         }
 
         const reservationsData = await Reservation.find({ username: existUsername.username});
