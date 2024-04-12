@@ -5,7 +5,7 @@
 		}
 
 		.containers {
-			height: 380px;
+			height: 420px;
 			display: inline-block;
 			vertical-align: top;
 			border-radius: 15px;
@@ -13,32 +13,124 @@
 
 		.red {
 			background-color:#e54c44;
-			width: 130px;
+			width: 180px;
 			color: #fffcef;
+			padding: 10px;
+			overflow-y: auto; /* Enable vertical scrolling */
+        	overflow-x: hidden; /* Disable horizontal scrolling */
 		}
-
 		.yellow {
 			background-color: #f1cf54;
-			width: 280px;
+			width: 320px;
+			padding: 10px;
 		}
+		.schedules {
+            background-color: #fffcef;
+            width: 440px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            border: none;
+            overflow: hidden; /* Clear floats */
+            position: relative; /* Add position relative */
+        }
+		.content {
+            display: flex;
+            flex-direction: column;
+        }
+		.content p {
+            margin: 0;
+        }
+		#selectLab{
+            background-color:#fffcef;
+            width: 180px;
+            height: 200px;
+            border-radius: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        #leftArrow {
+            align-self: center;
+            border-top: 15px solid transparent; 
+            border-bottom: 15px solid transparent; 
+            border-right: 30px solid #e54c44;
+            display: inline-block;
+			margin-bottom: 50px;
+			margin-right: 5px;
+        }
+
+        #rightArrow {
+            border-top: 15px solid transparent; 
+            border-bottom: 15px solid transparent; 
+            border-left: 30px solid #e54c44;
+            display: inline-block;
+			margin-bottom: 50px;
+			margin-left: 5px;
+        }
+
+		.seats{
+            width: 38px;
+            height: 38px;
+            display: inline-block;
+            margin: 3px;
+        }
+		#labTitle{
+            font-size: 10px;
+            margin-top: -15px;
+        }
 	</style>
+	<script src="/js/dashboard.js"></script>
 	<div class="dashContainer">
 		<div class="containers red">
 			<div id="profile-picture-container">
                 <img id="profile-picture" src={{ currentUser.profilepicture }} alt="Profile Image" width="80">
             </div>
-            <h2 id="profile-name" style="color: #fffcef;"> {{ currentUser.username }} </h2>
-			<p id="profile-birthdate" style="color: #fffcef;">{{ currentUser.birthdate }}</p>
-            <p id="profile-description"> {{ currentUser.description }} </p>
+            <h2 id="profile-name">{{ currentUser.username }}Place</h2>
+			<p id="profile-birthdate">{{ currentUser.birthdate }}xx/xx/xxxx</p>
+            <p id="profile-description">{{ currentUser.description }}Lorem ipsum dolor sit amet, consectetur adipiscing elit. leo tristique.</p>
+			<a href="/app/main/profile" class="normal-link" style="background-color: #f1cf54; font-size: 9px; padding: 10px 10px;">View Profile</a><br><br>
 		</div>
 		<div class="containers yellow">
-			<h1>Choose your lab!</h1>
-			<p>What would you like to do?</p>
-			<a href="/app/main/profile" class="normal-link">View Your Profile</a><br><br>
+			<h1>Fazbear Labs</h1>
+			<p>Reserve a slot now!</p>
+			<div id="displayLabs" style="justify-content: center;">
+				<div id="leftArrow"></div>
+				<div id="selectLab">
+					<div id="labTitle"><h1></h1></div>
+					<div class="seats" id="seat1">S1</div>
+					<div class="seats" id="seat2">S2</div>
+					<div class="seats" id="seat3">S3</div>
+					<div class="seats" id="seat4">S4</div>
+					<div class="seats" id="seat5">S5</div>
+					<div class="seats" id="seat6">S6</div>
+					<div class="seats" id="seat7">S7</div>
+					<div class="seats" id="seat8">S8</div>
+					<div class="seats" id="seat9">S9</div>
+					<div class="seats" id="seat10">S10</div>
+				</div>
+				<div id="rightArrow"></div>
+			</div>
+			<br>
 			<a href="/app/main/reserve" class="normal-link">Reserve a Lab Slot</a><br><br>
-			<a href="/app/main/userlogout" class="normal-link">Logout</a>
 		</div>
-		<div class="containers red"></div>
+		<div class="containers red">
+			<h1 style="font-size: 10px;">Reservations</h1>
+			{{#each reservationsData}}
+			<div class="schedules">
+				<div class="content">
+					{{#if this.anonymous}}
+						<p>Anonymous</p>
+					{{/if}}
+					<p>{{this.laboratory}}</p>
+					<p>{{this.seat}}</p>
+					<p>Reserve Time: {{this.dateTimeReservation}}</p>
+					<p>Request Time: {{this.dateTimeRequest}}</p>
+				</div>
+			</div>
+            {{/each}}
+		</div>
 	</div>
 
 	{{!-- <div class="container" style="width: 300px; height: 500px">
