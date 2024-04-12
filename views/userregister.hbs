@@ -1,6 +1,12 @@
 <form id="register_form" action="register" method="post">
     <div class="container">
         <h1>Register User</h1>
+        {{#if existingEmail}}
+        <b id="unavailable">Email already exists.</b><br>
+        {{/if}}
+        {{#if existingUsername}}
+        <b id="unavailable">Username already exists.</b><br>
+        {{/if}}
 
         <span>*Email address:<br/></span>
         <input type="email" class="form-input" id="email" name="email" value="{{email}}" required/>

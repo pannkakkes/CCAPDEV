@@ -8,7 +8,7 @@ const User = require("../database/models/User")
 
 const sessionChecker = (req, res, next) => {
     if (req.session.currentUser) {
-        res.redirect('main'); // Redirect to dashboard if currentUser is set in the session
+        return res.redirect('main'); // Redirect to dashboard if currentUser is set in the session
     } else {
         next(); // Redirect to index if currentUser is not set in the session
     }
@@ -16,29 +16,29 @@ const sessionChecker = (req, res, next) => {
 
 const sessionCheckerForMain = (req, res, next) => {
     if (!req.session.currentUser) {
-        res.redirect('/'); // Redirect to index if currentUser is not set in the session
+        return res.redirect('/'); // Redirect to index if currentUser is not set in the session
     } else {
         next(); // Continue to the next middleware if session is active
     }
 };
 
 router.get('/', sessionChecker, (req, res) => {
-    res.render('index', { layout: "layouts/main" });
+    return res.render('index', { layout: "layouts/main" });
 });
 
 ///////////////////////////
 router.get('/', function (req, res) {
-    res.render("index", {layout: "layouts/main"});
+    return res.render("index", {layout: "layouts/main"});
 });
 
 // User Registration Route (/userregister)
 router.get('/userregister', sessionChecker, function (req, res) {
-    res.render("userregister", { layout: "layouts/main" });
+    return res.render("userregister", { layout: "layouts/main" });
 });
 
 //User Login
 router.get('/userlogin', function (req, res) {
-    res.render("userlogin", {layout: "layouts/main"});
+    return res.render("userlogin", {layout: "layouts/main"});
 });
 
 router.post('/login', async function (req, res) {
@@ -76,20 +76,20 @@ router.post('/login', async function (req, res) {
             req.session.cookie.maxAge = 604800000;  // 7 days
         } else {
         }
-                res.redirect('main');
+        return res.redirect('main');
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 });
 
 //User Registration
 router.get('/userregister', function (req, res) {
-    res.render("userregister", {layout: "layouts/main"});
+    return res.render("userregister", {layout: "layouts/main"});
 });
 
 router.get('/app/userregister', function (req, res) {
-    res.render("userregister", { layout: "layouts/main"});
+    return res.render("userregister", { layout: "layouts/main"});
 });
 
 router.post('/register', async function (req, res) {
@@ -105,12 +105,8 @@ router.post('/register', async function (req, res) {
             const existingEmail = await User.findOne({ email });
             const existingUsername = await User.findOne({ username });
 
-            if (existingEmail) {
-                return res.status(400).send('<script>alert("Email already exists."); window.location.href="/app/userregister";</script>');
-            }
-
-            if (existingUsername) {
-                return res.status(400).send('<script>alert("Username already exists."); window.location.href="/app/userregister";</script>');
+            if (existingEmail || existingUsername) {
+                return res.render("userregister", {existingEmail, existingUsername, layout: "layouts/main"});
             }
 
             try {
@@ -127,24 +123,24 @@ router.post('/register', async function (req, res) {
                     role: role
                 });
 
-                res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
+                return res.send('<script>alert("Registration successful!"); window.location.href="/";</script>');
             } catch (error) {
                 console.error("Error creating user:", error);
-                res.status(500).send("Error registering user.");
+                return res.status(500).send("Error registering user.");
             }
         });
     } catch (error) {
         console.error("Error checking existing email and username:", error);
-        res.status(500).send("Error checking existing email and username.");
+        return res.status(500).send("Error checking existing email and username.");
     }
 });
 
 router.get('/details', function (req, res) {
-    res.render("details", {layout: "layouts/main"});
+    return res.render("details", {layout: "layouts/main"});
 });
 
 router.get('/about', function (req, res) {
-    res.render("about", {layout: "layouts/main"});
+    return res.render("about", {layout: "layouts/main"});
 });
 
 router.use("/main", sessionCheckerForMain, main);
