@@ -1,24 +1,28 @@
 
-    {{>nav}}
+{{>nav}}
 
-    <div class="container">
-        <h1>Profile</h1>
+<div>
+  <div class="profile-left">
+    <h1>Profile</h1><br>
+          <div>
+              <div id="profile-picture-container">
+                  <img id="profile-picture" src={{ currentUser.profilepicture }} alt="Profile Image" width="150">
+              </div>
+              <h2 id="profile-name"> {{ currentUser.username }} </h2>
+              <p id="profile-description"> {{ currentUser.description }} </p>
+              <p id="profile-birthdate">{{ currentUser.birthdate }}</p>
 
-        <div>
-            <div id="profile-picture-container">
-                <img id="profile-picture" src={{ currentUser.profilepicture }} alt="Profile Image" width="150">
-            </div>
-            <h2 id="profile-name"> {{ currentUser.username }} </h2>
-            <p id="profile-description"> {{ currentUser.description }} </p>
-            <p id="profile-birthdate">{{ currentUser.birthdate }}</p>
-
-        </div>
-
-        <div>
-            <h2>Reserved Seats</h2>
-            {{#if reservationsData.length}}
-            <table>
-        <thead>
+          </div>
+          <div class="subcontainer">
+            <a href="/app/main/profile/editprofile" class="normal-link">Edit Profile</a>
+          <a href="/app/main/profile/deleteprofile" class="normal-link">Delete Profile</a>
+          </div>
+  </div>
+  <div class="profile-right">
+    <h1>Reserved Seats</h1><br>
+    {{#if reservationsData.length}}
+            <table id="reservationTable">
+        <thead id="profiletableheader">
           <tr>
             <th>Seat</th>
             <th>Laboratory Number</th>
@@ -38,15 +42,5 @@
             <p class="reservation-none" id="reservation-none">No reservations found.</p>
           {{/if}}
         </tbody>
-      </table>
-
-            <div class="subcontainer">
-
-            <a href="/app/main/profile/deleteprofile" class="normal-link">Delete Profile</a>
-            <a href="/app/main/profile/editprofile" class="normal-link">Edit Profile</a>
-
-            </div>
-
-            <br>
-        </div>
-    </div>
+  </div>
+</div>
