@@ -56,7 +56,7 @@ var db = mongoose.connection;
 
 const sessionChecker = (req, res, next) => {
     if (req.session.currentUser) {
-        res.redirect('app/main'); // Redirect to dashboard if currentUser is set in the session
+        return res.redirect('app/main'); // Redirect to dashboard if currentUser is set in the session
     } else {
         next(); // Continue to the next middleware if session is not active
     }
@@ -65,17 +65,17 @@ const sessionChecker = (req, res, next) => {
 //Routes if not keep me logged in
 // Route for the home page
 app.get('/', sessionChecker, (req, res) => {
-    res.redirect("app");
+    return res.redirect("app");
 });
 
 // User Login
 app.get('/userlogin', sessionChecker, (req, res) => {
-    res.render('userlogin', { layout: "layouts/main" });
+    return res.render('userlogin', { layout: "layouts/main" });
 });
 
 /////////////////////////
 app.get('/', function (req, res) {
-    res.redirect("app");
+    return res.redirect("app");
 });
 
 var server = app.listen(3000, function () {
@@ -85,5 +85,5 @@ var server = app.listen(3000, function () {
 app.use("/app", apps);
 
 app.get('*', function(req, res){
-    res.render('404', { layout: "layouts/main" });
+    return res.render('404', { layout: "layouts/main" });
   });
