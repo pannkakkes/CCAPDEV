@@ -13,11 +13,13 @@ router.get('/searchusers', function (req, res) {
 
 router.get('/users', async (req, res) => {
     if (!req.query.username) {
-        res.send("<script>alert('Please enter a username.'); window.location.href = '/app/main/search/searchusers'; </script>");
+        const errorExists = true;
+        res.render("searchusers", {errorExists, layout: "layouts/main"});
     }
     else {
     const existUsername = await User.find({username: {$regex: req.query.username, $options: "i"}})
-    res.render("searchusers", {existUsername, layout: "layouts/main"});
+    const name = req.query.username;
+    res.render("searchusers", {name, existUsername, layout: "layouts/main"});
     }
 })
 
@@ -98,7 +100,8 @@ router.get('/slots', async (req, res) => {
     res.render("searchslots", {isTakenSeat, newlab, newdatetime, layout: "layouts/main"});
     }
     else {
-        res.send("<script>alert('Please fill in all the fields.'); window.location.href = '/app/main/search/searchslots'; </script>");
+        var errorExists = true;
+        res.render("searchslots", {errorExists, layout: "layouts/main"});
     }
 });
 

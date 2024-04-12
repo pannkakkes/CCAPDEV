@@ -8,6 +8,7 @@
 				</form>
 			</div>
 			{{#if existUsername.length includeZero=true}}
+				<p>Search results for "{{name}}":</p>
 				<p id="search-results">
 					{{#if existUsername.length}}
 					{{#each existUsername}}
@@ -27,4 +28,7 @@
 					{{/if}}
 				</p>
 				{{/if}}
+			{{#if errorExists}}
+				<p>Please enter a username.</p>
+			{{/if}}
 </div>
