@@ -25,20 +25,6 @@ router.get('/', async function (req, res) {
     }
 });
 
-router.get('/editprofile', async function (req, res) {
-    try {
-        const currentUser = await User.findOne({ username: req.session.currentUser.username });
-        const birthdate = currentUser.birthdate; 
-        const [month, day, year] = birthdate.split('/');
-
-        res.render('usereditprofile', { currentUser, formattedBirthdate: `${year}-${month}-${day}`, layout: "layouts/main"});
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Server error");
-    }
-    //res.sendFile(path.join(__dirname, 'usereditprofile.html'));
-});
-
 router.post('/edit', async (req, res) => {
     const currentUser = await User.findOne({ username: req.session.currentUser.username });
     const ID = currentUser.username;
