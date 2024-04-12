@@ -1,8 +1,50 @@
 {{>nav}}
-        <div class="container">
-			<h1>Fazbear Labs</h1>
+	<style>
+		.dashContainer {
+			text-align: center;
+		}
+
+		.containers {
+			height: 380px;
+			display: inline-block;
+			vertical-align: top;
+			border-radius: 15px;
+		}
+
+		.red {
+			background-color:#e54c44;
+			width: 130px;
+			color: #fffcef;
+		}
+
+		.yellow {
+			background-color: #f1cf54;
+			width: 280px;
+		}
+	</style>
+	<div class="dashContainer">
+		<div class="containers red">
+			<div id="profile-picture-container">
+                <img id="profile-picture" src={{ currentUser.profilepicture }} alt="Profile Image" width="80">
+            </div>
+            <h2 id="profile-name" style="color: #fffcef;"> {{ currentUser.username }} </h2>
+			<p id="profile-birthdate" style="color: #fffcef;">{{ currentUser.birthdate }}</p>
+            <p id="profile-description"> {{ currentUser.description }} </p>
+		</div>
+		<div class="containers yellow">
+			<h1>Choose your lab!</h1>
 			<p>What would you like to do?</p>
 			<a href="/app/main/profile" class="normal-link">View Your Profile</a><br><br>
 			<a href="/app/main/reserve" class="normal-link">Reserve a Lab Slot</a><br><br>
 			<a href="/app/main/userlogout" class="normal-link">Logout</a>
 		</div>
+		<div class="containers red"></div>
+	</div>
+
+	{{!-- <div class="container" style="width: 300px; height: 500px">
+		<h1>Fazbear Labs</h1>
+		<p>What would you like to do?</p>
+		<a href="/app/main/profile" class="normal-link">View Your Profile</a><br><br>
+		<a href="/app/main/reserve" class="normal-link">Reserve a Lab Slot</a><br><br>
+		<a href="/app/main/userlogout" class="normal-link">Logout</a>
+	</div> --}}
