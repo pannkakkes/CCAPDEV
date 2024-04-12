@@ -187,7 +187,18 @@ router.get('/users/:name', async function(req, res){
     try {
         const name = req.params.name;
         const existUsername = await User.findOne({username: name});
+
+        if (!existUsername) {
+            res.render('404', { layout: "layouts/main" });
+        }
+
         const reservationsData = await Reservation.find({ username: existUsername.username});
+        var currentUser = (req.session.currentUser);
+
+        if (name == currentUser.username) {
+            res.render('userviewprofile',{currentUser, reservationsData, layout: "layouts/main"});
+        }
+
         res.render("publicprofile", {existUsername, reservationsData, layout: "layouts/main"});
 
     } catch (error) {

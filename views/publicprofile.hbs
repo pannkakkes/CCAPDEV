@@ -1,23 +1,24 @@
+
 {{>nav}}
 
-    <div class="container">
-        <h1>Profile</h1>
+<div>
+  <div class="profile-left">
+    <h1>Profile</h1><br>
+          <div>
+              <div id="profile-picture-container">
+                  <img id="profile-picture" src={{ existUsername.profilepicture }} alt="Profile Image" width="150">
+              </div>
+              <h2 id="profile-name"> {{ existUsername.username }} </h2>
+              <p id="profile-description"> {{ existUsername.description }} </p>
+              <p id="profile-birthdate">{{ existUsername.birthdate }}</p>
 
-        <div>
-            <div id="profile-picture-container">
-                <img id="profile-picture" src="{{ existUsername.profilepicture }}" alt="Profile Image" width="150">
-            </div>
-            <h2 id="profile-name"> {{ existUsername.username }} </h2>
-            <p id="profile-description"> {{ existUsername.description }} </p>
-            <p id="profile-birthdate">{{ existUsername.birthdate }}</p>
-
-        </div>
-
-        <div>
-            <h2>Reserved Seats</h2>
-          {{#if reservationsData.length}}
-          <table>
-        <thead>
+          </div>
+  </div>
+  <div class="profile-right">
+    <h1>Reserved Seats</h1><br>
+    {{#if reservationsData.length}}
+            <table id="reservationTable">
+        <thead id="profiletableheader">
           <tr>
             <th>Seat</th>
             <th>Laboratory Number</th>
@@ -28,27 +29,22 @@
         <tbody id="reservationTableBody">
             {{#each reservationsData}}
             {{#if this.isAnonymous}}
-              <tr>
-                <td>Hidden</td>
-                <td>Hidden</td>
+            <tr>
+            <td>Hidden</td> <td>Hidden</td>
                 <td>Hidden</td>
                 <td>Hidden</td>
               </tr>
             {{else}}
-            <tr>
+              <tr>
                 <td>{{ this.seat }}</td> <td>{{ this.laboratory }}</td>
                 <td>{{ this.dateTimeRequest }}</td>
                 <td>{{ this.dateTimeReservation }}</td>
               </tr>
             {{/if}}
             {{/each}}
-          </tbody>
-      </table>
           {{else}}
             <p class="reservation-none" id="reservation-none">No reservations found.</p>
           {{/if}}
-        
-
-            <br>
-        </div>
-    </div>
+        </tbody>
+  </div>
+</div>
