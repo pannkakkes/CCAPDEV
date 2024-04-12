@@ -63,7 +63,7 @@ router.post('/edit', async (req, res) => {
         userToUpdate.description = desc;
         userToUpdate.profilepicture = profilePicture;
         await userToUpdate.save();
-        return res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
+        return res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main/profile'; </script>");
     } catch (err){
         console.error('Error updating user:', err);
         return res.status(500).send('Error updating user');

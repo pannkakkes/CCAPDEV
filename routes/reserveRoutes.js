@@ -14,10 +14,10 @@ let currentId;
 router.get('/', function (req, res) {
     try {
         const currentUser = req.session.currentUser;
-        res.render('reserve', { currentUser});
+        return res.render('reserve', { currentUser});
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 });
 
@@ -32,10 +32,10 @@ router.get('/edit', async function (req, res) {
         else{
             reservationsData = await Reservation.find({});
         }
-        res.render('reserveedit', { currentUser, reservationsData });
+        return res.render('reserveedit', { currentUser, reservationsData });
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 });
 
@@ -46,10 +46,10 @@ router.get('/saveedit', async function (req, res) {
         let reservationsData = await Reservation.findOne({ reserveId: req.query.id });
         currentId = req.query.id;
 
-        res.render('reservesaveedit', { currentUser, reservationsData });
+        return res.render('reservesaveedit', { currentUser, reservationsData });
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 });
 
@@ -82,15 +82,16 @@ router.post('/save',async function(req, res){
             if (await Reservation.findOne({username: req.body.studentNameText})){
 
             }else {
-                res.send("<script>alert('Edit was unsuccessful. The username does not exist'); window.location.href = '/app/main'; </script>");
-                return;
+                const usernameNotExist = true;
+                let reservationsData = await Reservation.findOne({ reserveId: currentId });
+                return res.render('reservesaveedit',{currentUser, reservationsData, usernameNotExist});
             }
         }
 
         //This already Exist
         if (validCheck){
-            res.send("<script>alert('Edit was unsuccessful. This slot has already been taken'); window.location.href = '/app/main'; </script>");
-            return;
+            let reservationsData = await Reservation.findOne({ reserveId: currentId });
+            return res.render('reservesaveedit',{currentUser, reservationsData, validCheck});
         }
 
         console.log();
@@ -109,10 +110,10 @@ router.post('/save',async function(req, res){
         await currentReservation.save();
 
 
-        res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
+        return res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 });
 
@@ -124,11 +125,11 @@ router.get('/see', async function (req, res){
 
         //console.log(currentUser);
 
-        res.render('reservesee',{reservationsData, layout:"layouts/main"});
+        return res.render('reservesee',{reservationsData, layout:"layouts/main"});
 
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
     //res.sendFile(path.join(__dirname, 'userviewprofile.html'));
 });
@@ -154,10 +155,10 @@ router.get('/viewslots', async function(req, res){
         const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
 
         const currDate = CurrentDate()
-        res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
+        return res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
     } catch (error){
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 })
 
@@ -180,7 +181,7 @@ router.get('/updateview', async function(req, res){
     const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
     
     const currDate = CurrentDate()
-    res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
+    return res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
 })
 
 router.get('/users/:name', async function(req, res){
@@ -195,14 +196,14 @@ router.get('/users/:name', async function(req, res){
         var currentUser = (req.session.currentUser);
 
         if (name == currentUser.username) {
-            res.render('userviewprofile',{currentUser, reservationsData, layout: "layouts/main"});
+            return res.render('userviewprofile',{currentUser, reservationsData, layout: "layouts/main"});
         }
 
-        res.render("publicprofile", {existUsername, reservationsData, layout: "layouts/main"});
+        return res.render("publicprofile", {existUsername, reservationsData, layout: "layouts/main"});
 
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 })
 
@@ -306,14 +307,16 @@ router.post('/reserve', async function (req, res) {
         
         if (existingReservation) {
             // Reservation slot is already taken
-            return res.status(400).send('<script>alert("This seat and slot have already been reserved. Please select another one."); window.location.href="/app/main/reserve";</script>');
+            const validCheck = true;
+            return res.render('reserve', { currentUser, validCheck});
         }
 
         if (role === 'T'){
             //make it so that if username inputted does not exist it will not reserve
             const userExists = await User.exists({ username: inputname });
             if (!userExists) {
-                return res.status(400).send('<script>alert("Reservation unsuccessful. This username does not exist."); window.location.href="/app/main/reserve";</script>');
+                const usernameNotExist = true;
+                return res.render('reserve', { currentUser, usernameNotExist});
             }
         }
     }
@@ -334,11 +337,11 @@ router.post('/reserve', async function (req, res) {
         
     } catch (error) {
         console.error("Error creating reservation:", error);
-        res.status(500).send("Error creating reservation.");
+        return res.status(500).send("Error creating reservation.");
     }
     }
     
-    res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
+    return res.send('<script>alert("Reservation successful!"); window.location.href="/app/main";</script>');
 });
 
 router.post('/deletereservation', async function (req, res) {
@@ -362,11 +365,14 @@ router.post('/deletereservation', async function (req, res) {
         await Reservation.deleteOne({
             reserveId: req.body.toDelete
         });
-        res.send('<script>alert("Reservation deleted!"); window.location.href="/app/main";</script>');
+        return res.send('<script>alert("Reservation deleted!"); window.location.href="/app/main";</script>');
     }
 
     else {
-        res.send('<script>alert("This reservation cannot be cancelled yet."); window.location.href="/app/main";</script>');
+        const cannotCancel = true;
+        const currentUser = req.session.currentUser;
+        let reservationsData = await Reservation.findOne({ reserveId: currentId });
+        return res.render('reservesaveedit', { currentUser, reservationsData, cannotCancel });
     }
     
 });

@@ -80,6 +80,15 @@
     {{>nav}}
     <div class="container">
         <h1>Edit Reservation</h1>
+        {{#if usernameNotExist}}
+        <b>Edit was unsuccessful. The student username does not exist.</b><br>
+        {{/if}}
+        {{#if validCheck}}
+        <b>Edit was unsuccessful. The slot has already been taken.</b><br>
+        {{/if}}
+        {{#if cannotCancel}}
+        <b>Deletion unsuccessful. This reservation cannot be cancelled yet.</b><br>
+        {{/if}}
         <div class="subcontainer-red">
             <!--Add div for the lab selection menu-->
             <div id="leftArrow"></div>

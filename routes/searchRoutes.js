@@ -8,23 +8,23 @@ const Reservation = require("../database/models/Reservation")
 const User = require("../database/models/User")
 
 router.get('/searchusers', function (req, res) {
-    res.render("searchusers", {layout: "layouts/main"});
+    return res.render("searchusers", {layout: "layouts/main"});
 });
 
 router.get('/users', async (req, res) => {
     if (!req.query.username) {
         const errorExists = true;
-        res.render("searchusers", {errorExists, layout: "layouts/main"});
+        return res.render("searchusers", {errorExists, layout: "layouts/main"});
     }
     else {
     const existUsername = await User.find({username: {$regex: req.query.username, $options: "i"}}).collation({ locale: "en" }).sort({ username: 1 })
     const name = req.query.username;
-    res.render("searchusers", {name, existUsername, layout: "layouts/main"});
+    return res.render("searchusers", {name, existUsername, layout: "layouts/main"});
     }
 })
 
 router.get('/searchslots', function (req, res) {
-    res.render("searchslots", {layout: "layouts/main"});
+    return res.render("searchslots", {layout: "layouts/main"});
 });
 
 router.get('/slots', async (req, res) => {
@@ -97,11 +97,11 @@ router.get('/slots', async (req, res) => {
     var isTakenSeat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
     searchResults.forEach((element) => isTakenSeat[parseInt((element.seat.split(" "))[1]) - 1] = element);
 
-    res.render("searchslots", {isTakenSeat, newlab, newdatetime, layout: "layouts/main"});
+    return res.render("searchslots", {isTakenSeat, newlab, newdatetime, layout: "layouts/main"});
     }
     else {
         var errorExists = true;
-        res.render("searchslots", {errorExists, layout: "layouts/main"});
+        return res.render("searchslots", {errorExists, layout: "layouts/main"});
     }
 });
 
