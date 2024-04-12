@@ -17,7 +17,7 @@ router.get('/users', async (req, res) => {
         res.render("searchusers", {errorExists, layout: "layouts/main"});
     }
     else {
-    const existUsername = await User.find({username: {$regex: req.query.username, $options: "i"}})
+    const existUsername = await User.find({username: {$regex: req.query.username, $options: "i"}}).collation({ locale: "en" }).sort({ username: 1 })
     const name = req.query.username;
     res.render("searchusers", {name, existUsername, layout: "layouts/main"});
     }
