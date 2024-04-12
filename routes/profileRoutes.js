@@ -17,11 +17,11 @@ router.get('/', async function (req, res) {
         reservationsData.reverse();
         const birthdate = currentUser.birthdate; 
         const [month, day, year] = birthdate.split('/');
-        res.render('userviewprofile',{currentUser, reservationsData, formattedBirthdate: `${year}-${month}-${day}`, layout: "layouts/main"});
+        return res.render('userviewprofile',{currentUser, reservationsData, formattedBirthdate: `${year}-${month}-${day}`, layout: "layouts/main"});
 
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        return res.status(500).send("Server error");
     }
 });
 
@@ -63,10 +63,10 @@ router.post('/edit', async (req, res) => {
         userToUpdate.description = desc;
         userToUpdate.profilepicture = profilePicture;
         await userToUpdate.save();
-        res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
+        return res.send("<script>alert('Edit was successful.'); window.location.href = '/app/main'; </script>");
     } catch (err){
         console.error('Error updating user:', err);
-        res.status(500).send('Error updating user');
+        return res.status(500).send('Error updating user');
     }
 })
 
@@ -76,7 +76,7 @@ router.get('/deleteprofile', async function (req, res){
     //console.log(currentUser._id)
     //console.log(currentUser);
     // Render user delete template (userdelete.hbs) with current user's information
-    res.render('userdelete', { currentUser, layout: "layouts/main"});
+    return res.render('userdelete', { currentUser, layout: "layouts/main"});
 });   
 
 router.post('/delete', async function (req, res) {
@@ -86,10 +86,10 @@ router.post('/delete', async function (req, res) {
         await User.deleteOne({ _id: idTobeDeleted });
         await Reservation.deleteMany({username: req.session.currentUser.username});
         req.session.currentUser = null;
-        res.status(200).send('User deleted successfully');
+        return res.status(200).send('User deleted successfully');
     } catch (error) {
         console.error('Error deleting user:', error);
-        res.status(500).send('Error deleting user');
+        return res.status(500).send('Error deleting user');
     }
 });
 
