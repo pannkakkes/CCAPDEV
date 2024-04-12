@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/favicon/freddyfazbear.png">
     <style>
-        .subcontainer {
+        .editSubcontainer {
             border-radius: 8px;
             margin-top: -0.3px;
             text-align: center;
-            width: 440px;
+            width: 500px;
             background-color: #e54c44;
         }
         h2 {
@@ -19,6 +19,7 @@
             font-weight: 400;
             line-height: 1.2;
             color: #fffcef;
+            padding-top: 10px;
         }
         .content {
             display: flex;
@@ -62,7 +63,7 @@
         <span id="userRole" style="display: none;">{{currentUser.role}}</span>
         <span id="userName" style="display: none;">{{currentUser.username}}</span>
         <h1>Edit Reservation</h1>
-        <div class="subcontainer">
+        <div class="editSubcontainer">
             <h2>Select Reservation to Edit</h2>
             <div id="buttonsContainer">
                 {{#each reservationsData}}
