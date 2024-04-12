@@ -29,62 +29,164 @@
 					</select><br><br>
 					<button class="search-button">Search for Slots</button>
 				</form>
-				{{#if isAvailableSeat}}
+				{{#if isTakenSeat}}
 				<p id="search-results">
 					<br><b>{{newlab}} {{newdatetime}}</b><br>
-					{{!-- {{#each searchResults}}
-					{{this.seat}}<br>
-					{{/each}} --}}
 					<div id="selectLab">
-						{{#if isAvailableSeat.[0]}}
-						<div class="seats">S1</div>
+						{{#if isTakenSeat.[0]}}
+							<div class="takenseat">S1
+								<div class="taken-details">
+								{{#if isTakenSeat.[0].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[0].username }}" name="name" value="{{ isTakenSeat.[0].username }}" method="get" class="user-link">{{ isTakenSeat.[0].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[0].dateTimeRequest}}
+								</div>
+							</div>
 						{{else}}
-						<div class="takenseat">S1</div>
+							<div class="seats">S1</div>
 						{{/if}}
-						{{#if isAvailableSeat.[1]}}
-						<div class="seats">S2</div>
+						{{#if isTakenSeat.[1]}}
+							<div class="takenseat">S2
+								<div class="taken-details">
+								{{#if isTakenSeat.[1].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[1].username }}" name="name" value="{{ isTakenSeat.[1].username }}" method="get" class="user-link">{{ isTakenSeat.[1].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[1].dateTimeRequest}}
+							</div>
+							</div>
+							
 						{{else}}
-						<div class="takenseat">S2</div>
+							<div class="seats">S2</div>
 						{{/if}}
-						{{#if isAvailableSeat.[2]}}
-						<div class="seats">S3</div>
+						{{#if isTakenSeat.[2]}}
+							<div class="takenseat">S3
+								<div class="taken-details">
+								{{#if isTakenSeat.[2].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[2].username }}" name="name" value="{{ isTakenSeat.[2].username }}" method="get" class="user-link">{{ isTakenSeat.[2].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[2].dateTimeRequest}}
+							</div>
+							</div>
+							
 						{{else}}
-						<div class="takenseat">S3</div>
+							<div class="seats">S3</div>
 						{{/if}}
-						{{#if isAvailableSeat.[3]}}
-						<div class="seats">S4</div>
+						{{#if isTakenSeat.[3]}}
+							<div class="takenseat">S4
+								<div class="taken-details">
+								{{#if isTakenSeat.[3].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[3].username }}" name="name" value="{{ isTakenSeat.[3].username }}" method="get" class="user-link">{{ isTakenSeat.[3].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[3].dateTimeRequest}}
+							</div>
+							</div>
+							
 						{{else}}
-						<div class="takenseat">S4</div>
+							<div class="seats">S4</div>
 						{{/if}}
-						{{#if isAvailableSeat.[4]}}
-						<div class="seats">S5</div>
+						{{#if isTakenSeat.[4]}}
+							<div class="takenseat">S5
+								<div class="taken-details">
+								{{#if isTakenSeat.[4].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[4].username }}" name="name" value="{{ isTakenSeat.[4].username }}" method="get" class="user-link">{{ isTakenSeat.[4].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[4].dateTimeRequest}}
+							</div>
+							</div>
+							
 						{{else}}
-						<div class="takenseat">S5</div>
+							<div class="seats">S5</div>
 						{{/if}}
-						{{#if isAvailableSeat.[5]}}
-						<div class="seats">S6</div>
+						{{#if isTakenSeat.[5]}}
+							<div class="takenseat">S6<div class="taken-details">
+								{{#if isTakenSeat.[5].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[5].username }}" name="name" value="{{ isTakenSeat.[5].username }}" method="get" class="user-link">{{ isTakenSeat.[5].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[5].dateTimeRequest}}
+							</div></div>
+							
 						{{else}}
-						<div class="takenseat">S6</div>
+							<div class="seats">S6</div>
 						{{/if}}
-						{{#if isAvailableSeat.[6]}}
-						<div class="seats">S7</div>
+						{{#if isTakenSeat.[6]}}
+							<div class="takenseat">S7<div class="taken-details">
+								{{#if isTakenSeat.[6].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[6].username }}" name="name" value="{{ isTakenSeat.[6].username }}" method="get" class="user-link">{{ isTakenSeat.[6].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[6].dateTimeRequest}}
+							</div></div>
+							
 						{{else}}
-						<div class="takenseat">S7</div>
+							<div class="seats">S7</div>
 						{{/if}}
-						{{#if isAvailableSeat.[7]}}
-						<div class="seats">S8</div>
+						{{#if isTakenSeat.[7]}}
+							<div class="takenseat">S8
+								<div class="taken-details">
+								{{#if isTakenSeat.[7].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[7].username }}" name="name" value="{{ isTakenSeat.[7].username }}" method="get" class="user-link">{{ isTakenSeat.[7].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[7].dateTimeRequest}}
+							</div>
+							</div>
+							
 						{{else}}
-						<div class="takenseat">S8</div>
+							<div class="seats">S8</div>
 						{{/if}}
-						{{#if isAvailableSeat.[8]}}
-						<div class="seats">S9</div>
+						{{#if isTakenSeat.[8]}}
+							<div class="takenseat">S9
+								<div class="taken-details">
+								{{#if isTakenSeat.[8].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[8].username }}" name="name" value="{{ isTakenSeat.[8].username }}" method="get" class="user-link">{{ isTakenSeat.[8].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[8].dateTimeRequest}}
+							</div>
+							</div>
+							
 						{{else}}
-						<div class="takenseat">S9</div>
+							<div class="seats">S9</div>
 						{{/if}}
-						{{#if isAvailableSeat.[9]}}
-						<div class="seats">S10</div>
+						{{#if isTakenSeat.[9]}}
+							<div class="takenseat">S10
+								<div class="taken-details">
+								{{#if isTakenSeat.[9].isAnonymous}}
+									Reserved by Anonymous<br>
+								{{else}}
+								Reserved by <a href="/app/main/reserve/users/{{ isTakenSeat.[9].username }}" name="name" value="{{ isTakenSeat.[9].username }}" method="get" class="user-link">{{ isTakenSeat.[9].username }}</a><br>
+								
+								{{/if}}
+								{{isTakenSeat.[9].dateTimeRequest}}
+							</div>
+							</div>
+							
 						{{else}}
-						<div class="takenseat">S10</div>
+							<div class="seats">S10</div>
 						{{/if}}
 					</div>
 				

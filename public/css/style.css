@@ -275,3 +275,14 @@ div .float-left {
     right: 20px; /* Adjust right positioning */
     text-align: right; /* Align text to the right */
 }
+
+.taken-details {
+    display: none;
+    position: absolute;
+    background-color: #fffcef;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.takenseat:hover .taken-details {display: block;}
