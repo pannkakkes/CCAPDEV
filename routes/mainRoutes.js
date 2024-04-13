@@ -14,7 +14,6 @@ const Reservation = require("../database/models/Reservation")
 
 router.get("/", async function (req, res) { 
     try {
-        console.log("here")
         // Ensure that the session contains the current user information
         if (!req.session.currentUser) {
             return res.redirect('/'); // Redirect to index if currentUser is not set in the session
@@ -33,7 +32,6 @@ router.get("/", async function (req, res) {
         const [month, day, year] = birthdate.split('/');
         
         // Render the dashboard template with the current user and reservations data
-        console.log(thisUser, reservationsData);
         return res.render('dashboard', {
             thisUser,
             reservationsData,

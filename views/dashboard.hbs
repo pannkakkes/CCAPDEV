@@ -28,7 +28,7 @@
 			
 		}
 		.schedules {
-            background-color: #fffcef;
+            background-color: white;
             margin: 20px auto;
             padding: 5px;
             border-radius: 8px;
@@ -122,12 +122,10 @@
 		</div>
 		<div class="containers red">
 			<h1 style="font-size: 20px;">Reservations</h1>
+			{{#if reservationsData}}
 			{{#each reservationsData}}
 			<div class="schedules">
 				<div class="content">
-					{{#if this.anonymous}}
-						<p>Anonymous</p>
-					{{/if}}
 					<p>{{this.laboratory}}</p>
 					<p>{{this.seat}}</p>
 					<p>Reserve Time: {{this.dateTimeReservation}}</p>
@@ -135,6 +133,10 @@
 				</div>
 			</div>
             {{/each}}
+			{{else}}
+			<p>No reservations found.</p>
+			{{/if}}
+
 		</div>
 	</div>
 
