@@ -140,9 +140,7 @@ router.get('/viewslots', async function(req, res){
     try {
         const currentUser = req.session.currentUser;
         let reservationsData = await Reservation.find({});
-        //const initialDtr = '1/1/2024 2:30 PM';
         const initialDtr = (new Date().toLocaleDateString('en-US')) + ' 9:00 AM';
-
         const initialLab = 'Freddy\'s Frightful Manor';
         const initialDt = (new Date().toLocaleDateString('en-US'))  + ' 9:00 AM - 9:30 AM';
 
@@ -154,6 +152,13 @@ router.get('/viewslots', async function(req, res){
 
         //console.log(reservationsData);
         const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
+
+        sortedAndFilledReservationsData.sort((a, b) => {
+            const seatNumberA = parseInt(a.seat.split(' ')[1]);
+            const seatNumberB = parseInt(b.seat.split(' ')[1]);
+            return seatNumberA - seatNumberB;
+        });
+    
 
         const currDate = CurrentDate()
         return res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
@@ -181,6 +186,12 @@ router.get('/updateview', async function(req, res){
 
     const sortedAndFilledReservationsData = fillBlanksDate(reservationsData, initialLab, initialDtr);
     
+    sortedAndFilledReservationsData.sort((a, b) => {
+        const seatNumberA = parseInt(a.seat.split(' ')[1]);
+        const seatNumberB = parseInt(b.seat.split(' ')[1]);
+        return seatNumberA - seatNumberB;
+    });
+
     const currDate = CurrentDate()
     return res.render('reserveviewslots', {sortedAndFilledReservationsData, initialDtr, initialLab, initialDt, currDate, layout: "layouts/main"});
 })

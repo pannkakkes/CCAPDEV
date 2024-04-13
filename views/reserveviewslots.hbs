@@ -77,6 +77,20 @@
     </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    const today = new Date();
+    const minDate = today.toISOString().split('T')[0];
+
+    const maxDate = new Date(today.getTime() + 6 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split('T')[0];
+
+    const dateInput = document.getElementById('date');
+
+    dateInput.min = minDate;
+    dateInput.max = maxDate;
+  </script>
+  
   <script src="/js/ViewslotAjax.js"></script> 
   <script>
     $(document).ready(function(){
