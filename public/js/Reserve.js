@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[0] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat1").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat2").addEventListener("click", function(e) {
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[1] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat2").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat3").addEventListener("click", function(e) {
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[2] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat3").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat4").addEventListener("click", function(e) {
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[3] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat4").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat5").addEventListener("click", function(e) {
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[4] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat5").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat6").addEventListener("click", function(e) {
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[5] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat6").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat7").addEventListener("click", function(e) {
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[6] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat7").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat8").addEventListener("click", function(e) {
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[7] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat8").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat9").addEventListener("click", function(e) {
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[8] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat9").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat10").addEventListener("click", function(e) {
@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clicked[9] = 1;
         }
 
-        console.log(accessSeatNum.value)
+        document.getElementById("seat10").style.backgroundColor = "#49d182";
         click = 1;
     });
 
