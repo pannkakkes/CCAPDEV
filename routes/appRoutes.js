@@ -3,7 +3,8 @@ const main = require("./mainRoutes");
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const moment = require('moment'); // Used for transforming birthdate to mm/dd/yyyy format
-
+const mongoose = require('mongoose');
+mongoose.connect("mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB");
 const User = require("../database/models/User")
 const Reservation = require("../database/models/Reservation")
 
