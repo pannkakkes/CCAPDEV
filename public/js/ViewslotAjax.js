@@ -1,23 +1,25 @@
-$(document).ready(function() {
-    $("#date, #time_slot, #lab").change(function() {
-      const lab = $("#lab").val();
-      const date = $("#date").val();
-      const timeSlot = $("#time_slot").val();
-  
-      $.ajax({
-        url: "/updateview", 
-        type: "GET",
-        data: {
-          lab: lab,
-          date: date,
-          time_slot: timeSlot
-        },
-        success: function(response) {
-          $("#reservation-table").html(response); 
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.error("Error fetching reservations:", textStatus, errorThrown);
-        }
-      });
+function fetchAvailabilityData() {
+    $.ajax({
+      url: '/updateview', 
+      method: 'GET',
+      success: function(response) {
+        updateTable(response.sortedAndFilledReservationsData);
+      },
+      error: function(xhr, status, error) {
+        console.error('Error fetching Lab Reservation:', error);
+      }
     });
-  });
+  }
+  
+  function updateTable(newData) {
+    $("#reservation-data").empty();
+  
+    $.each(newData, function(index, reservation) {
+      const tableRow = `
+        <tr>
+          <td>${reservation.laboratory}</td> <td>${reservation.seat}</td> <td class="availability">${reservation.isAvailable ? 'Available' : 'Unavailable'}</td> </tr>
+      `;
+      
+      $("#reservation-data").append(tableRow);
+    });
+  }
