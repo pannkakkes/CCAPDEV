@@ -1,13 +1,14 @@
 {{>nav}}
 
-    <div class="container" style="width: 700px; position: relative; height: 500px">
-        <h1>Reservation Details</h1>
+    <div class="container" style="width: 700px; position: relative; min-height: 500px; background-color: #e54c44;">
+        <h1 style="color: #fffcef">Reservation Details</h1>
     
 
-    <div class="table-container" style="left: 0; right: 0">
-        <table style="left: 0">
-            {{#if reservationsData.length}}
-            <thead>
+    <div style="left: 0; right: 0">
+        {{#if reservationsData.length}}
+        <table style="left: 0" id="reservationTable">
+            <br>
+            <thead id="profiletableheader">
                 <tr>
                     <th>Seat</th>
                     <th>Laboratory Name</th>
@@ -23,11 +24,11 @@
                     <td>{{ this.dateTimeReservation }}</td>
                 </tr>
                 {{/each}}
-            {{else}}
-                <p style="margin-left:285px">No reservations found.</p>
-            {{/if}}
             </tbody>
         </table>
+        {{else}}
+                <p style="color: #fffcef">No reservations found.</p>
+        {{/if}}
     </div>
     <br>
 

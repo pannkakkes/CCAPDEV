@@ -2,6 +2,7 @@ const router = require("express").Router();
 const mongoose = require('mongoose');
 const express = require('express');
 const moment = require("moment-timezone");
+const mom = require("moment");
 const path = require('path')
 
 mongoose.connect("mongodb+srv://pai:CRKDMGWvsxLejGFk@labdb.3vyara1.mongodb.net/?retryWrites=true&w=majority&appName=labDB")
@@ -47,7 +48,16 @@ router.get('/saveedit', async function (req, res) {
         let reservationsData = await Reservation.findOne({ reserveId: req.query.id });
         currentId = req.query.id;
 
-        return res.render('reservesaveedit', { currentUser, reservationsData });
+        if (reservationsData) {
+            var dt = reservationsData.dateTimeReservation.split(" ");
+            var formattedDate = Date.parse(dt[0]);
+            formattedDate = moment(formattedDate).format('YYYY-MM-DD');
+            return res.render('reservesaveedit', { formattedDate, currentUser, reservationsData });
+        }
+        else {
+            return res.render('404', { layout: "layouts/main" });
+        }
+
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
@@ -123,6 +133,7 @@ router.get('/see', async function (req, res){
     try {
         const currentUser = req.session.currentUser;
         const reservationsData = await Reservation.find({ username: currentUser.username });
+        reservationsData.reverse();
 
         //console.log(currentUser);
 

@@ -75,7 +75,7 @@
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="/js/User.js"></script>
     <script src="/js/CurrentUser.js"></script>
-    <script src="/js/ReserveSaveEdit.js"></script>
+    <script src="/js/ReserveSaveEdit.js" trueLab="{{reservationsData.laboratory}}" seat="{{reservationsData.seat}}" id="helper"></script>
 </head>
 <body>
     {{>nav}}
@@ -112,9 +112,8 @@
                 <div id="infoLabTitle"></div>
                 <div id="infoSeatNum">{{reservationsData.seat}}</div>
                 <input id="infoSeatNumHidden" type="hidden" name="infoSeatNum" value={{reservationsData.seat}}>
-                <div id="date">Date: <input type="date" id="reservationDate" name="dateCheck" required></div>
+                <div id="date">Date: <input type="date" id="reservationDate" name="dateCheck" value="{{formattedDate}}" required></div>
                 <select id="time_slot" name="time_slot">
-                    <option value="choose-slot">Choose Time</option>
                     <option value="9:00 AM">Slot 1 (9:00 - 9:30)</option>
                     <option value="9:30 AM">Slot 2 (9:30 - 10:00)</option>
                     <option value="10:00 AM">Slot 3 (10:00 - 10:30)</option>
@@ -147,6 +146,7 @@
             </div>
         </div>
     </div>
+    
 </body>
 </html>
 

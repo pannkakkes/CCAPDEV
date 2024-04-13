@@ -14,8 +14,28 @@ labs.push(new Lab("Chica's Chilling Chamber", "#d0d0d0", "#e7a11c"));
 labs.push(new Lab("Puppet's Perilous Palace", "#aba8a8", "#ba2828"));
 
 document.addEventListener("DOMContentLoaded", () => {
-    let currentLabIndex = 0;
+    var trueLab = document.getElementById("helper").getAttribute("trueLab");
+    let currentLabIndex;
+
+    if (trueLab.includes("Freddy")) {
+        currentLabIndex = 0;
+    } else if (trueLab.includes("Chica")) {
+        currentLabIndex = 1;
+    } else if (trueLab.includes("Puppet")) {
+        currentLabIndex = 2;
+    }
+
+    let seatNum = document.querySelector("#infoSeatNum");
+    var tempSeat = document.getElementById("helper").getAttribute("seat").split(" ");
+    seatNum.textContent = tempSeat[0] + ": " + tempSeat[1];
+
+    let accessSeatNum = document.getElementById("infoSeatNumHidden")
+    accessSeatNum.value = document.getElementById("helper").getAttribute("seat");
+    click = 1;
+
     updateLabDetails(currentLabIndex);
+
+    document.getElementById(tempSeat[0].toLowerCase() + tempSeat[1]).style.backgroundColor = "#49d182";
 
     var role = document.getElementById("userHolder").textContent; // Get the role value
     var roleInput = document.getElementById("roleInput"); // Get the input box element
@@ -161,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
         seatNum.textContent = "Seat: 7"
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
-        accessSeatNum.value = "Seat 7";
+        accessSeatNum.value = "Seat 7"
         updateLabDetails(currentLabIndex);
         document.getElementById("seat7").style.backgroundColor = "#49d182";
         click = 1;
