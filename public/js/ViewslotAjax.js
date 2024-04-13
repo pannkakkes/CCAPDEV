@@ -3,6 +3,7 @@ function fetchAvailabilityData() {
       url: '/updateview', 
       method: 'GET',
       success: function(response) {
+        console.log(response.initialDtr);
         updateTable(response.sortedAndFilledReservationsData);
       },
       error: function(xhr, status, error) {
