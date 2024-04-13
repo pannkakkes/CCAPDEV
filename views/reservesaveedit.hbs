@@ -59,6 +59,7 @@
             height: 34px;
             display: inline-block;
             margin: 3px;
+            cursor: pointer;
         }
         #labTitle{
             font-size: 10px;
@@ -136,12 +137,12 @@
                     <div id="studentNameText" style="display: none;">Student Name:</div>
                     <input type="text" id="roleInput" name="studentNameText" style="display: none;">
                 </div>
-                <a href="/app/main"><button id="reserve">Save</button></a>
+                <a href="/app/main"><button id="reserve" class="submit-button">Save</button></a>
             </form>
             <form action="/app/main/reserve/deletereservation" method ="post" enctype="multipart/form-data">
                 <input name="toDelete" value={{reservationsData.reserveId}} style="display: none;">
                 <input name="deleteDate" value="{{reservationsData.dateTimeReservation}}" style="display: none;">
-                <a href="/app/main"><button id="delete">Delete</button></a>
+                <a href="/app/main"><button id="delete" class="submit-button">Delete</button></a>
             </form>
             </div>
         </div>

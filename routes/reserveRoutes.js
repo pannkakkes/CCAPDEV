@@ -32,6 +32,7 @@ router.get('/edit', async function (req, res) {
         else{
             reservationsData = await Reservation.find({});
         }
+        reservationsData.reverse();
         return res.render('reserveedit', { currentUser, reservationsData });
     } catch (error) {
         console.error(error);

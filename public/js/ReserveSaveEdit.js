@@ -101,6 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 1";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat1").style.backgroundColor = "#49d182";
 
         click = 1;
     });
@@ -110,6 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 2";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat2").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat3").addEventListener("click", function(e) {
@@ -118,6 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 3";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat3").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat4").addEventListener("click", function(e) {
@@ -126,6 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 4";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat4").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat5").addEventListener("click", function(e) {
@@ -134,6 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 5";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat5").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat6").addEventListener("click", function(e) {
@@ -142,6 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 6";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat6").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat7").addEventListener("click", function(e) {
@@ -150,6 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 7";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat7").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat8").addEventListener("click", function(e) {
@@ -158,6 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 8";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat8").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat9").addEventListener("click", function(e) {
@@ -166,6 +182,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 9";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat9").style.backgroundColor = "#49d182";
         click = 1;
     });
     document.querySelector("#seat10").addEventListener("click", function(e) {
@@ -174,6 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let accessSeatNum = document.getElementById("infoSeatNumHidden")
         accessSeatNum.value = "Seat 10";
+        updateLabDetails(currentLabIndex);
+        document.getElementById("seat10").style.backgroundColor = "#49d182";
         click = 1;
     });
 
